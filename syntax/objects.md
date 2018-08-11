@@ -61,7 +61,7 @@ vec2 /= x y =/ obj:
     x other.x +  y other.y +  vec2
 ```
 
-Nested assignment (creates new copies of each level):
+Nested assignment (creates new copies of sub-objects at each level):
 ```
 a.b.c = 8
 ```
@@ -105,7 +105,38 @@ a b * .z.y.x
 
 Setter and modifier accessors:
 ```
-mod /= 3 swap .set-x  [4 +] swap .modify-y
+mod /= 3 x=  [4 +] y&=
+```
+
+Nested accessors:
+```
+a b *  .z.y.x
+a b *  4 z.y.x=
+a b *  [4 +] z.y.x&=
+```
+
+Method calls with arguments (no swap/rotate needed):
+```
+mod /= object =/
+  object
+    . 3 .set-x
+    . [4 +] .modify-y
+    . 1 2 3 .print
+    . 1 2 .print-with: z =/
+      z 3 *
+```
+
+## Multiple `self` variables
+
+To avoid storing `self` in a new variable, all `self-*` variables are special:
+
+```
+f /= x self-module =/
+  obj:
+    g /= y self =/
+      obj:
+        h /= z self-inner =/
+          x y z
 ```
 
 ## Inheritance
@@ -127,3 +158,17 @@ translated = points
 ## Property namespaces
 
 _One global namespace, so be specific when overloading core methods_
+
+## Extension methods
+
+Syntactic extension only where imported (does not monkey-patch):
+
+```
+xy /= extend-self =/
+  vector.x vector.y
+
+set-xy /= x y extend-self =/
+  extend-self.x = x
+  extend-self.y = y
+  extend-self
+```
