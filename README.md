@@ -5,6 +5,7 @@ Ideas for the Tacit programming language.
 ## Contents
 
 * [Syntax](syntax/README.md)
+* [Plans](plans/README.md)
 
 ## License
 
