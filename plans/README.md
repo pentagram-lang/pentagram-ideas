@@ -2,6 +2,8 @@
 
 ## Contents
 
+* [Benchmarking](benchmarking.md)
+* [Community](community.md)
 * [First programs](first-programs.md)
 * [Infrastructure](infrastructure.md)
 * [Optimizations](optimizations.md)
