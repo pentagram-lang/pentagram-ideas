@@ -7,7 +7,8 @@
 * [Expressions and blocks](expressions-and-blocks.md)
 * [Objects](objects.md)
 * [Collections](collections.md)
-* [Modules](modules.md)
+* [Packages and modules](packages-and-modules.md)
+* [Testing](testing.md)
 * Exceptions: _?_
 * [Advanced methods](advanced-methods.md)
 * [Assignment and declaration ordering](advanced-methods.md)
