@@ -42,3 +42,7 @@
 
 * Map-reduce
 * Screen buffer output
+
+## Social/ecosystem
+* After compile, show bytes per package included
+* During CPU profiling, show percent time spent in each package
