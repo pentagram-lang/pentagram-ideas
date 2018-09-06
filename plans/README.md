@@ -7,6 +7,7 @@
 * [First programs](first-programs.md)
 * [Infrastructure](infrastructure.md)
 * [Optimizations](optimizations.md)
+* [Physics-based UI](physics-based-ui.md)
 * [Semantics](semantics.md)
 * [Syntax highlighting](syntax-highlighting.md)
 * [Syntax](syntax.md)
