@@ -35,6 +35,22 @@ Float precision:
 1.0d 1.0float-64 eq
 ```
 
+## Numeric variants
+
+Digit separators:
+```
+1_000_000
+9,999,999.99
+0xFFFF_FFFF
+```
+
+Percentages:
+```
+50% 0.5 eq
+50.0% 0.5 eq
+50.0%d 0.5d eq
+```
+
 ## String interpolation
 
 Basic variables:
