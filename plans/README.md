@@ -4,6 +4,7 @@
 
 * [Benchmarking](benchmarking.md)
 * [Community](community.md)
+* [Environment activation](environment-activation.md)
 * [First programs](first-programs.md)
 * [Infrastructure](infrastructure.md)
 * [Optimizations](optimizations.md)
