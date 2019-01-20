@@ -19,7 +19,7 @@
 * Prompt to run `direnv allow .` if direnv is installed
 
 ### Activation
-* For direnv, .envrc has one line `tacit1.1 env bash | source`
+* For direnv, .envrc has one line `eval "$(tacit1.1 env bash)"`
 * Developers can manually invoke `tacit1.1 env` for their shell
 * IDEs can find the Tacit version from tacit.toml, and just start up the language server
 
