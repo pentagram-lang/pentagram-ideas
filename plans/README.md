@@ -7,6 +7,7 @@
 * [Environment activation](environment-activation.md)
 * [First programs](first-programs.md)
 * [Infrastructure](infrastructure.md)
+* [Memory management](memory-management.md)
 * [Optimizations](optimizations.md)
 * [Physics-based UI](physics-based-ui.md)
 * [Semantics](semantics.md)
