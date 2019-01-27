@@ -103,3 +103,9 @@ For a 48-bit address space and object capacities that are powers of two, there a
 When running as an x64 program, the capacity required for an object size can be computed using the BSR (bit scan reverse) instruction. When running as a WebAssembly program, [`iclz`](https://webassembly.github.io/spec/core/exec/numerics.html#op-iclz) (count leading zeroes) will be used instead.
 
 Based on the capacity, the current heap allocation scheme can be looked up (tiny, small, medium, or large) together with the exact parameters for the scheme at that capacity.
+
+## Analysis layer
+
+Any single object that's dynamic in size with no upper limit is an availability security vulnerability. Some condition could cause extreme page swapping or out-of-memory, making the program effectively unavailable.
+
+To help developers with this, Tacit will provide an analysis layer that will flag any unbounded, dynamic size objects in the program. This analysis layer may also be able to calculate the total theoretical maximum memory usage of the whole program.
