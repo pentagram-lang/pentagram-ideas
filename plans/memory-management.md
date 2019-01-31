@@ -88,15 +88,17 @@ Every thread manages its own allocation independently from other threads (to avo
 
 ### State
 
-1. Coroutine stacks are managed using one region address, one next address (set to the start of the stack region) plus one dynamic-sized free stack plus a blocks-returned counter
+In general, state might need a region address (RG), a next address (N), a free stack (F), a return counter (RT), and a minimum free window (M). The free stack is a dynamic-sized array with an upper limit of 65,536 addresses, and the minimum free window is a fixed-size array of 24 counters.
 
-2. Large heap allocation is managed using one region address, one next address (set to the start of the large heap region) plus one free stack plus a return counter
+1. Coroutine stacks: 1 x RG, 1 x N, 1 x F, 1 x RT, 1 x M
 
-3. Medium heap allocation gets a region address and a single next address (set to the start of the medium heap region), and every block size from 64 KiB to 1 MiB (5 sizes) gets its own free stack and return counter
+2. Large heap allocation: 1 x RG, 1 x N, 1 x F, 1 x RT, 1 x M
 
-4. Every small heap allocation block size from 64 bytes to 32 KiB (10 sizes) gets its own next address (set to the start of the medium heap region), free stack, and return counter
+3. Medium heap allocation (sizes of 64 KiB to 1 MiB): 1 x RG, 1 x N, 5 x F, 5 x RT, 5 x M
 
-In total, roughly a quarter of a KiB.
+4. Small heap allocation (sizes of 64 bytes to 32 KiB): 10 x N, 10 x F, 10 x RT
+
+In total, close to 1 MiB.
 
 ## Allocation
 
@@ -162,9 +164,23 @@ When memory is deallocated, it goes to a free stack first before getting returne
 
 In this manner, an application with a stable behaviour will reach a generally stable state where the next addresses are no longer used and allocations only happen from the free stack.
 
-For some free stacks, returning memory to the operating system is helpful when there's a major reduction in the program's resource usage. For this case a return count is used. If the return count gets too high, unreturned items at the bottom of the free stack are _lazily_ returned to the operating system, and the return count is incremented for each item. If a previously-returned item from the free stack gets popped, decrement the return count.
+Each free stack is a dynamically-sized array with a maximum size of 512 KiB. When it doubles in size, it gets copied to a new location and the old address gets deallocated (gets put into a different free stack). This can trigger a recursive, but limited chain reaction. 
 
-Each free stack is a dynamically-sized array with a maximum size of 1 MiB. When it doubles in size, it gets copied to a new location and the old address gets deallocated (gets put into a different free stack). This can trigger a recursive, but limited chain reaction.
+#### Returns
+
+For some free stacks, returning memory to the operating system is helpful when there's a major reduction in the program's resource usage. For this case a return counter is used. Unreturned items at the bottom of the free stack are _lazily_ returned (i.e. made available) to the operating system, and the return counter is incremented for each item. If a previously-returned item from the free stack gets popped, this decrements the return counter.
+
+If an item is free and the stack is at the maximum size, all items in the free stack are immediately returned, and its size gets truncated to half (to delay the next overflow event).
+
+To manage returns without affecting normal program behaviour, the returns are set up using a 2-minute delayed schedule. Every 5 seconds, three things happen:
+
+1. The system is checked for memory pressure (less than 5% freeable memory), and if there is memory pressure, all unreturned items in all free stacks are returned immediately
+2. If there is no memory pressure, all unreturned items in each free stack are returned up to the minimum free stack size of the last 2 minutes (24 samples)
+3. The current size of the free stack is recorded for every free stack, and now if an allocation happens during the next 5 seconds that decreases the free stack size further, that size is recorded instead
+
+Using this algorithm, deallocation with matching allocation within 2 minutes won't trigger OS returns (and subsequent OS acquisitions). On the other hand, unmatched deallocations _will_ trigger OS returns with a 2 minute delay, for other system processes to use the unneeded memory.
+
+(To accommodate updating minimum stack sizes during allocation, the stack sizes will be stored column-oriented. All 7 2-byte counters that might need updating in the 5 seconds will be stored together in a quarter of a 64-byte cache line.)
 
 ### Coroutine stack
 
@@ -215,9 +231,10 @@ To help developers with this, Tacit will provide an analysis layer that will fla
 - Populating memory when marking it readable and writable, to avoid later soft page faults
 - Shifting memory management system calls to a background thread
 - Disabling transparent huge pages
-- Searching for returnable small heap blocks
-- Making free stack returns time-based
+- Searching for returnable small heap blocks if CPU is idle
+- Upgrading or downgrading returnable small heap blocks if CPU is idle
 - Use a lower minimum coroutine stack size for Linux
 - Convert some small heap sizes to medium for Linux
 - Use a dynamic index block size for large objects
-- Use finer-grained capacity for large objects
+- Use finer-grained capacity for dynamic-sized large objects
+- Pause returns for a free stack for two minutes after returning once
