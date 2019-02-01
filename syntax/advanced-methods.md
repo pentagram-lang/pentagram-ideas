@@ -1,10 +1,16 @@
 # Tacit ideas / Syntax / Advanced methods
 
-Optional parameters (`obj` not needed, strictly evaluated):
+## Configuration parameters
+
+Explicit `obj` not needed, strictly evaluated:
+
 ```
-paint /= x y opt =/
-  opt &= optional:
+paint /= x y conf =/
+  conf &= configure:
     color = blue
+
+1 4 [] paint
+1 4 [color = red] paint
 ```
 
 ## Named parameters

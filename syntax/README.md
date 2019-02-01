@@ -2,16 +2,16 @@
 
 ## Contents
 
-* [Basics](basics.md)
-* [Literals](literals.md)
-* [Expressions and blocks](expressions-and-blocks.md)
-* [Objects](objects.md)
-* [Collections](collections.md)
-* [Packages and modules](packages-and-modules.md)
-* [Testing](testing.md)
-* Exceptions: _?_
 * [Advanced methods](advanced-methods.md)
 * [Assignment and declaration ordering](advanced-methods.md)
+* [Basics](basics.md)
+* [Collections](collections.md)
+* [Common words](common-words.md)
+* [Expressions and blocks](expressions-and-blocks.md)
+* [Keyboard symbols](keyboard-symbols.md)
+* [Literals](literals.md)
+* [Objects](objects.md)
+* [Packages and modules](packages-and-modules.md)
 * [Pointers](pointers.md)
 * [Rich comments](rich-comments.md)
-* [(Keyboard symbols)](keyboard-symbols.md)
+* [Testing](testing.md)

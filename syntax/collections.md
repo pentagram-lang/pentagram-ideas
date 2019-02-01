@@ -12,7 +12,7 @@ my-other-array = arr:
 Options:
 ```
 x = 7 opt
-y = opt-none
+y = nil
 z = [x y] arr flat
 ```
 
