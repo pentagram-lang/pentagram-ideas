@@ -4,8 +4,11 @@
 
 * [Benchmarking](benchmarking.md)
 * [Bounded cache](bounded-cache.md)
+* [Closures](closures.md)
 * [Community](community.md)
+* [Continuation marks](continuation-marks.md)
 * [Environment activation](environment-activation.md)
+* [Exceptions](exceptions.md)
 * [First programs](first-programs.md)
 * [Infrastructure](infrastructure.md)
 * [Input and output](input-and-output.md)
