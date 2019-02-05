@@ -5,11 +5,15 @@
 * Function calls as jumps without stack manipulation
 * Function calls inlined
 * Register usage
+  * Reduce to avoid call overhead
+    * Including not loading from stack to register for input operands
+  * Increase to enable instruction parallelism
 * Fixed point
 * SIMD
 * Loop unrolling
 * Antibranching
 * Memory lookaheads
+* Branch targets calculated in registers
 
 ## Memory
 

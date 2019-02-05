@@ -41,6 +41,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `@` | Code inside of comments |
 | `[]` |  |
 | `_` |  |
+| `add` | Add an item to a collection |
 | `all?` |  |
 | `and` |  |
 | `any?` |  |
@@ -73,6 +74,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `idiv` | Divide and discard remainder |
 | `if` |  |
 | `in?` |  |
+| `ins` | Insert an item into a collection at a specific location |
 | `iter` | Deal with a collection lazily |
 | `keep` |  |
 | `len` | How many items in a collection |
@@ -89,9 +91,10 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `or` |  |
 | `pass` |  |
 | `ptr` | Read-only pointer |
+| `put` | Put an item into a collection at a specific location |
 | `say` | Tell something via the terminal |
 | `self` |  |
-| `set` | Set in collection |
+| `set` | Create a set collection |
 | `skip` |  |
 | `swap` |  |
 | `take` |  |
