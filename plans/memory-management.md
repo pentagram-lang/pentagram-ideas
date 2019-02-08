@@ -226,6 +226,17 @@ Any single object that's dynamic in size with no upper limit is an availability 
 
 To help developers with this, Tacit will provide an analysis layer that will flag any unbounded, dynamic size objects in the program. This analysis layer may also be able to calculate the total theoretical maximum memory usage of the whole program.
 
+## Linear 32-bit memory
+
+To save pointer space (and work similarly to wasm32 ArrayBuffer memory objects)...
+
+- Reserve 32-bit of address space anywhere in 64-bit, aligned to 8 MiB blocks
+- Save that pointer permanently into a register
+- Divide into the number of threads
+- Use for all allocations: call stack, medium heap, large heap
+- All three reserve 8 MiB blocks at a time
+- Memory access needs two registers (pointer plus offset), but maybe faster in the end due to less bandwidth needed
+
 ## Future benchmarking/extensions
 
 - Populating memory when marking it readable and writable, to avoid later soft page faults
