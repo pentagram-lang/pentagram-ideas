@@ -58,6 +58,8 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `call` | Call a method object |
 | `cat` | Append one collection to another |
 | `chg` | Change in collection |
+| `cin` | Standard (console) input file |
+| `cout` | Standard (console) output file |
 | `dec` | Decode UTF-8 bytes to a string |
 | `dict` | A collection of key-value pairs |
 | `drop` |  |
