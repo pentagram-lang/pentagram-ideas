@@ -4,3 +4,4 @@
 * Snappy compression
 * Forum software
 * Vector graphics editor
+* Game-like code editor frontend
