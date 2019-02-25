@@ -17,8 +17,8 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | (person) | Who crosses paths with Tacit |
 | (property) | A value attached to an object |
 | ` ` | Significant whitespace |
-| `"""` |  |
 | `"` |  |
+| `"""` |  |
 | `%` | Remainder |
 | `&=` |  |
 | `'` |  |
@@ -30,6 +30,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `++=` |  |
 | `-` | Subtract |
 | `-` | Unexported prefix |
+| `-` | Negative number prefix |
 | `--` |  |
 | `.` | Get something from inside |
 | `/` | Divide without loss |
@@ -50,6 +51,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `atof` | Parse a float from a string |
 | `atoi` | Parse an integer from a string |
 | `band` | Bitwise and |
+| `blob` | A linear collection of bytes with bigger-than-byte access |
 | `bnot` | Bitwise complement |
 | `bor` | Bitwise or |
 | `bsl` | Bitwise shift right |
@@ -61,8 +63,8 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `cin` | Standard (console) input file |
 | `cout` | Standard (console) output file |
 | `dec` | Decode UTF-8 bytes to a string |
-| `dict` | A collection of key-value pairs |
-| `drop` |  |
+| `del` | Remove an item from a collection |
+| `drop` | Filter and discard |
 | `dup` |  |
 | `each` |  |
 | `else` |  |
@@ -78,25 +80,28 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `in?` |  |
 | `ins` | Insert an item into a collection at a specific location |
 | `iter` | Deal with a collection lazily |
-| `keep` |  |
+| `keep` | Filter and retain |
 | `len` | How many items in a collection |
 | `lt` |  |
 | `lte` |  |
 | `map` |  |
 | `mptr` | Mutable pointer |
+| `neg` | Negate a number |
 | `neq` |  |
 | `nil` | Potential not filled |
-| `none?` |  |
+| `nil-arr` | Empty array |
+| `nil?` | Is a collection empty |
 | `not` |  |
 | `obj` | A structured collection of items |
 | `opt` | Potential fulfilled with a value |
 | `or` |  |
 | `pass` |  |
 | `ptr` | Read-only pointer |
-| `put` | Put an item into a collection at a specific location |
 | `say` | Tell something via the terminal |
 | `self` |  |
-| `set` | Create a set collection |
+| `set` | Set into a collection |
+| `smap` | Create a sorted map collection |
+| `sset` | Create a sorted set collection |
 | `skip` |  |
 | `swap` |  |
 | `take` |  |
