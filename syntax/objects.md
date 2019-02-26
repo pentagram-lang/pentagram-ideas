@@ -8,11 +8,11 @@ vec2 /= x y =/ obj:
   y = y
 ```
 
-Property setters and modifiers:
+Property set and change:
 ```
 a = 1 3 vec2
 b = 8 a.set-x
-c = [2 +] a.modify-x
+c = [2 +] a.chg-x
 ```
 
 Referencing properties directly (`self` implied):
@@ -103,7 +103,7 @@ Nested accessors:
 a b * .z.y.x
 ```
 
-Setter and modifier accessors:
+Set and change accessors:
 ```
 mod /= 3 x=  [4 +] y&=
 ```
@@ -112,7 +112,9 @@ Nested accessors:
 ```
 a b *  .z.y.x
 a b *  4 z.y.x=
+a b *  . 4 .z.y.x=
 a b *  [4 +] z.y.x&=
+a b *  . [4 +] .z.y.x&=
 ```
 
 Method calls with arguments (no swap/rotate needed):
@@ -120,7 +122,7 @@ Method calls with arguments (no swap/rotate needed):
 mod /= object =/
   object
     . 3 .set-x
-    . [4 +] .modify-y
+    . [4 +] .chg-y
     . 1 2 3 .print
     . 1 2 .print-with: z =/
       z 3 *
@@ -143,7 +145,7 @@ f /= x self-module =/
 
 _Not supported (use automatic properties and methods instead)_
 
-## Modification syntax
+## Change syntax
 
 Nothing beyond property assignment (wouldn't add much):
 
