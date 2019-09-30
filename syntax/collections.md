@@ -16,10 +16,10 @@ y = nil
 z = [x y] arr flat
 ```
 
-Dictionaries:
+Maps:
 ```
-words = ["ok", 8; "the", 400] dict
-numbers = dict:
+words = ["ok", 8; "the", 400] smap
+numbers = smap:
   1, obj:
     even? = false
   2, obj:
@@ -30,5 +30,5 @@ Lazy iterators (with splat):
 ```
 fib /= a b =/
  next = a b +
- [next  b next fib .splat] iter
+ [next  b next fib ..] iter
 ```

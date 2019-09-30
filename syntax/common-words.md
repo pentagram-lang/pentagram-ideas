@@ -6,11 +6,13 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | --- | :--- |
 | (block) | Structured indentation |
 | (call stack) | Grows when calling calls |
+| (collection) | A data structure with many items |
 | (expression) | Evaluates to a value |
 | (expression stack) | Grows when calling calls |
 | (import) | How to use a module |
 | (method) | Attached to an object, when you call it, a value is returned |
 | (method object) | Can be passed around |
+| (named parameter) | A parameter specified by its name |
 | (module) | A single Tacit file inside a package |
 | (package) | Can be installed, required |
 | (parameter) | What you pass into a method |
@@ -26,22 +28,27 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `*` | Multiply |
 | `*` | Pointer dereference suffix |
 | `+` | Add |
+| `+` | Positive marker prefix |
 | `+=` |  |
 | `++=` |  |
+| `-` | Negative number prefix |
 | `-` | Subtract |
 | `-` | Unexported prefix |
-| `-` | Negative number prefix |
 | `--` |  |
 | `.` | Get something from inside |
+| `.` | Method retrieval point marker |
+| `.` | Radix point |
 | `/` | Divide without loss |
 | `/=` |  |
 | `:` |  |
 | `;` |  |
 | `=` |  |
 | `=/` |  |
+| `?` | Not yet implemented |
 | `@` | Code inside of comments |
 | `[]` |  |
-| `_` |  |
+| `_` | Number digit group separator |
+| `_` | Unused variable |
 | `add` | Add an item to a collection |
 | `all?` |  |
 | `and` |  |
@@ -66,6 +73,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `del` | Remove an item from a collection |
 | `drop` | Filter and discard |
 | `dup` |  |
+| `e` | Order of magnitude notation |
 | `each` |  |
 | `else` |  |
 | `enc` | Encode a string to UTF-8 bytes |

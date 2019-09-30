@@ -105,24 +105,22 @@ a b * .z.y.x
 
 Set and change accessors:
 ```
-mod /= 3 x=  [4 +] y&=
+mod /= . 3 .x=  . [4 +] .y&=
 ```
 
 Nested accessors:
 ```
 a b *  .z.y.x
-a b *  4 z.y.x=
 a b *  . 4 .z.y.x=
-a b *  [4 +] z.y.x&=
 a b *  . [4 +] .z.y.x&=
 ```
 
-Method calls with arguments (no swap/rotate needed):
+Chained method calls with arguments (no swap/rotate needed):
 ```
 mod /= object =/
   object
-    . 3 .set-x
-    . [4 +] .chg-y
+    . 3 .compute
+    . [4 +] .transform
     . 1 2 3 .print
     . 1 2 .print-with: z =/
       z 3 *

@@ -172,3 +172,19 @@ f /= g =/
   _ = 11 g.call nil
   12
 ```
+
+## Not used
+
+If the result of an expression is not used, assigning to `_` marks it as unused. Parameters cannot be named `_`, but can be assigned to `_` for this effect.
+
+```
+_ = cause-side-effect-and-return-result
+```
+
+## Not yet implemented
+
+A special value that prevents compiler errors and can be filled in later:
+```
+some-method-to-write-later /=
+  ?
+```

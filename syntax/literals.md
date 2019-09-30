@@ -83,4 +83,4 @@ Triple quotes also supported:
 '''I'm a friend''' say
 ```
 
-_No special Tex-like English typographic shortcuts (that are imported by default)_
+_No special TeX-like English typographic shortcuts (that are imported by default)_
