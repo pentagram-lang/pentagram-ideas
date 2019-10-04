@@ -4,12 +4,12 @@
 
 There are a number of things in Tacit that need implicit tracking at the coroutine stack level:
 
-- exception handlers
+- error handlers
 - cleanup handlers
 - current working directory
 - current environment variables
 - current standard input/output streams
-- logging/exception context
+- logging/error context
 - cancelability
 
 Instead of making these mutable, requiring developers to clean up after themselves manually to avoid external side effects, having a continuation mark stack tied to the call stack keeps mark changes localized.
@@ -29,7 +29,7 @@ Every item in a continuation mark stack includes the new value and the call stac
 
 When a continuation mark gets set, first it checks the call stack frame for the current item -- if it matches the current stack frame (i.e. during a tail call), then the current item is replaced. Otherwise, a new mark gets pushed to the stack and return address for the next call gets replaced by a special continuation mark unset routine.
 
-When the call stack pops past where a continuation mark was previously set, via normal returns or via exception stack unwinding, the memory used by the continuation mark must be deallocated. To accomplish this, instead of returning to normal code, the return happens to a special continuation mark unset routine, which does the deallocation, pops the mark stack, and then jumps to the return address specified by mark's stack frame.
+When the call stack pops past where a continuation mark was previously set, via normal returns or via error stack unwinding, the memory used by the continuation mark must be deallocated. To accomplish this, instead of returning to normal code, the return happens to a special continuation mark unset routine, which does the deallocation, pops the mark stack, and then jumps to the return address specified by mark's stack frame.
 
 ### Alternative implementations
 
@@ -37,4 +37,4 @@ Continuation marks are actually the same kind of continuation data as return add
 
 ## Coroutines
 
-When coroutines are started, they inherit some of the continuation marks of the caller's context (e.g. current working directory), but not all (e.g. exception handlers). This is determined mark-by-mark.
+When coroutines are started, they inherit some of the continuation marks of the caller's context (e.g. current working directory), but not all (e.g. error handlers). This is determined mark-by-mark.

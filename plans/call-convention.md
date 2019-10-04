@@ -9,7 +9,7 @@
 - No `push`/`pop`/`call`/`ret` instructions, manually move to and from the stack
 - Adjust the stack pointer twice: once on method entry, once on exit
 - Tail calls are adjusting the stack pointer and unconditionally jumping
-- Call boundaries can be changed by the compiler (especially tail calls), so no guarantees for stack traces except exception source
+- Call boundaries can be changed by the compiler (especially tail calls), so no guarantees for stack traces except error source
   - Use context info and/or a time-travel debugger for full picture
 - Push the return address onto the stack before any potential parameters/results
 

@@ -10,7 +10,7 @@
 * [Continuation marks](continuation-marks.md)
 * [Debugging](debugging.md)
 * [Environment activation](environment-activation.md)
-* [Exceptions](exceptions.md)
+* [Errors and crashes](errors-and-crashes.md)
 * [First programs](first-programs.md)
 * [Infrastructure](infrastructure.md)
 * [Input and output](input-and-output.md)

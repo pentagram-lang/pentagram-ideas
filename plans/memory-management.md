@@ -58,7 +58,7 @@ Every small heap allocation uses at least one cache line (64 bytes), even if the
 
 ### Medium heap
 
-One an object's size reaches 64 KiB, it gets allocated directly from the medium heap.
+Once an object's size reaches 64 KiB, it gets allocated directly from the medium heap.
 
 ### Large heap
 
@@ -165,6 +165,8 @@ When memory is deallocated, it goes to a free stack first before getting returne
 In this manner, an application with a stable behaviour will reach a generally stable state where the next addresses are no longer used and allocations only happen from the free stack.
 
 Each free stack is a dynamically-sized array with a maximum size of 512 KiB. When it doubles in size, it gets copied to a new location and the old address gets deallocated (gets put into a different free stack). This can trigger a recursive, but limited chain reaction. 
+
+Each thread has its own set of free stacks. When deallocation happens, memory is put into the free stack of the thread that the task is currently running on, regardless of which thread the memory initially came from. This avoids any locking, and should still produce stable results (task stealing being roughly random).
 
 #### Returns
 

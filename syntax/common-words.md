@@ -18,6 +18,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | (parameter) | What you pass into a method |
 | (person) | Who crosses paths with Tacit |
 | (property) | A value attached to an object |
+| (task) | Independent unit of concurrent work |
 | ` ` | Significant whitespace |
 | `"` |  |
 | `"""` |  |
@@ -65,10 +66,14 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `bsr` | Bitwise shift left |
 | `bxor` | Bitwise exclusive or |
 | `call` | Call a method object |
+| `case` | Apply equality checks to an object |
 | `cat` | Append one collection to another |
+| `catch` | Call a method and see if there was an error |
 | `chg` | Change in collection |
 | `cin` | Standard (console) input file |
+| `context` | Important info for debugging |
 | `cout` | Standard (console) output file |
+| `crash` | What happens when a program cannot continue |
 | `dec` | Decode UTF-8 bytes to a string |
 | `del` | Remove an item from a collection |
 | `drop` | Filter and discard |
@@ -78,6 +83,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `else` |  |
 | `enc` | Encode a string to UTF-8 bytes |
 | `eq` |  |
+| `error` | What happens when a program diverts control flow to error handling |
 | `false` |  |
 | `fmod` | Remainder for floating-point |
 | `get` | Get from collection |
@@ -93,6 +99,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `lt` |  |
 | `lte` |  |
 | `map` |  |
+| `match` | Apply predicates to an object |
 | `mptr` | Mutable pointer |
 | `neg` | Negate a number |
 | `neq` |  |
@@ -115,3 +122,4 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `take` |  |
 | `to` | Range from one number to another |
 | `true` |  |
+| `try` | Try to call a method, continuing if there is no error |
