@@ -2,7 +2,7 @@
 
 ## Uses
 
-There are a number of things in Tacit that need implicit tracking at the coroutine stack level:
+There are a number of things in Tacit that need implicit tracking at the task stack level:
 
 - error handlers
 - cleanup handlers
@@ -23,7 +23,7 @@ By using a language-level construct of continuation marks to manage composable s
 
 ## Implementation
 
-Each mark gets its own dynamic-sized stack, with the size plus pointer stored in the coroutine stack header. This allows each mark to get pushed/popped at different rates, and allows O(1) access to the latest value of each mark. (All marks must have a default initialization value.)
+Each mark gets its own dynamic-sized stack, with the size plus pointer stored in the task stack header. This allows each mark to get pushed/popped at different rates, and allows O(1) access to the latest value of each mark. (All marks must have a default initialization value.)
 
 Every item in a continuation mark stack includes the new value and the call stack frame for when the item was added. Stack frame references are to the location in the stack where the return address was pushed.
 
@@ -35,6 +35,6 @@ When the call stack pops past where a continuation mark was previously set, via 
 
 Continuation marks are actually the same kind of continuation data as return addresses. They could be passed to method invocations (continuation-passing style) and saved to the call stack just like return addresses. If a continuation mark was pushed and popped as often as a return address, identical handling would be logical, but this is often not the case.
 
-## Coroutines
+## Tasks
 
-When coroutines are started, they inherit some of the continuation marks of the caller's context (e.g. current working directory), but not all (e.g. error handlers). This is determined mark-by-mark.
+When tasks are started, they inherit some of the continuation marks of the caller's context (e.g. current working directory), but not all (e.g. error handlers). This is determined mark-by-mark.

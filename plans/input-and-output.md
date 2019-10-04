@@ -2,7 +2,7 @@
 
 ## Async I/O
 
-Tacit unifies all file, network, pipe, etc. I/O into a single async I/O API: the stream. You request bytes, you get bytes. You send bytes, they get written. There is no overhead of multiple copying of the data or special memory regions just for I/O. While one coroutine is reading or writing, another coroutine can start running in its place.
+Tacit unifies all file, network, pipe, etc. I/O into a single async I/O API: the stream. You request bytes, you get bytes. You send bytes, they get written. There is no overhead of multiple copying of the data or special memory regions just for I/O. While one task is reading or writing, another task can start running in its place.
 
 ### Read operations
 
@@ -24,7 +24,7 @@ Not all I/O is equal. Sometimes you have more important things to read or write,
 
 ## Why no memory-mapped file I/O?
 
-At a fundamental level, OS-provided memory-mapped file solutions are incompatible with Tacit's cooperative multithreading and there is no workaround. If the OS is handling a hard page fault, all of the Tacit coroutines for that thread will be blocked, not just the coroutine that triggered the fault. It would be possible for Tacit to implement custom asynchronous page faulting logic, but it would not be possible for Tacit to transparently implement the same page eviction logic that makes memory-mapped file I/O attractive in the first place.
+At a fundamental level, OS-provided memory-mapped file solutions are incompatible with Tacit's cooperative multithreading and there is no workaround. If the OS is handling a hard page fault, all of the Tacit tasks for that thread will be blocked, not just the task that triggered the fault. It would be possible for Tacit to implement custom asynchronous page faulting logic, but it would not be possible for Tacit to transparently implement the same page eviction logic that makes memory-mapped file I/O attractive in the first place.
 
 From a performance perspective, Tacit's general async I/O should be sufficient because it manages its own queues to prevent I/O oversaturation (e.g. "write storming"), it can read blocks smaller than OS memory pages, and it does not require MMU/TLB management.
 

@@ -29,12 +29,12 @@
 ## File I/O
 
 * Memory mapped files (how to handle errors and network files?)
-* Async coroutines
+* Async tasks
 
 ## Network I/O
 
 * Event based
-* Async coroutines
+* Async tasks
 
 ## CPU parallelism
 

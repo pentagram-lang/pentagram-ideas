@@ -28,11 +28,11 @@ When an object has no more variables referring to it, it will be deleted and its
 
 If an object is being actively used, it'll be stored in a CPU register. Also, if the object is small enough (less than or equal to 32 bytes) and isn't needed elsewhere, it may _only_ be located in a register.
 
-### Coroutine stack
+### Task stack
 
-All execution Tacit code happens via coroutines, and each coroutine has its own stack. (When a coroutine needs to do I/O, it yields to another coroutine to use the CPU.)
+All execution Tacit code happens via tasks, and each task has its own stack. (When a task needs to do I/O, it yields to another task to use the CPU.)
 
-If an object has a fixed size and can't only be stored in a register (e.g. its lifecycle extends to a parent method call), it may be stored in the coroutine's stack. The stack grows with each method call and shrinks with each method return.
+If an object has a fixed size and can't only be stored in a register (e.g. its lifecycle extends to a parent method call), it may be stored in the task's stack. The stack grows with each method call and shrinks with each method return.
 
 ### Heap
 
@@ -80,7 +80,7 @@ Every thread manages its own allocation independently from other threads (to avo
 
 ### Regions
 
-1. Tacit code runs using coroutines, so a 1 GiB region of virtual stack space is reserved, aligned at 8 MiB (using 16 MiB of extra padding)
+1. Tacit code runs using tasks, so a 1 GiB region of virtual stack space is reserved, aligned at 8 MiB (using 16 MiB of extra padding)
 
 2. Large heap allocation which always uses 2 MiB blocks gets its own 1 GiB region reserved, with transparent huge pages enabled for the whole region, aligned at 2 MiB (using 4 MiB of extra padding)
 
@@ -90,7 +90,7 @@ Every thread manages its own allocation independently from other threads (to avo
 
 In general, state might need a region address (RG), a next address (N), a free stack (F), a return counter (RT), and a minimum free window (M). The free stack is a dynamic-sized array with an upper limit of 65,536 addresses, and the minimum free window is a fixed-size array of 24 counters.
 
-1. Coroutine stacks: 1 x RG, 1 x N, 1 x F, 1 x RT, 1 x M
+1. Task stacks: 1 x RG, 1 x N, 1 x F, 1 x RT, 1 x M
 
 2. Large heap allocation: 1 x RG, 1 x N, 1 x F, 1 x RT, 1 x M
 
@@ -102,17 +102,17 @@ In total, close to 1 MiB.
 
 ## Allocation
 
-### Coroutine stack
+### Task stack
 
-#### Coroutine start
+#### Task start
 
 1. Mark the first 64 KiB of the next address as readable and writable
 
 2. Increment the next address by 8 MiB
 
-3. Check the coroutine next address, if it's at the end of the region, reserve a new one
+3. Check the task next address, if it's at the end of the region, reserve a new one
 
-#### Coroutine execute
+#### Task execute
 
 1. Catch a segmentation fault
 
@@ -184,9 +184,9 @@ Using this algorithm, deallocation with matching allocation within 2 minutes won
 
 (To accommodate updating minimum stack sizes during allocation, the stack sizes will be stored column-oriented. All 7 2-byte counters that might need updating in the 5 seconds will be stored together in a quarter of a 64-byte cache line.)
 
-### Coroutine stack
+### Task stack
 
-1. Turn off transparent huge pages for the coroutine's stack
+1. Turn off transparent huge pages for the task's stack
 
 2. Mark the entire stack as not readable and not writable
 
@@ -246,7 +246,7 @@ To save pointer space (and work similarly to wasm32 ArrayBuffer memory objects).
 - Disabling transparent huge pages
 - Searching for returnable small heap blocks if CPU is idle
 - Upgrading or downgrading returnable small heap blocks if CPU is idle
-- Use a lower minimum coroutine stack size for Linux
+- Use a lower minimum task stack size for Linux
 - Convert some small heap sizes to medium for Linux
 - Use a dynamic index block size for large objects
 - Use finer-grained capacity for dynamic-sized large objects
