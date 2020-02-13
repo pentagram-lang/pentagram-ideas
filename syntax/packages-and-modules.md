@@ -4,23 +4,23 @@
 
 Import a link to a module:
 ```
-math += pkg.core.math
+math += pkg.math.core
 ```
 
 Import a link to a module using a default name binding:
 ```
-+= pkg.core.math
++= pkg.math.core
 ```
 
 Import a link to a specific property or method:
 ```
-+= pkg.core.math.pi
-+= pkg.core.math.cos
++= pkg.math.pi.core
++= pkg.math.cos.core
 ```
 
 Import links to all names directly:
 ```
-++= pkg.core.math
+++= pkg.math.core
 ```
 
 The benefits of linking vs. assignment syntax are...
@@ -57,13 +57,13 @@ zero = 0
 
 Import & export a link to a module:
 ```
-core-math += pkg.core.math
-/= core-math
+math += pkg.math.core
+/= math
 ```
 
 Import & export a link to a method:
 ```
-++= pkg.core.math
+++= pkg.math.core
 /= sin
 ```
 
@@ -88,9 +88,9 @@ _Also, non-assignment/definition statements allowed in object blocks_
 
 All packages and modules under the `pkg` identifier are external packages that can be referenced by the current package being developed.
 
-The first level under `pkg` is a tag/categorization system. `core` is all packages that can be referenced by default. Others could include `web`, `file`, `gfx`, `io`, etc.
+The first level under `pkg` is a tag/categorization system. `core` is the name for packages that can be referenced by default without installing. Others could include `web`, `file`, `gfx`, `input`, `net`, `domain`, etc.
 
-The second level under `pkg` is the actual package name. For example the `snappy` of `pkg.data.snappy`.
+The second level under `pkg` is the actual package name. For example the `snappy` of `pkg.data.snappy`. Or there can be three levels if the maintainer wants to have the package scoped to a person or organization.
 
 (Any identifiers after the second level are methods and modules inside of a package.)
 
@@ -102,15 +102,13 @@ A `pkg.txt` file controls the developer's rules for referencing packages, and a 
 
 ## Local-package modules
 
-For the package being developed, all modules are accessible under the `self-pkg` identifier.
+For the package being developed, all modules are accessible under package's official name. The default name if not specified is the special `app` name.
 ```
-+= self-pkg.parser
-math-utils += self-pkg.utils.math
++= pkg.default.app.parser
+math-utils += pkg.default.app.utils.math
 ```
 
 There is no relative addressing of local modules. All local module references need to use the full path to the module.
-
-A separate `self-pkg.txt` file controls non-reference-related settings for the package like published name and tag, and multiple entry points or build settings.
 
 ## Index modules
 
@@ -130,12 +128,12 @@ d = 3
 f = 4
 
 -- g.tacit
-+= self-pkg.a
-+= self-pkg.b
-+= self-pkg.b.c
-+= self-pkg.b.d
-+= self-pkg.b.e
-+= self-pkg.b.e.f
++= pkg.default.app.a
++= pkg.default.app.b
++= pkg.default.app.b.c
++= pkg.default.app.b.d
++= pkg.default.app.b.e
++= pkg.default.app.b.e.f
 
 [a b c d e f] say
 ```

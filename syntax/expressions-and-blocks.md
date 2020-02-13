@@ -30,7 +30,7 @@ Every line of code in Tacit is a statement, and statements can either be an expr
 | --- | --- | --- |
 | Expression | N/A | `'hi' say` |
 | Declaration | Variable assignment | `x = 0` |
-| Declaration | Module import | `+= pkg.core.math` |
+| Declaration | Module import | `+= pkg.math.core` |
 | Declaration | Method definition | `times-two /= y =/ y 2 *` |
 
 When statements follow each other at the same level of indentation (leading spaces), they form a block:

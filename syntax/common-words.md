@@ -54,6 +54,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `all?` |  |
 | `and` |  |
 | `any?` |  |
+| `app` | An application that can be run |
 | `arr` | A linear collection of items |
 | `ask` | Inquire something via the terminal |
 | `atof` | Parse a float from a string |
