@@ -63,6 +63,14 @@ animal match:
     animal.meow
 ```
 
+## Not nil assertion
+
+When dealing with optional values, you may find yourself often using `x is-nil? not assert` when you don't want to handle nils. The shortcut in Tacit for this is the `!` suffix operator.
+
+```
+person.company!.address!.city! say
+```
+
 ## Messages and data
 
 All three `error`, `crash`, and `assert` use an any (rich) comment from the preceding line as the message. And all three have an optional named parameter for including data.

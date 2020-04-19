@@ -21,6 +21,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | (splat) | The use of unknown number of parameters |
 | (task) | Independent unit of concurrent work |
 | ` ` | Significant whitespace |
+| `!` | Not nil suffix |
 | `"` |  |
 | `"""` |  |
 | `%` | Remainder |
