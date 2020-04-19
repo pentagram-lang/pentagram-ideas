@@ -7,6 +7,7 @@
 * [Basics](basics.md)
 * [Collections](collections.md)
 * [Common words](common-words.md)
+* [Enums](enums.md)
 * [Errors and crashes](errors-and-crashes.md)
 * [Expressions and blocks](expressions-and-blocks.md)
 * [Keyboard symbols](keyboard-symbols.md)

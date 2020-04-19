@@ -6,9 +6,9 @@ And crashes in Tacit aren't managed at all. Crashes happen in response to non-lo
 
 ```
 foo /= n =/
-  cond:
-    n 0 eq, “too small” error
-    n 100 gt, “too big” crash
+  cond.try:
+    n 0 eq, "too small" error
+    n 100 gt, "too big" crash
     else, n 1 +
 
 -- propagate
@@ -61,7 +61,7 @@ animal match:
 
 ## Higher order methods
 
-It's okay to use `.try-call` on a method object even if in actual use, raising errors isn't part of that method object's signature.
+It's okay to use `.try` on a method object even if in actual use, raising errors isn't part of that method object's signature.
 
 ```
 map /= collection transform =/
@@ -69,8 +69,8 @@ map /= collection transform =/
     collection len 0 eq,
       [] arr
     else,
-      [collection 0 get transform.try-call] arr
-      collection 1 slice-from transform map
+      [collection 0 get transform.try] arr
+      collection 1 slice-from  transform  map
       cat
 ```
 
