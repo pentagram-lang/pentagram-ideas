@@ -7,8 +7,12 @@ And crashes in Tacit aren't managed at all. Crashes happen in response to non-lo
 ```
 foo /= n =/
   cond.try:
-    n 0 eq, "too small" error
-    n 100 gt, "too big" crash
+    n 0 eq,
+      -- Too small
+      error
+    n 100 gt,
+      -- Too big
+      crash
     else, n 1 +
 
 -- propagate
@@ -47,7 +51,7 @@ Assertions will be attempted to be checked at compile-time (except for static as
 speed.unit m/s eq static-assert
 ```
 
-When assertions fail, they produce usefully-formatted details. These details include any (rich) comment before the assertion.
+When assertions fail, they produce usefully-formatted details. The details even have enough information to allow interactive browsing of equality failures.
 
 Missing `else` cases for conditionals are a special type of static assertion that checks the `else` case would never be reached.
 
@@ -57,6 +61,15 @@ animal match:
     animal.bark
   is-cat?,
     animal.meow
+```
+
+## Messages and data
+
+All three `error`, `crash`, and `assert` use an any (rich) comment from the preceding line as the message. And all three have an optional named parameter for including data.
+
+```
+# Can't open file
+[path = path] obj +data error
 ```
 
 ## Higher order methods

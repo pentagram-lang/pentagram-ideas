@@ -18,6 +18,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | (parameter) | What you pass into a method |
 | (person) | Who crosses paths with Tacit |
 | (property) | A value attached to an object |
+| (splat) | The use of unknown number of parameters |
 | (task) | Independent unit of concurrent work |
 | ` ` | Significant whitespace |
 | `"` |  |
@@ -35,7 +36,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `-` | Negative number prefix |
 | `-` | Subtract |
 | `-` | Unexported prefix |
-| `--` |  |
+| `--` | Comment |
 | `.` | Get something from inside |
 | `.` | Method retrieval point marker |
 | `.` | Radix point |
@@ -57,6 +58,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `app` | An application that can be run |
 | `arr` | A linear collection of items |
 | `ask` | Inquire something via the terminal |
+| `assert` | Make sure a value is true, or crash |
 | `atof` | Parse a float from a string |
 | `atoi` | Parse an integer from a string |
 | `band` | Bitwise and |
@@ -76,6 +78,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `cout` | Standard (console) output file |
 | `crash` | What happens when a program cannot continue |
 | `dec` | Decode UTF-8 bytes to a string |
+| `default` | Define a default value for an unspecified named parameter |
 | `del` | Remove an item from a collection |
 | `drop` | Filter and discard |
 | `dup` |  |
@@ -122,6 +125,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `smap` | Create a sorted map collection |
 | `sset` | Create a sorted set collection |
 | `skip` |  |
+| `static-assert` | Make sure a value is true, or fail to compile |
 | `swap` |  |
 | `take` |  |
 | `to` | Range from one number to another |
