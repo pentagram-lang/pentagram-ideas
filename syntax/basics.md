@@ -31,7 +31,7 @@ Comments:
 -- Helpful comment
 ```
 
-Conditionals:
+Conditionals (true or false required):
 ```
 fact /= n =/
   if:

@@ -51,9 +51,9 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `_` | Number digit group separator |
 | `_` | Unused variable |
 | `add` | Add an item to a collection |
-| `all?` |  |
+| `all?` | Is a collection all true |
 | `and` |  |
-| `any?` |  |
+| `any?` | Is true in a collection |
 | `app` | An application that can be run |
 | `arr` | A linear collection of items |
 | `ask` | Inquire something via the terminal |
@@ -82,6 +82,8 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `e` | Order of magnitude notation |
 | `each` |  |
 | `else` |  |
+| `empty-arr` | Empty array |
+| `empty?` | Is a collection empty |
 | `enc` | Encode a string to UTF-8 bytes |
 | `eq` |  |
 | `error` | What happens when a program diverts control flow to error handling |
@@ -92,8 +94,10 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `gte` |  |
 | `idiv` | Divide and discard remainder |
 | `if` |  |
-| `in?` |  |
+| `in?` | Is a value in a collection |
 | `ins` | Insert an item into a collection at a specific location |
+| `is-nil?` | |
+| `is-opt?` | |
 | `iter` | Deal with a collection lazily |
 | `keep` | Filter and retain |
 | `len` | How many items in a collection |
@@ -105,8 +109,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `neg` | Negate a number |
 | `neq` |  |
 | `nil` | Potential not filled |
-| `nil-arr` | Empty array |
-| `nil?` | Is a collection empty |
+| `none?` | Is a collection all false |
 | `not` |  |
 | `obj` | A structured collection of items |
 | `opt` | Potential fulfilled with a value |
