@@ -60,6 +60,8 @@ nop
   my-complex-func
 ```
 
+(`say` prints all unnamed parameters from the expression stack using a splat.)
+
 ## Method guards
 
 _Maybe not required_
@@ -77,3 +79,9 @@ head ..tail = [1 2 3] arr ..
 ```
 
 _Other forms (including parameter destructuring) too weak, difficult to extend, not supported_
+
+## Expression trees
+
+Some methods evaluate their parameters lazily, like `and` and `or` (for short-circuiting).
+
+Other methods walk through parameter evaluation step by step. For example, `assert` in debug mode saves the each evaluation node result of each parameter, which allows for both good error messages for `eq`, etc. checks, and for full interactive stepping through the expression trees.

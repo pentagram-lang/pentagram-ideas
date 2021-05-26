@@ -44,11 +44,11 @@ Assertion failures at runtime cause crashes. They're program invariants and prog
 2 2 + 4 eq assert
 ```
 
-Assertions will be attempted to be checked at compile-time (except for static assertions which must be verifiable at compile time and have no runtime impact, and which can be used for method overload resolution).
+Assertions will be attempted to be checked at run-time (except for when the value is a compile-time constant, which can be required using the `const` method).
 
 ```
 -- Make sure we're in metric
-speed.unit m/s eq static-assert
+speed.unit m/s eq const assert
 ```
 
 When assertions fail, they produce usefully-formatted details. The details even have enough information to allow interactive browsing of equality failures.
