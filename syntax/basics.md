@@ -12,18 +12,18 @@ y &= 8 +
 
 Methods:
 ```
-plus /= x y =/
+plus >> x y >
   x y +
 ```
 
 Lambdas:
 ```
-doubled = [1 2 3] arr [n =/ n 2 *] map
+doubled = [1 2 3] arr [n > n 2 *] map
 ```
 
 Point-free (tacit):
 ```
-plus-one /= 1 +
+plus-one >> 1 +
 ```
 
 Comments:
@@ -31,12 +31,35 @@ Comments:
 -- Helpful comment
 ```
 
-Conditionals (true or false required):
+Conditional (true or false required):
 ```
-fact /= n =/
-  if:
-    n 1 gt,
-      n  n 1 - fact  *
-    else,
-      1
+x 1 eq if:
+  "a"
+x y +  2  gt elif:
+  "b"
+else:
+  "c"
+```
+
+While loop:
+```
+i = 0 mptr
+i* 10 lt while:
+  "at [i*]" say
+  i* &= 1 +
+```
+
+Infinite loop:
+```
+loop: break >
+  event = pull-event
+  event process-event not if:
+    break
+```
+
+Item loop:
+```
+sum = 0 mptr
+1 10 range each: item >
+  sum* &= item +
 ```

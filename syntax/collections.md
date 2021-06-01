@@ -18,17 +18,17 @@ z = [x y] arr flat
 
 Maps:
 ```
-words = ["ok", 8; "the", 400] smap
+words = [["ok" 8] ["the" 400]] smap
 numbers = smap:
-  1, obj:
+  : 1 obj:
     even? = false
-  2, obj:
+  : 2 obj:
     even? = true
 ```
 
 Lazy iterators (with splat):
 ```
-fib /= a b =/
+fib >> a b >
  next = a b +
  [next  b next fib ..] iter
 ```

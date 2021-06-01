@@ -1,0 +1,9 @@
+{
+  "editor.detectIndentation": false,
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": false,
+  "editor.insertSpaces": true,
+  "editor.autoClosingBrackets": "never",
+  "editor.tabSize": 2,
+  "files.autoSave": "onFocusChange",
+}

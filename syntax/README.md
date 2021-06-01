@@ -3,7 +3,7 @@
 ## Contents
 
 * [Advanced methods](advanced-methods.md)
-* [Assignment and declaration ordering](advanced-methods.md)
+* [Assignment and definition ordering](assignment-and-definition-ordering.md)
 * [Basics](basics.md)
 * [Collections](collections.md)
 * [Common words](common-words.md)
