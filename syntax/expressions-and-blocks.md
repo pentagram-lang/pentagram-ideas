@@ -12,7 +12,7 @@ Values can be combined, together with method calls, to make an expression:
 1 1 +
 ```
 
-When expressions are evaluated, values are pushed onto the current expression stack, and methods pop values from the stack in order to push new values:
+When expressions are evaluated, values are pushed onto the current expression stack, and methods pop parameter values from the stack in order to push new values:
 
 | Remaining expression | Expression stack |
 | -------------------- | ---------------- |
@@ -24,14 +24,15 @@ When expressions are evaluated, values are pushed onto the current expression st
 
 ## Statements and blocks
 
-Every line of code in Tacit is a statement, and statements can either be an expression or a declaration. Variable assignment, module import, and method definition are all declarations. Here are some examples:
+Every line of code in Tacit is a statement, and statements can either be an expressions,variable assignment, module import, named parameter definition, and method definition:
 
-| Statement type | Declaration type | Code |
-| --- | --- | --- |
-| Expression | N/A | `'hi' say` |
-| Declaration | Variable assignment | `x = 0` |
-| Declaration | Module import | `+= pkg.math.core` |
-| Declaration | Method definition | `times-two /= y =/ y 2 *` |
+| Statement type | Code |
+| --- | --- |
+| Expression | `'hi' say` |
+| Variable assignment | `x = 0` |
+| Module import | `<< pkg.math.core` |
+| Named paramter definition | `y < 1` |
+| Method definition | `times-two >> z > z 2 *` |
 
 When statements follow each other at the same level of indentation (leading spaces), they form a block:
 ```
@@ -40,12 +41,12 @@ y = x 2 +
 y say
 ```
 
-Any plain expression can be written with the help of a new block, so that means variable assignment and method definition (which both use expression) can use blocks:
+Any expression can be written as a new indented block, so that means variable assignment and method definition (which both use expressions) can use blocks:
 ```
-f /= a =/
+f >> a >
   a
-    a
-    *
+  a
+  *
 
 b =
   c = 1
@@ -55,13 +56,13 @@ b =
 
 The names defined inside of a block cannot be seen from outside of that block:
 ```
-f /=
+f >>
   x = 1
   x 2 *
 
-g /=
+g >>
   x = 3
-  h /=
+  h >>
     x 4 *
   h h
 ```
@@ -75,23 +76,50 @@ x = [1 2 3] arr
 
 Inline method objects use the `[ ]` syntax, and the expression inside cannot start a new block.
 
-Alternatively, method objects can be created using the `:` syntax, which does allow starting a new block.
+## Method object operator
+
+Method objects can also be created using the `:` method object operator, which does allow starting a new block.
 ```
 y = arr:
   1
-  2
-  3
-  4
+  x =
+    2
+    3
+    +
+  x
+  x 4 *
 ```
 
 This pattern is useful for building longer, multi-part expressions:
 ```
-z = x y
+z =
+  x y
   cat
   map: 10 +
-  keep: a =/
+  keep: a >
     a 11 gt
   2 take
+```
+
+## Prefix operator
+
+Complex nested expressions are often easier to read with the help of the `,` prefix operator.
+```
+-- Original
+"Can't You Sleep, Little Bear?" title<
+1999 year<
+"United States" "Massachusetts" "Cambridge"
+origin origin<
+book
+
+-- With prefix operator
+book,
+  title < "Can't You Sleep, Little Bear?"
+  year < 1999
+  origin < origin,
+    "United States"
+    "Massachusetts"
+    "Cambridge"
 ```
 
 ## String interpolation
@@ -102,52 +130,50 @@ name = "What's your name?" ask
 'Hello, [name]' say
 ```
 
-If the expression inside `[ ]` is so complex that it'd need a new block, you can create a new variable first.
+If the expression inside `[ ]` is so complex that it would need a new block, you can create a new variable first.
 
 ## Popping and pushing an outer expression stack
 
-When you call a method, it pops parameter values from the expression stack you give it, and pushes result values to that stack. The way this works is when the method is called, the whole expression for the method body is evaluated using the caller's expression stack.
+When you call a method, it pops parameter values from the expression stack you give it, and pushes result values to that stack. The way this works is when the method is called, every statement in the method body is evaluated using the caller's expression stack.
 ```
 -- Push
-f /= 1 2 3
+f >> 1 2 3
 
 -- Pop and push
-g /= x y =/ x y *
+g >> x y > x y *
 
 -- Implicit pop and push
-h /= 4 +
-```
+h >> 4 +
 
-Now, if an expression (including a method body expression) includes a block, not every statement in the block has access to the whole expression's stack. Intuitively, only the last expression statements of the block have access, after all the declaration statements are done. All of the statements before that have their own local expression stacks.
-```
-x = 1 2 3 -- Push 3
+x =
+  1 2 3 -- Push 3
   y = 4
   y say
   z = 5 6 *
   + + y z + + -- Pop 3, push 1
 
-f /= a =/ -- Pop 1
+f >> a > -- Pop 1
   b = 1 2 +
   a + b + -- Pop 1, push 1
 
-write-3 /=
+write-3 >>
   'a.txt' write-file -- Pop 1
   'b.txt' write-file -- Pop 1
   'c.txt' write-file -- Pop 1
 
-sequence /=
-  a /= a 1 + -- Pop 1, push 1
-  b /= b 2 * dup -- Pop 1, push 2
+sequence >>
+  a > a 1 + -- Pop 1, push 1
+  b > b 2 * dup -- Pop 1, push 2
 
-nested /= a =/ -- Pop 1
+nested >> a > -- Pop 1
   b = a 1 +
-  c /= -- Pop 1
+  c > -- Pop 1
     d = c 1 +
-    e /= -- Pop 1
+    e > -- Pop 1
       f = e 1 +
       b d f + + -- Push 1
 
-f /= a =/ -- Pop 1
+f >> a > -- Pop 1
   b = 1 2 +
   a + b + -- Pop 1, push 1
 
@@ -157,19 +183,26 @@ arr:
   i 1 + -- Push 1
   i 2 + -- Push 1
   i 3 + dup -- Push 2
+
+vec2 >> obj:
+  x y = -- Pop 2
+
+f >> x > -- Pop 1
+  y = x 2 * dup -- Push 1
+  y 3 * -- Push 1
 ```
 
-If a block doesn't need to push or pop, it doesn't need any expression statements:
+To give access to the full expression stack to a method object, splat it in a normal expression:
 ```
-a = obj:
-  b = 1
-  c = 2
+f >> g >
+  11 g ..
+  12
 ```
 
-To make sure an effect-only method object doesn't access the outer expression stack, use a sentinel value:
+To restrict a method object to just pushing values, use `no-pop`:
 ```
-f /= g =/
-  _ = 11 g.call nil
+f >> g >
+  [11] g cat no-pop ..
   12
 ```
 

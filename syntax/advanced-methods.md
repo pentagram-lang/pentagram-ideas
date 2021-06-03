@@ -29,7 +29,7 @@ x y = f
 vec2, < x y
 ```
 
-Using a named parameter statement pushes the named parameter onto the stack, and does not create a local variable.
+Using a named parameter defininition statement pushes the named parameter onto the stack, and does not create a local variable.
 
 ## Optional parameters
 
@@ -82,7 +82,7 @@ Sometimes you want to bridge collections and unnamed parameters or maps/objects 
 ```
 1 2 3 splat-arr
 1 x<  2 y<  3 z<  splat-smap
-1 x<  2 y<  3 z< splat-obj
+1 x<  2 y<  3 z<  splat-obj
 ```
 
 ## Method guards
