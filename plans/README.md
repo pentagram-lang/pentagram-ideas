@@ -12,6 +12,7 @@
 * [Environment activation](environment-activation.md)
 * [Errors and crashes](errors-and-crashes.md)
 * [First programs](first-programs.md)
+* [Formatting](formatting.md)
 * [Infrastructure](infrastructure.md)
 * [Input and output](input-and-output.md)
 * [Memory management](memory-management.md)
