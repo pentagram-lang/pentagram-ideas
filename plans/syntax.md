@@ -9,7 +9,7 @@
 
 ## Features
 
-* No distinction between lambda and function definition (one isn’t delayed, one is)
+* No distinction between method object and method definition (one isn’t delayed, one is)
 * No repetition in module definition or consumption
 * Everything postfix
 * No data structure definition or naming

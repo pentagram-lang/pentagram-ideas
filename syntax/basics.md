@@ -16,7 +16,7 @@ plus >> x y >
   x y +
 ```
 
-Lambdas:
+Method objects:
 ```
 doubled = [1 2 3] arr [n > n 2 *] map
 ```

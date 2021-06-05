@@ -4,23 +4,23 @@
 
 Import a link to a module:
 ```
-math += pkg.math.core
+math << pkg.math.core
 ```
 
 Import a link to a module using a default name binding:
 ```
-+= pkg.math.core
+<< pkg.math.core
 ```
 
 Import a link to a specific property or method:
 ```
-+= pkg.math.pi.core
-+= pkg.math.cos.core
+<< pkg.math.pi.core
+<< pkg.math.cos.core
 ```
 
 Import links to all names directly:
 ```
-++= pkg.math.core
+<< pkg.math.core..
 ```
 
 The benefits of linking vs. assignment syntax are...
@@ -33,44 +33,50 @@ The benefits of linking vs. assignment syntax are...
 
 Overload an imported (linked) method (`.` required):
 ```
-math.cos /= n =/
+math.cos >> n/complex >
   n.real math.cos  n.imaginary math.cosh  *
   math.i  n.real sin  n.imaginary math.sinh  * *
   -
 ```
 
-Create a global extension method (imported by default by all modules):
+Create an extension method:
 ```
-global-extensions.my-prop2 /= extend-self =/
+global-extensions.my-prop2 >> extend-self/my-type >
   extend-self.my-prop 2 *
 ```
 
-_(The overload target's module needs to be in scope via "linking" syntax not copy/assignment syntax for the overload to be globally available.)_
+Extension methods are only usable when imported. To make "global" add to the current package's prelude.
 
 ## Exports
 
 Export a property or method:
 ```
-squared /= dup *
+squared >> dup *
 zero = 0
 ```
 
 Import & export a link to a module:
 ```
-math += pkg.math.core
-/= math
+math << pkg.math.core
+>> math
 ```
 
 Import & export a link to a method:
 ```
-++= pkg.math.core
-/= sin
+<< pkg.math.core..
+>> sin
+```
+
+Import & export a link to all methods and properties:
+```
+math << pkg.math.core
+>> math..
 ```
 
 Hide an export by default:
 ```
 -hidden-x = 1
--hidden-f /= y =/ hidden-x y +
+-hidden-f >> y > hidden-x y +
 ```
 
 Use a hidden export:
@@ -104,8 +110,8 @@ A `pkg.txt` file controls the developer's rules for referencing packages, and a 
 
 For the package being developed, all modules are accessible under package's official name. The default name if not specified is the special `app` name.
 ```
-+= pkg.default.app.parser
-math-utils += pkg.default.app.utils.math
+<< pkg.default.app.parser
+math-utils << pkg.default.app.utils.math
 ```
 
 There is no relative addressing of local modules. All local module references need to use the full path to the module.
@@ -128,16 +134,16 @@ d = 3
 f = 4
 
 -- g.tacit
-+= pkg.default.app.a
-+= pkg.default.app.b
-+= pkg.default.app.b.c
-+= pkg.default.app.b.d
-+= pkg.default.app.b.e
-+= pkg.default.app.b.e.f
+<< pkg.default.app.a
+<< pkg.default.app.b
+<< pkg.default.app.b.c
+<< pkg.default.app.b.d
+<< pkg.default.app.b.e
+<< pkg.default.app.b.e.f
 
 [a b c d e f] say
 ```
 
 _(Note: object definitions for modules get merged.)_
 
-It's also possible to have a module file named the same as a directory, which is equivalent to having that file called `index.tacit` and located inside the directory. For consistency, this will generate a warning and an automatic fix.
+It's also possible to have a module file named the same as an existing directory, which is equivalent to having that file called `index.tacit` and located inside the directory. For consistency, this will generate a warning and an automatic fix.

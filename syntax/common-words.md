@@ -22,34 +22,37 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | (task) | Independent unit of concurrent work |
 | ` ` | Significant whitespace |
 | `!` | Not nil suffix |
-| `"` |  |
-| `"""` |  |
+| `"""` | String |
+| `"` | String |
 | `%` | Remainder |
-| `&=` |  |
-| `'` |  |
-| `'''` |  |
+| `&=` | Modify assignment |
+| `'''` | String |
+| `'` | String |
 | `*` | Multiply |
 | `*` | Pointer dereference suffix |
 | `+` | Add |
 | `+` | Positive marker prefix |
-| `+=` |  |
-| `++=` |  |
+| `--` | Comment |
 | `-` | Negative number prefix |
 | `-` | Subtract |
 | `-` | Unexported prefix |
-| `--` | Comment |
+| `,` | Prefix operator |
 | `.` | Get something from inside |
 | `.` | Method retrieval point marker |
 | `.` | Radix point |
 | `/` | Divide without loss |
-| `/=` |  |
-| `:` |  |
-| `;` |  |
-| `=` |  |
-| `=/` |  |
+| `:` | Method object operator |
+| `;` | Statement separator |
+| `<<` | Import |
+| `<` | Named parameter declaration |
+| `=` | Assignment |
+| `>>` | Method definition |
+| `>` | Method parameter declaration |
 | `?` | Not yet implemented |
 | `@` | Code inside of comments |
-| `[]` |  |
+| `[]` | Inline method object |
+| `[]` | Expression inside of strings |
+| `[]` | Reference inside of comments |
 | `_` | Number digit group separator |
 | `_` | Unused variable |
 | `add` | Add an item to a collection |
@@ -85,6 +88,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `del` | Remove an item from a collection |
 | `drop` | Filter and discard |
 | `dup` |  |
+| `dyn` | Dynamic object |
 | `e` | Order of magnitude notation |
 | `each` |  |
 | `else` |  |

@@ -115,7 +115,7 @@ book
 -- With prefix operator
 book,
   title < "Can't You Sleep, Little Bear?"
-  year < 1999
+  year < 1994
   origin < origin,
     "United States"
     "Massachusetts"
