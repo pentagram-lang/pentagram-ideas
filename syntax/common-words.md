@@ -69,6 +69,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `blob` | A linear collection of bytes with bigger-than-byte access |
 | `bnot` | Bitwise complement |
 | `bor` | Bitwise or |
+| `break` | Exit a loop |
 | `bsl` | Bitwise shift right |
 | `bsr` | Bitwise shift left |
 | `bxor` | Bitwise exclusive or |
@@ -127,6 +128,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `or` |  |
 | `pass` |  |
 | `ptr` | Read-only pointer |
+| `return` | Return from a block |
 | `say` | Tell something via the terminal |
 | `self` |  |
 | `set` | Set into a collection |

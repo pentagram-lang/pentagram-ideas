@@ -31,6 +31,15 @@ Comments:
 -- Helpful comment
 ```
 
+Non-local return (escape continuation):
+```
+f >> return x >
+  x 0 lte
+  if:
+    [0] return
+  8 x /
+```
+
 Conditional (true or false required):
 ```
 x 1 eq if:
@@ -54,7 +63,7 @@ Infinite loop:
 loop: break >
   event = pull-event
   event process-event not if:
-    break
+    [] break
 ```
 
 Item loop:
