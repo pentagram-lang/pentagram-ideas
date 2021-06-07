@@ -102,6 +102,8 @@ In total, close to 1 MiB.
 
 ## Allocation
 
+Allocation first checks free lists. If a free list is empty, free lists for larger sizes are not checked.
+
 ### Task stack
 
 #### Task start
