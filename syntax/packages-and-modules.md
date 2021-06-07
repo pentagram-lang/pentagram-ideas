@@ -4,23 +4,23 @@
 
 Import a link to a module:
 ```
-math << pkg.math.core
+math << pkg.tacit-lang.math
 ```
 
 Import a link to a module using a default name binding:
 ```
-<< pkg.math.core
+<< pkg.tacit-lang.math
 ```
 
 Import a link to a specific property or method:
 ```
-<< pkg.math.pi.core
-<< pkg.math.cos.core
+<< pkg.tacit-lang.math.pi
+<< pkg.tacit-lang.math.cos
 ```
 
 Import links to all names directly:
 ```
-<< pkg.math.core..
+*<< pkg.tacit-lang.math.cos
 ```
 
 The benefits of linking vs. assignment syntax are...
@@ -57,20 +57,19 @@ zero = 0
 
 Import & export a link to a module:
 ```
-math << pkg.math.core
+math << pkg.tacit-lang.math
 >> math
 ```
 
 Import & export a link to a method:
 ```
-<< pkg.math.core..
+*<< pkg.tacit-lang.math
 >> sin
 ```
 
-Import & export a link to all methods and properties:
+Export links to all methods and properties:
 ```
-math << pkg.math.core
->> math..
+*>> pkg.tacit-lang.math
 ```
 
 Hide an export by default:
@@ -92,26 +91,24 @@ _Also, non-assignment/definition statements allowed in object blocks_
 
 ## Package management system
 
-All packages and modules under the `pkg` identifier are external packages that can be referenced by the current package being developed.
+All packages and modules are under the `pkg` identifier.
 
-The first level under `pkg` is a tag/categorization system. `core` is the name for packages that can be referenced by default without installing. Others could include `web`, `file`, `gfx`, `input`, `net`, `domain`, etc.
+The first level under `pkg` is an organization or handle. The second level under `pkg` is a source repository name. For example `pkg.tacit-lang.snappy` refers to the `snappy` repository in the `tacit-lang` organization.
 
-The second level under `pkg` is the actual package name. For example the `snappy` of `pkg.data.snappy`. Or there can be three levels if the maintainer wants to have the package scoped to a person or organization.
+Extra levels of identifiers can refer to a package deeper in the repository, or a module or object within a package.
 
-(Any identifiers after the second level are methods and modules inside of a package.)
-
-The package name and tag defaults are specified by the author of the package (and can be changed), and can be overridden by the developer using the package (e.g. to avoid name conflicts).
+The package name is specified by the author of the package (and can be changed), and can be overridden by a developer using the package (e.g. to avoid name conflicts). A warning is generated when adding if the canonical source control URL doesn't match the package's provided name.
 
 When adding a package reference, Tacit automatically uses semantic versioning. The system "locks" in place the latest current version, and allows simple upgrades to compatible semantic versions. (This locking can be overridden to pin to specific versions or Git revisions.) Any potentially incompatible upgrades (including in the `0.x` range) trigger warnings with release note links.
 
-A `pkg.txt` file controls the developer's rules for referencing packages, and a `pkg.lock.txt` file tracks the exact (semantic-compatible) versions and Git revision each package. (Tacit will check that the lock file is included or excluded from source control correctly.)
+A `pkg.tacit` file controls the developer's rules for referencing packages, and a `pkg.lock.txt` file tracks the exact (semantic-compatible) versions and Git revision each package. (Tacit will check that the lock file is included or excluded from source control correctly.)
 
 ## Local-package modules
 
-For the package being developed, all modules are accessible under package's official name. The default name if not specified is the special `app` name.
+For the package being developed, all modules are accessible under package's official name. When initializing the package, a name is suggested based on source control, or based on current logged in user & path.
 ```
-<< pkg.default.app.parser
-math-utils << pkg.default.app.utils.math
+<< pkg.my-handle.my-app.parser
+math-utils << pkg.my-handle.my-app.utils.math
 ```
 
 There is no relative addressing of local modules. All local module references need to use the full path to the module.
@@ -134,12 +131,12 @@ d = 3
 f = 4
 
 -- g.tacit
-<< pkg.default.app.a
-<< pkg.default.app.b
-<< pkg.default.app.b.c
-<< pkg.default.app.b.d
-<< pkg.default.app.b.e
-<< pkg.default.app.b.e.f
+<< my-handle.my-app.a
+<< my-handle.my-app.b
+<< my-handle.my-app.b.c
+<< my-handle.my-app.b.d
+<< my-handle.my-app.b.e
+<< my-handle.my-app.b.e.f
 
 [a b c d e f] say
 ```
@@ -147,3 +144,13 @@ f = 4
 _(Note: object definitions for modules get merged.)_
 
 It's also possible to have a module file named the same as an existing directory, which is equivalent to having that file called `index.tacit` and located inside the directory. For consistency, this will generate a warning and an automatic fix.
+
+## Prelude
+
+The standard Tacit prelude doesn't have any of its own definitions, it re-exports from other modules. For example, the `smap` method comes from `pkg.tacit-lang.collections.smap.smap`.
+
+The prelude for a package can be configured. You can switch to any module, including a published "empty prelude" module. For example, you can also define your own prelude and re-export everything in the standard prelude plus your own extensions.
+
+## Engine
+
+Some functionality isn't defined directly in Tacit modules, instead comes from `-engine.*` modules defined by the compiler.

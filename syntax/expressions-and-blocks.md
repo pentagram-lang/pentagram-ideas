@@ -30,7 +30,7 @@ Every line of code in Tacit is a statement, and statements can either be an expr
 | --- | --- |
 | Expression | `'hi' say` |
 | Variable assignment | `x = 0` |
-| Module import | `<< pkg.math.core` |
+| Module import | `<< pkg.tacit-lang.math` |
 | Named paramter definition | `y < 1` |
 | Method definition | `times-two >> z > z 2 *` |
 
