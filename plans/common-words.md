@@ -1,4 +1,4 @@
-# Tacit ideas / Syntax / Common words
+# Tacit ideas / Plans / Common words
 
 Common words need to be easy to use. If they're small, that's good. And they don't need to follow strict rules.
 
