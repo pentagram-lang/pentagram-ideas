@@ -25,5 +25,5 @@
 * [Syntax](syntax.md)
 * [System install](system-install.md)
 * [Targets](targets.md)
-* [Terminology](terminology.md)
+* [Typing](typing.md)
 * [Use cases](use-cases.md)
