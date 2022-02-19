@@ -23,8 +23,10 @@
 * [Type annotations](type-annotations.md)
 * [Whitespace](whitespace.md)
 * [Custom types](custom-types.md)
+* [Extensions](extensions.md)
 * [Generics](generics.md)
 * [Traits](traits.md)
+* [Boxes](boxes.md)
 * [Point-free style](point-free-style.md)
 
 ## Practice

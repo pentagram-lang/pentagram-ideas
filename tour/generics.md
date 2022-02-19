@@ -1,19 +1,24 @@
 ```
-list >> enum:
-  tvar (any-type)
->
+(list) >>
+  tvar (type)
+> enum:
   tail >> type:
     ()
   head >> type:
     value (tvar)
     next (tvar list)
 
-number-list >> alias:
-  tvar (number)
+(i32-list) >> (i32 list)
+
+(number-list) >>
+  tvar (type)
+  (tvar number)
+>
   (tvar list)
 
 add >>
-  tvar (number)
+  tvar (type)
+  (tvar number)
   x (tvar)
   y (tvar)
   (tvar)
@@ -21,13 +26,12 @@ add >>
   x y +
 
 any >>
-  tvar-collection (collection)
-  tvar-item (any-type)
-  items (tvar-item tvar-collection)
-  check ([_ (tvar-item); (bool)])
+  tvar-collection [_ (type) (type)]
+  tvar-item (type)
+  (tvar-collection collection)
+  items (tvar-item tvar-collection.call)
+  check ([_ (tvar-item) (bool)])
   (bool)
 >
   ?
-
-
 ```
