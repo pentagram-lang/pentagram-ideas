@@ -5,4 +5,5 @@ main >> () >
   x = 1
   -2 -x * say
   x 1 + &- say
+  x y &= swap
 ```
