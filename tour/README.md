@@ -21,21 +21,22 @@
 
 * [Named parameters](named-parameters.md)
 * [Type annotations](type-annotations.md)
-* [Whitespace](whitespace.md)
+* [Blocks](blocks.md)
 * [Custom types](custom-types.md)
 * [Extensions](extensions.md)
 * [Generics](generics.md)
 * [Traits](traits.md)
-* [Boxes](boxes.md)
 * [Point-free style](point-free-style.md)
 
 ## Practice
 
 * [Modules](modules.md)
-* [I/O](io.md)
-* [Errors](errors.md)
+* [Input and output](input-and-output.md)
+* [Errors and crashes](errors-and-crashes.md)
 * [Concurrency](concurrency.md)
 * [Pointers](pointers.md)
+* [Boxes](boxes.md)
+* [Bit math](bit-math.md)
 * [Testing](testing.md)
 * [Docstrings](docstrings.md)
 

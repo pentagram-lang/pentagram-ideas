@@ -7,31 +7,21 @@ add >>
 >
   x y +  z +
 
-make-z >>
+make-z-squared >>
   z (i32)
-  (z < i32)
+  (z = i32)
 >
-  z z<
+  z = z * z
 
 main >>
   x = 1
   y = 2
   result = add,
-    1
+    q = 3
+    q 3 *
     = y
-    z = 3
+    z = 4
   result say
   1 2 3 z= add say
-  1 2 3 make-z add say
-
-main >>
-  x = 1
-  y = 2
-  result = add,
-    1
-    < y
-    z < 3
-  result say
-  1 2 3 z< add say
   1 2 3 make-z add say
 ```

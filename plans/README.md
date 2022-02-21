@@ -3,6 +3,7 @@
 ## Contents
 
 * [Benchmarking](benchmarking.md)
+* [Blocks](blocks.md)
 * [Bounded cache](bounded-cache.md)
 * [Call convention](call-convention.md)
 * [Closures](closures.md)
@@ -29,3 +30,4 @@
 * [Targets](targets.md)
 * [Typing](typing.md)
 * [Use cases](use-cases.md)
+* [Warnings](warnings.md)

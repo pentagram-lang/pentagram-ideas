@@ -34,8 +34,8 @@
     value (tvar opt)
     (str)
   >
-    value is-act? if:
-      value.value show
+    value is-val? if:
+      value* show
     else:
       "nil"
 
@@ -45,9 +45,9 @@
     (bool opt)
   >
     value 0 eq if:
-      false act
+      false val
     value 1 eq if:
-      true act
+      true val
     else:
       nil
 ```

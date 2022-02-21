@@ -26,16 +26,18 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `"` | String |
 | `%` | Remainder |
 | `&=` | Modify assignment |
+| `&*` | Dereference operator |
+| `&-` | Negate operator |
 | `'''` | String |
 | `'` | String |
 | `*` | Multiply |
-| `*` | Pointer dereference suffix |
+| `*` | Dereference suffix |
 | `+` | Add |
 | `+` | Positive marker prefix |
 | `--` | Comment |
-| `-` | Negative number prefix |
 | `-` | Subtract |
-| `-` | Unexported prefix |
+| `-` | Negate prefix |
+| `-` | Number digit group separator |
 | `,` | Prefix operator |
 | `.` | Get something from inside |
 | `.` | Method retrieval point marker |
@@ -54,7 +56,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `[]` | Expression inside of strings |
 | `[]` | Reference inside of comments |
 | `_` | Number digit group separator |
-| `_` | Unused variable |
+| `_` | Unexported prefix |
 | `add` | Add an item to a collection |
 | `all?` | Is a collection all true |
 | `and` |  |
@@ -67,12 +69,12 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `atoi` | Parse an integer from a string |
 | `band` | Bitwise and |
 | `blob` | A linear collection of bytes with bigger-than-byte access |
+| `bneq` | Bitwise exclusive or |
 | `bnot` | Bitwise complement |
 | `bor` | Bitwise or |
 | `break` | Exit a loop |
 | `bsl` | Bitwise shift right |
 | `bsr` | Bitwise shift left |
-| `bxor` | Bitwise exclusive or |
 | `call` | Call a method object |
 | `case` | Apply equality checks to an object |
 | `cat` | Append one collection to another |
@@ -98,7 +100,8 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `enc` | Encode a string to UTF-8 bytes |
 | `eq` |  |
 | `error` | What happens when a program diverts control flow to error handling |
-| `explain` | Like `dbg` but prints the expression tree of each parameter, and returns each parameter as-is |
+| `explain` | Like `dbg` but prints the value of each node of the expression tree of each parameter, and returns each parameter as-is |
+| `ext` | Declare extension methods |
 | `false` |  |
 | `fmod` | Remainder for floating-point |
 | `get` | Get from collection |
@@ -106,10 +109,13 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `gte` |  |
 | `idiv` | Divide and discard remainder |
 | `if` |  |
+| `iif` | "Inline if" ternary operator |
+| `impl` | Implement a trait |
+| `implies` | Boolean operator for material implication |
 | `in?` | Is a value in a collection |
 | `ins` | Insert an item into a collection at a specific location |
 | `is-nil?` | |
-| `is-opt?` | |
+| `is-val?` | |
 | `iter` | Deal with a collection lazily |
 | `keep` | Filter and retain |
 | `len` | How many items in a collection |
@@ -118,13 +124,15 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `map` |  |
 | `match` | Apply predicates to an object |
 | `mptr` | Mutable pointer |
-| `neg` | Negate a number |
+| `nand` |  |
 | `neq` |  |
+| `nimplies` |  |
+| `nor` |  |
 | `nil` | Potential not filled |
 | `none?` | Is a collection all false |
 | `not` |  |
 | `obj` | A structured collection of items |
-| `opt` | Potential fulfilled with a value |
+| `opt` | Potential enum type |
 | `or` |  |
 | `pass` |  |
 | `ptr` | Read-only pointer |
@@ -138,5 +146,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `swap` |  |
 | `take` |  |
 | `to` | Range from one number to another |
+| `trait` | Declare a group of functionality |
 | `true` |  |
 | `try` | Try to call a method, continuing if there is no error |
+| `val` | Potential fulfilled with a value |

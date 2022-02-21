@@ -13,6 +13,9 @@ x y +  2  gt elif:
 else:
   "c"
 
+-- Inline conditional (true or false required)
+x 1 eq  "a"  "b"  iif
+
 -- Value equality switch
 x switch
 1 case:
@@ -33,9 +36,9 @@ else:
 
 -- While loop
 i = 0 mptr
-i* 10 lt while:
-  "at [i*]" say
-  i* &= 1 +
+i% 10 lt while:
+  "at [i%]" say
+  i% &= 1 +
 
 -- Infinite loop
 loop: break >
