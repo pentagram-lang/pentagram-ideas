@@ -16,6 +16,11 @@
 >
   (tvar list)
 
+(tagged-i32) >>
+  tvar-tag (str)
+> type:
+  value (i32)
+
 add >>
   tvar (type)
   (tvar number)
@@ -29,7 +34,7 @@ any >>
   tvar-collection [_ (type) (type)]
   tvar-item (type)
   (tvar-collection collection)
-  items (tvar-item tvar-collection.call)
+  items (tvar-item tvar-collection*)
   check ([_ (tvar-item) (bool)])
   (bool)
 >

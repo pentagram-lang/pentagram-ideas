@@ -62,7 +62,7 @@ applicative >>
     tvar-value (type)
     tvar-result (type)
     function ([_ (tvar-value) (tvar-result)])
-    value (tvar-value tvar.call)
+    value (tvar-value tvar*)
     (tvar tvar-result)
 
 applicative >>
@@ -72,12 +72,12 @@ applicative >>
   pure >>
     tvar-value (type)
     value (tvar)
-    (tvar-result tvar.call)
+    (tvar-result tvar*)
 
   apply >>
     tvar-value (type)
     tvar-result (type)
-    function ([_ (tvar-value) (tvar-result)] tvar.call)
-    value (tvar-value tvar.call)
-    (tvar-result tvar.call)
+    function ([_ (tvar-value) (tvar-result)] tvar*)
+    value (tvar-value tvar*)
+    (tvar-result tvar*)
 ```

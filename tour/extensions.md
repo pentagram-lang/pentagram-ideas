@@ -17,7 +17,7 @@
     self.top-left &= distance +
     self
 
-<< @other.rect-ext.*
+*<< @other.rect-ext
 
 (named) >>
   tvar (type)

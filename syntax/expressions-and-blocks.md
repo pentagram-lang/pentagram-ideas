@@ -192,26 +192,11 @@ f >> x > -- Pop 1
   y 3 * -- Push 1
 ```
 
-To give access to the full expression stack to a method object, splat it in a normal expression:
+To give access to the full expression stack to a method object, call it in a normal expression:
 ```
 f >> g >
-  11 g ..
+  11 g*
   12
-```
-
-To restrict a method object to just pushing values, use `no-pop`:
-```
-f >> g >
-  [11] g cat no-pop ..
-  12
-```
-
-## Not used
-
-If the result of an expression is not used, assigning to `_` marks it as unused. Parameters cannot be named `_`, but can be assigned to `_` for this effect.
-
-```
-_ = cause-side-effect-and-return-result
 ```
 
 ## Not yet implemented

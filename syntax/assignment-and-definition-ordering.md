@@ -48,20 +48,3 @@ obj:
 ```
 
 _`self` methods cannot be called until all property assignments are complete_
-
-## Ideal sorting
-
-_`tacit format` will sort to have assignments first, followed by definitions, as allowed by the DAG, sorted alphabetically_
-
-## Assignment destructuring
-
-Assignment can be used to pull from the call stack for simple cases (no required-name parameters, no optional or default values):
-```
-d m = 9 4 div-mod
-x y = vec.points ..
-head ..tail = [1 2 3] arr ..
-vec2 >> type:
-  x/f32
-  y/f32
-  =
-```

@@ -67,7 +67,7 @@ vec2 >> x y > obj:
 Automatic properties through other objects:
 ```
 vec3 >> v/vec2 z =/ obj:
-  = v.*
+  *= v
   = z
 ```
 

@@ -153,4 +153,4 @@ The prelude for a package can be configured. You can switch to any module, inclu
 
 ## Engine
 
-Some functionality isn't defined directly in Tacit modules, instead comes from `-engine.*` modules defined by the compiler.
+Some functionality isn't defined directly in Tacit modules, instead comes from `_engine.*` modules defined by the compiler.

@@ -2,7 +2,7 @@
 -- Non-local return (escape continuation)
 f >> return x >
   x 0 lte if:
-    0 return.call
+    0 return*
   8 x /
 
 -- Conditional (true or false required)
@@ -44,10 +44,10 @@ i% 10 lt while:
 loop: break >
   event = pull-event
   event process-event not if:
-    break.call
+    break*
 
 -- Item loop
 sum = 0 mptr
-1 10 range each: item >
+1 10 to each: item >
   sum* &= item +
 ```

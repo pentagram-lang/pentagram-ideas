@@ -21,3 +21,7 @@ The formatter will help with complex nested expressions:
 ```
 
 If your code already contains a "higher" separator, it will be left there, but "lower" separators will get upgraded by the formatter.
+
+## Statement sorting
+
+Will sort to have assignments first, followed by definitions, as allowed by the DAG, sorted alphabetically.

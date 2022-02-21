@@ -146,6 +146,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `swap` |  |
 | `take` |  |
 | `to` | Range from one number to another |
+| `tpl` | Range from one number to another |
 | `trait` | Declare a group of functionality |
 | `true` |  |
 | `try` | Try to call a method, continuing if there is no error |
