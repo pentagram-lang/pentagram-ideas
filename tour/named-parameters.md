@@ -1,16 +1,18 @@
 ```
 add >>
-  x (i32)
-  y (i32)
-  z (i32) = 0
-  (i32)
+  x | i32
+  y | i32
+  z | i32 = 0
 >
+  i32
+/>
   x y +  z +
 
 make-z-squared >>
-  z (i32)
-  (z = i32)
+  z | i32
 >
+  z | i32
+/>
   z = z * z
 
 main >>

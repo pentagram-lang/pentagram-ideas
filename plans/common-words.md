@@ -43,6 +43,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `.` | Method retrieval point marker |
 | `.` | Radix point |
 | `/` | Divide without loss |
+| `/>` | Return type annotation |
 | `:` | Method object operator |
 | `;` | Statement separator |
 | `<<` | Import |
@@ -51,6 +52,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `>>` | Method definition |
 | `>` | Method parameter declaration |
 | `?` | Not yet implemented |
+| `?` | Unnamed/anonymous parameter |
 | `@` | Code inside of comments |
 | `[]` | Inline method object |
 | `[]` | Expression inside of strings |

@@ -1,6 +1,8 @@
 ```
 delayed-sum >> type:
-  values ([tvar [_ (type) (type)] (tvar iterable) > i32 tvar*] box)
+  values |
+    [tvar | [? | type > type]; [tvar iterable] > i32 tvar*]
+    box
 >
   sum >> values* 0 [+] fold
   increment >> values* [1 +] box delayed-sum

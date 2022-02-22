@@ -1,7 +1,7 @@
 ```
 f >
-  x (u8)
-  y (u8)
+  x | u8
+  y | u8
 >>
   x bnot say
   x y bor say

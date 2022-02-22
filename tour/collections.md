@@ -11,11 +11,13 @@ my-other-array = arr:
   3 2 /
 doubled = [1 2 3] arr [n > n 2 *] map
 f >>
-  a (i32 opt)
-  b ([(i32) (i32)] tup)
-  c ([(i32)])
-  d (i32 arr)
+  a | i32 opt
+  b | [i32 i32] tup
+  c | [? | i32 > i32]
+  d | i32 arr
 >
+  i32 arr
+/>
   arr:
     a*
     b*
