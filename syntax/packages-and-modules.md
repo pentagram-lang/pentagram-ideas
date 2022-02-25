@@ -147,7 +147,7 @@ It's also possible to have a module file named the same as an existing directory
 
 ## Prelude
 
-The standard Tacit prelude doesn't have any of its own definitions, it re-exports from other modules. For example, the `smap` method comes from `pkg.tacit-lang.collections.smap.smap`.
+The standard Tacit prelude doesn't have any of its own definitions, it re-exports from other modules. For example, the `smap` method comes from `std-collections.smap` (as a method linked into the root package index).
 
 The prelude for a package can be configured. You can switch to any module, including a published "empty prelude" module. For example, you can also define your own prelude and re-export everything in the standard prelude plus your own extensions.
 

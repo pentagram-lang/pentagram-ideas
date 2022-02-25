@@ -26,4 +26,6 @@ main >>
   result say
   1 2 3 z= add say
   1 2 3 make-z add say
+  params = [1 2 3 make-z] tup
+  params* add say
 ```
