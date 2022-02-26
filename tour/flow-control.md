@@ -36,9 +36,9 @@ else:
 
 -- While loop
 i = 0 mptr
-i% 10 lt while:
-  "at [i%]" say
-  i% &= 1 +
+i* 10 lt while:
+  ['at' i*] dbg
+  i* &= 1 +
 
 -- Infinite loop
 loop: break >

@@ -23,9 +23,9 @@ main >>
     q 3 *
     = y
     z = 4
-  result say
-  1 2 3 z= add say
-  1 2 3 make-z add say
+  [result] dbg
+  [1 2 3 z= add] dbg
+  [1 2 3 make-z add] dbg
   params = [1 2 3 make-z] tup
-  params* add say
+  [params* add] dbg
 ```

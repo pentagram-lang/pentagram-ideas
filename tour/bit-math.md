@@ -3,15 +3,15 @@ f >
   x | u8
   y | u8
 >>
-  x bnot say
-  x y bor say
-  x y band say
-  x y bneq say
-  x y beq say
-  x y bnor say
-  x y bnand say
-  x y bimplies say
-  x y bnimplies say
-  x 2 bsl say
-  x 2 bsr say
+  [x bnot] dbg
+  [x y bor] dbg
+  [x y band] dbg
+  [x y bneq] dbg
+  [x y beq] dbg
+  [x y bnor] dbg
+  [x y bnand] dbg
+  [x y bimplies] dbg
+  [x y bnimplies] dbg
+  [x 2 bsl] dbg
+  [x 2 bsr] dbg
 ```

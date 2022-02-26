@@ -1,9 +1,9 @@
 ```
 main >>
-  1 1 +  say
-  ['hello' 'world'] arr  ' ' join  say
+  [1 1 +] dbg
+  [['hello' 'world'] arr  ' ' join] dbg
   x = 1
-  -2 -x * say
-  x 1 + &- say
+  [-2 -x *] dbg
+  [x 1 + &-] dbg
   x y &= swap
 ```

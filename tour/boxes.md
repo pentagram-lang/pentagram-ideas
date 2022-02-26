@@ -9,6 +9,6 @@ delayed-sum >> type:
 
 main >>
   d = [1 2 3] box delayed-sum
-  d.sum say
-  d.increment.sum say
+  [d.sum] dbg
+  [d.increment.sum] dbg
 ```

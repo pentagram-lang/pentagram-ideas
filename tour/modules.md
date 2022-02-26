@@ -18,9 +18,9 @@ p << std-math.pi
 
 main >>
   bitmap = 256 256 allegro.bitmap.create
-  "[other.a.x other.b.y +]" say
-  "[1 2 my-pkg.main._inner]" say
-  "[2 sin]" say
-  "[p std-math.cos]" say
-  "[1 val [+ 1] fmap]" say
+  [other.a.x other.b.y +] dbg
+  [1 2 my-pkg.main._inner] dbg
+  [2 sin] dbg
+  [p std-math.cos] dbg
+  [1 val [+ 1] fmap] dbg
 ```

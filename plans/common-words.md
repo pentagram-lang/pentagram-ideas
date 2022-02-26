@@ -87,7 +87,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `const` | Mark an expression as compile-time constant |
 | `cout` | Standard (console) output file |
 | `crash` | What happens when a program cannot continue |
-| `dbg` | Like `say` but written to standard error and includes file & line number |
+| `dbg` | Pretty print all values to standard error, includes file & line number |
 | `dec` | Decode UTF-8 bytes to a string |
 | `default` | Define a default value for an unspecified named parameter |
 | `del` | Remove an item from a collection |
@@ -102,7 +102,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `enc` | Encode a string to UTF-8 bytes |
 | `eq` |  |
 | `error` | What happens when a program diverts control flow to error handling |
-| `explain` | Like `dbg` but prints the value of each node of the expression tree of each parameter, and returns each parameter as-is |
+| `explain` | Like `dbg` but prints the values of each node of the expression tree of each parameter, and returns each parameter as-is |
 | `ext` | Declare extension methods |
 | `false` |  |
 | `fmod` | Remainder for floating-point |
