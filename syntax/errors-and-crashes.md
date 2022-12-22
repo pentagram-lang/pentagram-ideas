@@ -24,7 +24,7 @@ bar =/
 bar =/
   result = 4 foo.catch
   if,
-    result is-ok?,
+    result.is-ok?,
       m = result.ok-result
       m say
     else,
@@ -57,15 +57,15 @@ Missing `else` cases for conditionals are a special type of static assertion tha
 
 ```
 animal match:
-  is-dog?,
+  .is-dog?,
     animal.bark
-  is-cat?,
+  .is-cat?,
     animal.meow
 ```
 
 ## Not nil assertion
 
-When dealing with optional values, you may find yourself often using `x is-nil? not assert` when you don't want to handle nils. The shortcut in Tacit for this is the `!` suffix operator.
+When dealing with optional values, you may find yourself often using `x.is-nil? not assert` when you don't want to handle nils. The shortcut in Tacit for this is the `!` suffix operator.
 
 ```
 person.company!.address!.city! say

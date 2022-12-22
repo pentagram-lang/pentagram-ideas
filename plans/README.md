@@ -21,6 +21,7 @@
 * [Keyboard symbols](keyboard-symbols.md)
 * [Laziness](laziness.md)
 * [Memory management](memory-management.md)
+* [Modules](modules.md)
 * [Named parameters](named-parameters.md)
 * [Objects](objects.md)
 * [Optimizations](optimizations.md)

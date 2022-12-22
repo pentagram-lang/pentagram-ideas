@@ -62,6 +62,8 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `|-` | Type condition annotation |
 | `|` | Type annotation |
 | `~` | Unspecified name parameter prefix |
+| `.is-nil?` | |
+| `.is-val?` | |
 | `add` | Add an item to a collection |
 | `all?` | Is a collection all true |
 | `and` |  |
@@ -118,8 +120,6 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `implies` | Boolean operator for material implication |
 | `in?` | Is a value in a collection |
 | `ins` | Insert an item into a collection at a specific location |
-| `is-nil?` | |
-| `is-val?` | |
 | `iter` | Deal with a collection lazily |
 | `keep` | Filter and retain |
 | `len` | How many items in a collection |
@@ -143,6 +143,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `return` | Return from a block |
 | `say` | Tell something via the terminal |
 | `self` |  |
+| `self-pkg` |  |
 | `self-type` |  |
 | `set` | Set into a collection |
 | `smap` | Create a sorted map collection |
