@@ -157,3 +157,4 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `try` | Try to call a method, continuing if there is no error |
 | `tup` | Fixed-length group of values, can include named and unnamed members |
 | `val` | Potential fulfilled with a value |
+| `virt` | Virtual object wrapper |

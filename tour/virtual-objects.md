@@ -1,6 +1,6 @@
 ```
 delayed-sum >> struct:
-  values | virtual:
+  values | virt:
     t-iterable < [< type | type]
     |& t-iterable iterable
     | i32 t-iterable*
@@ -11,7 +11,7 @@ delayed-sum >> struct:
     self
 
 main >>
-  d = [1 2 3] arr virtual delayed-sum
+  d = [1 2 3] arr virt delayed-sum
   [d.sum] dbg
   [d.increment.sum] dbg
 ```
