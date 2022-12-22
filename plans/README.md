@@ -28,6 +28,7 @@
 * [Syntax](syntax.md)
 * [System install](system-install.md)
 * [Targets](targets.md)
+* [Testing](testing.md)
 * [Typing](typing.md)
 * [Use cases](use-cases.md)
 * [Warnings](warnings.md)

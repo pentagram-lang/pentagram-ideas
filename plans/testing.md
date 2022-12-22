@@ -1,33 +1,17 @@
-# Tacit ideas / Syntax / Testing
+# Tacit ideas / Plans / Testing
 
 Testing files are named `*.test.tacit` and all get automatically run.
 
 Inside a test file, all identifiers from the "base" (non-test) module are imported directly, including hidden identifiers. (The testing package also gets imported directly.)
 
-Tests are optionally named using a comment from the preceding line:
-
-```
--- [sqrt]
-test:
-  -- Four
-  test:
-    4 sqrt  2  eq assert
-
-  -- Other numbers
-  arr:
-    :
-      input < 16
-      output < 4
-    :
-      input < 9
-      output < 3
-  test-cases: input output >
-    input sqrt  output  eq assert
-```
+Tests are optionally named using a comment from the preceding line.
 
 Because Tacit modules can't have side effects, it's easy to tell exactly which tests need to run when code changes, and Tacit will only run the minimal set of tests again during continuous testing mode.
 
-When showing progress, only test files are enumerated. Details are shown using a lattice, with double-line intersections coloured green for pass and single-line intersections showing red for fail. Details and context are only shown for the first failing test. Hierarchy is used to help navigation. A summary footer is also shown with test counts, with the "todo" line animated as ocean waves or a zigzag spark.
+To allow enumerating all tests, nested tests aren't supported. But test groups and test cases are supported. The body of test groups are run on test startup (to collect tests) and the input to test cases are special "test tuples" that include instantiation line number.
+
+Details are shown using a lattice (test files), with double-line intersections coloured green for pass and single-line intersections showing red for fail. Details and context are only shown for the first failing test. Hierarchy is used to help navigation. A summary footer is also shown with test counts (all enumerated tests), with the "todo" line animated as ocean waves or a zigzag spark.
+
 ```
 ╭╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╮
 ╎ parse/parse.test.tacit                  ╎
