@@ -22,7 +22,7 @@
 * [Named parameters](named-parameters.md)
 * [Type annotations](type-annotations.md)
 * [Blocks](blocks.md)
-* [Custom types](custom-types.md)
+* [Structs](structs.md)
 * [Extensions](extensions.md)
 * [Generics](generics.md)
 * [Traits](traits.md)

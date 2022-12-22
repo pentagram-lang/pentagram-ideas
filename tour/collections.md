@@ -13,11 +13,10 @@ doubled = [1 2 3] arr [n > n 2 *] map
 f >>
   a | i32 opt
   b | [i32 i32] tup
-  c | [? | i32 > i32]
+  c | [| i32 |- i32]
   d | i32 arr
+  |- i32 arr
 >
-  i32 arr
-/>
   arr:
     a*
     b*
@@ -33,15 +32,15 @@ f >>
 
 words = ["ok" 8; "the" 400] smap
 numbers = smap:
-  1 obj,
+  1 tup:
     even? = false
-  2 obj,
+  2 tup:
     even? = true
 
 more-numbers = smap:
   numbers*
   3 10 to each: i >
-    i obj,
+    i tup:
       even? = i 2 mod 0 eq
 
 fib >> a b >

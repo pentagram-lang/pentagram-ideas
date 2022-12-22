@@ -40,7 +40,7 @@ x &= f
 
 Using `self` access syntax refers to the current object:
 ```
-obj:
+tup:
   f >> self > self.x +
   x = 1
   g >> self > self.x *

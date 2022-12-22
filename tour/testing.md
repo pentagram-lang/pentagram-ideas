@@ -5,19 +5,19 @@ test:
     1 1 +  2  eq
 
 -- [sqrt]
-tgroup:
+test-group:
   -- Four
   test:
     4 sqrt  2  eq assert
 
   -- Other numbers
   arr:
-    ttup:
+    tup:
       input = 16
       output = 4
-    ttup:
+    tup:
       input = 9
       output = 3
-  tfor: input output >
-    input sqrt  output  eq assert
+  test-each: data >
+    data.input sqrt  data.output  eq assert
 ```

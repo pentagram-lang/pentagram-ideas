@@ -184,7 +184,7 @@ arr:
   i 2 + -- Push 1
   i 3 + dup -- Push 2
 
-vec2 >> obj:
+vec2 >> tup:
   x y = -- Pop 2
 
 f >> x > -- Pop 1

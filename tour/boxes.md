@@ -1,9 +1,9 @@
 ```
-delayed-sum >> type:
-  values |
-    [tvar | [? | type > type]; [tvar iterable] > i32 tvar*]
-    box
+delayed-sum >> struct:
+  t-iterable | [| type |- type]
+  |& t-iterable iterable
 >
+  values | i32 t-iterable* box
   sum >> values* 0 [+] fold
   increment >> values* [1 +] box delayed-sum
 

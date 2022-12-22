@@ -1,8 +1,7 @@
 ```
 square >>
-  [value] | f32
+  -value | f32
+  |- f32
 >
-  f32
-/>
   dup *
 ```

@@ -77,7 +77,7 @@ All three `error`, `crash`, and `assert` use an any (rich) comment from the prec
 
 ```
 # Can't open file
-[path = path] obj +data error
+[path = path] tup +data error
 ```
 
 ## Higher order methods

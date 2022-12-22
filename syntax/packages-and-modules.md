@@ -121,7 +121,7 @@ For example:
 ```
 -- index.tacit
 a = 1
-b = obj:
+b = tup:
   c = 2
 
 -- b/index.tacit

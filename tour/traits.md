@@ -1,59 +1,58 @@
 ## Simple types
 
 ```
-can-show >>
-  tvar | type
+can-show >> trait:
+  t-value | type
 >
-  trait:
-    show >>
-      value | tvar
-    >
-      str
-    />
+  show >>
+    value | t-value
+    |- str
+  >
+    ?
 
-can-try-convert >>
-  tvar-from | type
-  tvar-to | type
+can-try-convert >> trait:
+  t-from | type
+  t-to | type
 >
-  trait:
-    try-convert >>
-      value | tvar-from
-    >
-      tvar-to opt
-    />
+  try-convert >>
+    value | t-from
+    |- t-to opt
+  >
+    ?
 
-bool-can-show >> [bool can-show] impl:
+bool-can-show >> impl:
+  |- bool can-show
+>
   show >>
     value | bool
+    |- str
   >
-    str
-  />
     value true eq if:
       "true"
     else:
       "false"
 
-opt-can-show >>
-  tvar | type
-  [tvar can-show]
+opt-can-show >> impl:
+  t-value | type
+  |? t-value can-show
+  |- t-value opt can-show
 >
-  [tvar opt can-show] impl:
-    show >>
-      value | tvar opt
-    >
-      str
-    />
-      value is-val? if:
-        value* show
-      else:
-        "nil"
+  show >>
+    value | t-value opt
+    |- str
+  >
+    value is-val? if:
+      value* show
+    else:
+      "nil"
 
-i32-bool-can-try-convert >> [i32 bool can-try-convert] impl:
+i32-bool-can-try-convert >> impl:
+  |- i32 bool can-try-convert
+>
   try-convert >>
     value | i32
+    |- bool opt
   >
-    bool opt
-  />
     value 0 eq if:
       false val
     value 1 eq if:
@@ -65,37 +64,35 @@ i32-bool-can-try-convert >> [i32 bool can-try-convert] impl:
 ## Higher order types
 
 ```
-applicative >>
-  tvar | [? | type > type]
+functor >> trait:
+  t-container | [| type |- type]
 >
-  trait:
-    fmap >>
-      tvar-value | type
-      tvar-result | type
-      function | [? | tvar-value > tvar-result]
-      value | tvar-value tvar*
-    >
-      tvar tvar-result
-    />
+  fmap >>
+    t-value | type
+    t-result | type
+    function | [| t-value |- t-result]
+    value | t-value t-container*
+    |- t-container t-result
+  >
+    ?
 
-applicative >>
-  tvar | [? | type > type]
-  [tvar functor]
+applicative >> trait:
+  t-container | [| type |> type]
+  |? t-container functor
 >
-  trait:
-    pure >>
-      tvar-value | type
-      value | tvar
-    >
-      tvar-result tvar*
-    />
+  pure >>
+    t-value | type
+    value | t-value
+    |- t-result t-container*
+  >
+    ?
 
-    apply >>
-      tvar-value | type
-      tvar-result | type
-      function | [? | tvar-value > tvar-result] tvar*
-      value | tvar-value tvar*
-    >
-      tvar-result tvar*
-    />
+  apply >>
+    t-value | type
+    t-result | type
+    function | [| t-value |- t-result] t-container*
+    value | t-value t-container*
+    |- t-result t-container*
+  >
+    ?
 ```

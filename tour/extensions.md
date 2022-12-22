@@ -1,36 +1,20 @@
 ```
-rect >> type:
+rect >> struct:
   top-left | vec2
   size | vec2
->
-  = top-left
-  = top-right
   area >> size.x size.x *  size.y size.y *  +
-  scale >> self; factor | f32 > rect />
+  scale >> self factor | self-type f32 |- self-type >
     self.size &= factor *
     self
 
-rect-ext >> [rect] ext:
-  bottom-right >> self > vec2 />
+rect-ext >> struct-ext:
+  |- rect
+>
+  bottom-right >> self | self-type |- vec2 >
     self.top-left self.size +
-  move >> self; distance | vec2 > rect />
+  move >> self distance | self-type vec2 |- self-type >
     self.top-left &= distance +
     self
 
 *<< @other.rect-ext
-
-named >>
-  tvar | type
->
-  trait:
-    named-ext >> [tvar] ext:
-      name >> str />
-
-named-extra-ext >>
-  tvar | type
-  [tvar named]
->
-  [tvar] ext:
-    name-extra >> self >
-      '[self.name] extra'
 ```

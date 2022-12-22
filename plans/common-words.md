@@ -25,40 +25,43 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `"""` | String |
 | `"` | String |
 | `%` | Remainder |
-| `&=` | Modify assignment |
 | `&*` | Dereference operator |
 | `&-` | Negate operator |
+| `&=` | Modify assignment |
 | `'''` | String |
 | `'` | String |
-| `*` | Multiply |
 | `*` | Dereference suffix |
+| `*` | Multiply |
 | `+` | Add |
 | `+` | Positive marker prefix |
+| `,` | Prefix operator |
 | `--` | Comment |
-| `-` | Subtract |
 | `-` | Negate prefix |
 | `-` | Number digit group separator |
-| `,` | Prefix operator |
+| `-` | Subtract |
+| `-` | Uncaptured parameter prefix |
 | `.` | Get something from inside |
 | `.` | Method retrieval point marker |
 | `.` | Radix point |
 | `/` | Divide without loss |
-| `/>` | Return type annotation |
 | `:` | Method object operator |
 | `;` | Statement separator |
 | `<<` | Import |
-| `<` | Named parameter declaration |
 | `=` | Assignment |
 | `>>` | Method definition |
-| `>` | Method parameter declaration |
+| `>` | Method signature end |
 | `?` | Not yet implemented |
-| `?` | Unnamed/anonymous parameter |
+| `?` | Required named parameter placeholder |
 | `@` | Code inside of comments |
-| `[]` | Inline method object |
 | `[]` | Expression inside of strings |
+| `[]` | Inline method object |
 | `[]` | Reference inside of comments |
 | `_` | Number digit group separator |
 | `_` | Unexported prefix |
+| `|-` | Return type annotation |
+| `|-` | Type condition annotation |
+| `|` | Type annotation |
+| `~` | Unspecified name parameter prefix |
 | `add` | Add an item to a collection |
 | `all?` | Is a collection all true |
 | `and` |  |
@@ -103,7 +106,6 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `eq` |  |
 | `error` | What happens when a program diverts control flow to error handling |
 | `explain` | Like `dbg` but prints the values of each node of the expression tree of each parameter, and returns each parameter as-is |
-| `ext` | Declare extension methods |
 | `false` |  |
 | `fmod` | Remainder for floating-point |
 | `get` | Get from collection |
@@ -134,18 +136,20 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `nil` | Potential not filled |
 | `none?` | Is a collection all false |
 | `not` |  |
-| `obj` | A structured collection of items |
-| `opt` | Potential enum type |
+| `opt` | Potential type |
 | `or` |  |
 | `pass` |  |
 | `ptr` | Read-only pointer |
 | `return` | Return from a block |
 | `say` | Tell something via the terminal |
 | `self` |  |
+| `self-type` |  |
 | `set` | Set into a collection |
 | `smap` | Create a sorted map collection |
 | `sset` | Create a sorted set collection |
 | `skip` |  |
+| `struct` | Declare structured data |
+| `struct-ext` | Declare struct extension methods |
 | `swap` |  |
 | `take` |  |
 | `to` | Range from one number to another |
