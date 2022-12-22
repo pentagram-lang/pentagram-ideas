@@ -20,7 +20,7 @@ animal >> struct:
 handle >> struct:
   fd | i32
   ctor >>
-    name | str
+    name < str
   >
     fd = name open
   dtor >>

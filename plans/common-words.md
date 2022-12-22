@@ -39,7 +39,6 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `-` | Negate prefix |
 | `-` | Number digit group separator |
 | `-` | Subtract |
-| `-` | Uncaptured parameter prefix |
 | `.` | Get something from inside |
 | `.` | Method retrieval point marker |
 | `.` | Radix point |
@@ -47,6 +46,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `:` | Method object operator |
 | `;` | Statement separator |
 | `<<` | Import |
+| `<` | Parameter type annotation |
 | `=` | Assignment |
 | `>>` | Method definition |
 | `>` | Method signature end |
@@ -58,8 +58,8 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `[]` | Reference inside of comments |
 | `_` | Number digit group separator |
 | `_` | Unexported prefix |
-| `|-` | Return type annotation |
-| `|-` | Type condition annotation |
+| `|<` | Uncaptured parameter type annotation |
+| `|?` | Type condition annotation |
 | `|` | Type annotation |
 | `~` | Unspecified name parameter prefix |
 | `.is-nil?` | |

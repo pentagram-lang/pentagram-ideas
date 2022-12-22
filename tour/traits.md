@@ -2,26 +2,26 @@
 
 ```
 can-show >> trait:
-  t-value | type
+  t-value < type
 >
   show >>
-    value | t-value
-    |- str
+    value < t-value
+    | str
 
 can-try-convert >> trait:
-  t-from | type
-  t-to | type
+  t-from < type
+  t-to < type
 >
   try-convert >>
-    value | t-from
-    |- t-to opt
+    value < t-from
+    | t-to opt
 
 bool-can-show >> impl:
-  |- bool can-show
+  | bool can-show
 >
   show >>
-    value | bool
-    |- str
+    value < bool
+    | str
   >
     value true eq if:
       "true"
@@ -29,13 +29,13 @@ bool-can-show >> impl:
       "false"
 
 opt-can-show >> impl:
-  t-value | type
+  t-value < type
   |? t-value can-show
-  |- t-value opt can-show
+  | t-value opt can-show
 >
   show >>
-    value | t-value opt
-    |- str
+    value < t-value opt
+    | str
   >
     value.is-val? if:
       value* show
@@ -43,11 +43,11 @@ opt-can-show >> impl:
       "nil"
 
 i32-bool-can-try-convert >> impl:
-  |- i32 bool can-try-convert
+  | i32 bool can-try-convert
 >
   try-convert >>
-    value | i32
-    |- bool opt
+    value < i32
+    | bool opt
   >
     value 0 eq if:
       false val
@@ -61,28 +61,28 @@ i32-bool-can-try-convert >> impl:
 
 ```
 functor >> trait:
-  t-container | [| type |- type]
+  t-container < [< type | type]
 >
   fmap >>
-    t-value | type
-    t-result | type
-    function | [| t-value |- t-result]
-    value | t-value t-container*
-    |- t-container t-result
+    t-value < type
+    t-result < type
+    function < [< t-value | t-result]
+    value < t-value t-container*
+    | t-container t-result
 
 applicative >> trait:
-  t-container | [| type |> type]
+  t-container < [< type | type]
   |? t-container functor
 >
   pure >>
-    t-value | type
-    value | t-value
-    |- t-result t-container*
+    t-value < type
+    value < t-value
+    | t-result t-container*
 
   apply >>
-    t-value | type
-    t-result | type
-    function | [| t-value |- t-result] t-container*
-    value | t-value t-container*
-    |- t-result t-container*
+    t-value < type
+    t-result < type
+    function < [< t-value | t-result] t-container*
+    value < t-value t-container*
+    | t-result t-container*
 ```
