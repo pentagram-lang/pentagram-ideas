@@ -7,8 +7,6 @@ can-show >> trait:
   show >>
     value | t-value
     |- str
-  >
-    ?
 
 can-try-convert >> trait:
   t-from | type
@@ -17,8 +15,6 @@ can-try-convert >> trait:
   try-convert >>
     value | t-from
     |- t-to opt
-  >
-    ?
 
 bool-can-show >> impl:
   |- bool can-show
@@ -73,8 +69,6 @@ functor >> trait:
     function | [| t-value |- t-result]
     value | t-value t-container*
     |- t-container t-result
-  >
-    ?
 
 applicative >> trait:
   t-container | [| type |> type]
@@ -84,8 +78,6 @@ applicative >> trait:
     t-value | type
     value | t-value
     |- t-result t-container*
-  >
-    ?
 
   apply >>
     t-value | type
@@ -93,6 +85,4 @@ applicative >> trait:
     function | [| t-value |- t-result] t-container*
     value | t-value t-container*
     |- t-result t-container*
-  >
-    ?
 ```

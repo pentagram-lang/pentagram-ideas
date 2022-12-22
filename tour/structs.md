@@ -3,13 +3,19 @@ vec2 >> struct:
   x | f32
   y | f32
 
-person >> struct:
-  position | vec2
+animal >> struct:
   name | str
-  mortal,
-    hat | str
-  werewolf,
-    fur | str
+  location | tup:
+    continent | str
+    position | vec2
+  canis | case:
+    bark | str
+  felidae | case:
+    meow | str
+    lion | case:
+      mane | str
+    lynx | case:
+      tufts | str
 
 handle >> struct:
   fd | i32
@@ -21,4 +27,11 @@ handle >> struct:
     self
   >
     self.fd close
+
+main >>
+  a = animal.canis,
+    "dog"
+    ["NA" 32 100 vec2] tup
+    "woof"
+  [a.is-canis? a.is-lion?] dbg
 ```
