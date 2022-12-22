@@ -1,4 +1,4 @@
-# Tacit ideas / Plans / Syntax highlighting
+# Pentagram ideas / Plans / Syntax highlighting
 
 * Reach 100s of GitHub repos using the language
 * Follow the [github/linguist instructions](https://github.com/github/linguist/blob/master/CONTRIBUTING.md#adding-a-language)

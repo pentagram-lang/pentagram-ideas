@@ -1,4 +1,4 @@
-# Tacit ideas / Plans / Typing
+# Pentagram ideas / Plans / Typing
 
 The langauge will use explicit, static, nominal typing. This supports the goals of ergonomics, determinism, and performance.
 

@@ -1,4 +1,4 @@
-# Tacit ideas / Syntax / Basics
+# Pentagram ideas / Syntax / Basics
 
 Comments:
 ```

@@ -1,4 +1,4 @@
-# Tacit ideas / Syntax / Objects
+# Pentagram ideas / Syntax / Objects
 
 Definition (same scope rules as assignment):
 ```

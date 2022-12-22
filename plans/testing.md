@@ -1,12 +1,12 @@
-# Tacit ideas / Plans / Testing
+# Pentagram ideas / Plans / Testing
 
-Testing files are named `*.test.tacit` and all get automatically run.
+Testing files are named `*.test.penta` and all get automatically run.
 
 Inside a test file, all identifiers from the "base" (non-test) module are imported directly, including hidden identifiers. (The testing package also gets imported directly.)
 
 Tests are optionally named using a comment from the preceding line.
 
-Because Tacit modules can't have side effects, it's easy to tell exactly which tests need to run when code changes, and Tacit will only run the minimal set of tests again during continuous testing mode.
+Because Pentagram modules can't have side effects, it's easy to tell exactly which tests need to run when code changes, and Pentagram will only run the minimal set of tests again during continuous testing mode.
 
 To allow enumerating all tests, nested tests aren't supported. But test groups and test cases are supported. The body of test groups are run on test startup (to collect tests) and the input to test cases are special "test tuples" that include instantiation line number.
 
@@ -14,7 +14,7 @@ Details are shown using a lattice (test files), with double-line intersections c
 
 ```
 ╭╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╮
-╎ parse/parse.test.tacit                  ╎
+╎ parse/parse.test.penta                  ╎
 ╎ ╭╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╮ ╎
 ╎ ╎ parse-number                        ╎ ╎
 ╎ ╎ ╭╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╮ ╎ ╎

@@ -1,4 +1,4 @@
-# Tacit ideas / Syntax / Literals
+# Pentagram ideas / Syntax / Literals
 
 Integers:
 ```

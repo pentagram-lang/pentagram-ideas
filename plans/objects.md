@@ -1,4 +1,4 @@
-# Tacit ideas / Plans / Objects
+# Pentagram ideas / Plans / Objects
 
 Everything is an object, including instances of primitive types and modules. Everything can have methods, properties, setters, etc.
 

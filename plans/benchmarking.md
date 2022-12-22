@@ -1,4 +1,4 @@
-# Tacit ideas / Plans / Community
+# Pentagram ideas / Plans / Community
 
 - Compare to the output of a stable compiler (e.g. [TCC](https://bellard.org/tcc/))
   - Varying program sizes

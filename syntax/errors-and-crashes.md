@@ -1,8 +1,8 @@
-# Tacit ideas / Syntax / Errors and crashes
+# Pentagram ideas / Syntax / Errors and crashes
 
-Errors in Tacit aren't managed using block scopes. They're required to be managed at call-sites, which makes this special control flow visible and explicit.
+Errors in Pentagram aren't managed using block scopes. They're required to be managed at call-sites, which makes this special control flow visible and explicit.
 
-And crashes in Tacit aren't managed at all. Crashes happen in response to non-local conditions (for example, system, assumptions, or API usage), so any attempt to recover or clean up locally without understanding the non-local causes will fail. A safer approach for recovery is non-local, to completely exit and restart the task, which the mechanism Tacit provides.
+And crashes in Pentagram aren't managed at all. Crashes happen in response to non-local conditions (for example, system, assumptions, or API usage), so any attempt to recover or clean up locally without understanding the non-local causes will fail. A safer approach for recovery is non-local, to completely exit and restart the task, which the mechanism Pentagram provides.
 
 ```
 foo /= n =/
@@ -65,7 +65,7 @@ animal match:
 
 ## Not nil assertion
 
-When dealing with optional values, you may find yourself often using `x.is-nil? not assert` when you don't want to handle nils. The shortcut in Tacit for this is the `!` suffix operator.
+When dealing with optional values, you may find yourself often using `x.is-nil? not assert` when you don't want to handle nils. The shortcut in Pentagram for this is the `!` suffix operator.
 
 ```
 person.company!.address!.city! say

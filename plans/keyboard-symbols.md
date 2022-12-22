@@ -1,4 +1,4 @@
-# Tacit ideas / Plans / Keyboard symbols
+# Pentagram ideas / Plans / Keyboard symbols
 
 _For non-US keyboards_
 

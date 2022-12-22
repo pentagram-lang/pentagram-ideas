@@ -1,4 +1,4 @@
-# Tacit ideas / Plans / Serialization
+# Pentagram ideas / Plans / Serialization
 
 ## Interchange formats
 

@@ -1,4 +1,4 @@
-# Tacit ideas / Syntax / Assignment and definition ordering
+# Pentagram ideas / Syntax / Assignment and definition ordering
 
 Assignment can only reference previous assignment/definition:
 ```

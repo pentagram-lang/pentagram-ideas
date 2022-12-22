@@ -1,6 +1,6 @@
-# Tacit ideas / Plans / Formatting
+# Pentagram ideas / Plans / Formatting
 
-Tacit will come with a builtin formatter.
+Pentagram will come with a builtin formatter.
 
 The formatter will help with complex nested expressions:
 - Single space

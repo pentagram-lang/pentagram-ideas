@@ -1,7 +1,7 @@
-# Tacit ideas / Plans / System install
+# Pentagram ideas / Plans / System install
 
-* Let multiple Tacit versions coexist
-* Let system package managers install an unversioned `tacit` if they want to
+* Let multiple Pentagram versions coexist
+* Let system package managers install an unversioned `pentagram` if they want to
 * Use [Repology](https://repology.org) to track system packaging status
 * Maybe go through the process for an Arch Linux [community](https://wiki.archlinux.org/index.php/AUR_Trusted_User_Guidelines#Rules_for_Packages_Entering_the_.5Bcommunity.5D_Repo) package
 * Go for Chocolatey [trusted](https://chocolatey.org/faq#what-is-a-trusted-package) because it'd be a first-party package

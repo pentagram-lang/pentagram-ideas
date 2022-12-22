@@ -1,4 +1,4 @@
-# Tacit ideas / Plans / Physics-based UI
+# Pentagram ideas / Plans / Physics-based UI
 
 Who says that it makes sense for UIs to be hierarchical? Do related visual elements fit a strict hierarchy? Does that hierarchy apply to both UI input data and UI output events?
 

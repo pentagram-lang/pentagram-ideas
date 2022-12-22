@@ -1,4 +1,4 @@
-# Tacit ideas / Plans / Imports
+# Pentagram ideas / Plans / Imports
 
 Although fully-qualified module usage may be a good default, the language supports importing individual identifiers into scope (optionally renaming) and importing all members into scope.
 

@@ -1,4 +1,4 @@
-# Tacit ideas / Plans / Syntax
+# Pentagram ideas / Plans / Syntax
 
 ## Goals
 

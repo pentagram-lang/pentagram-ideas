@@ -1,6 +1,6 @@
-# Tacit ideas / Plans / Named parameters
+# Pentagram ideas / Plans / Named parameters
 
-All trait implementations in Tacit must have matching parameter names. With that, it's possible to call all methods using named parameters.
+All trait implementations in Pentagram must have matching parameter names. With that, it's possible to call all methods using named parameters.
 
 Unnamed parameters cannot follow named parameters in a method call, but otherwise, named parameters use the expression stack just like unnamed parameters.
 

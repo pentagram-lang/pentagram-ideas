@@ -1,4 +1,4 @@
-# Tacit ideas / Tour
+# Pentagram ideas / Tour
 
 ## Prelude
 

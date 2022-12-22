@@ -1,4 +1,4 @@
-# Tacit ideas / Plans / Warnings
+# Pentagram ideas / Plans / Warnings
 
 ## Suppression
 

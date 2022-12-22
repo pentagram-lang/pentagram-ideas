@@ -1,4 +1,4 @@
-# Tacit ideas / Plans / Call convention
+# Pentagram ideas / Plans / Call convention
 
 ## Overview
 
@@ -23,7 +23,7 @@
 
 ## WebAssembly 1.0
 
-This target doesn't have tail calls or arbitrary jumps, all it has is basic structured control flow. Assuming it does have labeled breaks and/or a jump table, maybe Tacit will code gotos (including task resumption) as follows:
+This target doesn't have tail calls or arbitrary jumps, all it has is basic structured control flow. Assuming it does have labeled breaks and/or a jump table, maybe Pentagram will code gotos (including task resumption) as follows:
 
 ```
 function wholeProgram() {

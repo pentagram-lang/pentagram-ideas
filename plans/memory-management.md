@@ -1,6 +1,6 @@
-# Tacit ideas / Plans / Memory management
+# Pentagram ideas / Plans / Memory management
 
-Everything in Tacit is an object. Objects can contain other objects. Every object has a place where it's stored.
+Everything in Pentagram is an object. Objects can contain other objects. Every object has a place where it's stored.
 
 ## Object lifecycle
 
@@ -30,7 +30,7 @@ If an object is being actively used, it'll be stored in a CPU register. Also, if
 
 ### Task stack
 
-All execution Tacit code happens via tasks, and each task has its own stack. (When a task needs to do I/O, it yields to another task to use the CPU.)
+All execution Pentagram code happens via tasks, and each task has its own stack. (When a task needs to do I/O, it yields to another task to use the CPU.)
 
 If an object has a fixed size and can't only be stored in a register (e.g. its lifecycle extends to a parent method call), it may be stored in the task's stack. The stack grows with each method call and shrinks with each method return.
 
@@ -80,7 +80,7 @@ Every thread manages its own allocation independently from other threads (to avo
 
 ### Regions
 
-1. Tacit code runs using tasks, so a 1 GiB region of virtual stack space is reserved, aligned at 8 MiB (using 16 MiB of extra padding)
+1. Pentagram code runs using tasks, so a 1 GiB region of virtual stack space is reserved, aligned at 8 MiB (using 16 MiB of extra padding)
 
 2. Large heap allocation which always uses 2 MiB blocks gets its own 1 GiB region reserved, with transparent huge pages enabled for the whole region, aligned at 2 MiB (using 4 MiB of extra padding)
 
@@ -228,7 +228,7 @@ Based on the capacity, the current heap allocation scheme can be looked up (tiny
 
 Any single object that's dynamic in size with no upper limit is an availability security vulnerability. Some condition could cause extreme page swapping or out-of-memory, making the program effectively unavailable.
 
-To help developers with this, Tacit will provide an analysis layer that will flag any unbounded, dynamic size objects in the program. This analysis layer may also be able to calculate the total theoretical maximum memory usage of the whole program.
+To help developers with this, Pentagram will provide an analysis layer that will flag any unbounded, dynamic size objects in the program. This analysis layer may also be able to calculate the total theoretical maximum memory usage of the whole program.
 
 ## Linear 32-bit memory
 

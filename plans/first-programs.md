@@ -1,6 +1,6 @@
-# Tacit ideas / Plans / First programs
+# Pentagram ideas / Plans / First programs
 
-* Tacit compiler
+* Pentagram compiler
 * Snappy compression
 * Forum software
 * Vector graphics editor

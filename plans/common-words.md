@@ -1,4 +1,4 @@
-# Tacit ideas / Plans / Common words
+# Pentagram ideas / Plans / Common words
 
 Common words need to be easy to use. If they're small, that's good. And they don't need to follow strict rules.
 
@@ -13,10 +13,10 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | (method) | Attached to an object, when you call it, a value is returned |
 | (method object) | Can be passed around |
 | (named parameter) | A parameter specified by its name |
-| (module) | A single Tacit file inside a package |
+| (module) | A single Pentagram file inside a package |
 | (package) | Can be installed, required |
 | (parameter) | What you pass into a method |
-| (person) | Who crosses paths with Tacit |
+| (person) | Who crosses paths with Pentagram |
 | (property) | A value attached to an object |
 | (splat) | The use of unknown number of parameters |
 | (task) | Independent unit of concurrent work |

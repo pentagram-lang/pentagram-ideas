@@ -1,6 +1,6 @@
-# Tacit ideas
+# Pentagram ideas
 
-Ideas for the Tacit programming language.
+Ideas for the Pentagram programming language.
 
 ## Contents
 

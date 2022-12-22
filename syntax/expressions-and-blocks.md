@@ -1,8 +1,8 @@
-# Tacit ideas / Syntax / Expressions and blocks
+# Pentagram ideas / Syntax / Expressions and blocks
 
 ## Values and expressions
 
-At the very core of Tacit codes is the value:
+At the very core of Pentagram codes is the value:
 ```
 'hello'
 ```
@@ -24,13 +24,13 @@ When expressions are evaluated, values are pushed onto the current expression st
 
 ## Statements and blocks
 
-Every line of code in Tacit is a statement, and statements can either be an expressions,variable assignment, module import, named parameter definition, and method definition:
+Every line of code in Pentagram is a statement, and statements can either be an expressions,variable assignment, module import, named parameter definition, and method definition:
 
 | Statement type | Code |
 | --- | --- |
 | Expression | `'hi' say` |
 | Variable assignment | `x = 0` |
-| Module import | `<< pkg.tacit-lang.math` |
+| Module import | `<< pkg.penta-lang.math` |
 | Named paramter definition | `y < 1` |
 | Method definition | `times-two >> z > z 2 *` |
 

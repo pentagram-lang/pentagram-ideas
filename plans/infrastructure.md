@@ -1,4 +1,4 @@
-# Tacit ideas / Plans / Infrastructure
+# Pentagram ideas / Plans / Infrastructure
 
 * Source: GitHub
 * Docs: Docusaurus, Docz

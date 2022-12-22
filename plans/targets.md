@@ -1,4 +1,4 @@
-# Tacit ideas / Plans / Targets
+# Pentagram ideas / Plans / Targets
 
 * x64
   * Windows

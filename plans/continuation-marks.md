@@ -1,8 +1,8 @@
-# Tacit ideas / Plans / Continuation marks
+# Pentagram ideas / Plans / Continuation marks
 
 ## Uses
 
-There are a number of things in Tacit that need implicit tracking at the task stack level:
+There are a number of things in Pentagram that need implicit tracking at the task stack level:
 
 - error handlers
 - cleanup handlers
@@ -18,8 +18,8 @@ Instead of making these mutable, requiring developers to clean up after themselv
 
 By using a language-level construct of continuation marks to manage composable stack state, it's now possible...
 
-1. For all of these features to be built using Tacit itself, not a lower-level language that has special stack inspection rights
-2. For all Tacit developers to introduce their own dynamic constructs built on continuation marks
+1. For all of these features to be built using Pentagram itself, not a lower-level language that has special stack inspection rights
+2. For all Pentagram developers to introduce their own dynamic constructs built on continuation marks
 
 ## Implementation
 

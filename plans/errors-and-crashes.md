@@ -1,10 +1,10 @@
-# Tacit ideas / Plans / Errors and crashes
+# Pentagram ideas / Plans / Errors and crashes
 
 ## Error handler marks
 
 Performance is a key to useful and usable error modeling. Errors need to be fast to raise, fast to catch, and fast to ignore if they don't happen.
 
-To accomplish this, Tacit uses its built-in model of delimited continuations using continuation marks. The stack unwinds to the error handler and execution continues from that point. Errors don't chew up return registers or cycles spent checking return values.
+To accomplish this, Pentagram uses its built-in model of delimited continuations using continuation marks. The stack unwinds to the error handler and execution continues from that point. Errors don't chew up return registers or cycles spent checking return values.
 
 ## Error data
 
@@ -14,27 +14,27 @@ The shape of the data included with potential errors is part of method signature
 
 ## Task isolation
 
-When a Tacit task crashes, by default it triggers a crash of all its child tasks and of its parent task. The reason why such a large scope is assumed is that parent and child processes can be very tightly coupled, unable to function independently, and there may even be effectively shared mutable state.
+When a Pentagram task crashes, by default it triggers a crash of all its child tasks and of its parent task. The reason why such a large scope is assumed is that parent and child processes can be very tightly coupled, unable to function independently, and there may even be effectively shared mutable state.
 
 The way to get resilience is to build your program as a distributed network of cooperating tasks. You can define your own isolation boundaries for task groups and restart rules (building a recursive tree of task groups), and use chaos engineering to verify that the system performs well regardless what bugs or systems conditions might occur. And if conditions are too bad, exit completely and let the OS or orchestration layer take over, instead of trying/failing to deal with things locally.
 
-To properly separate Tacit tasks, there can't be any shared mutable state via references or files. Mutable reference ownership can be passed between tasks, while immutable references are okay to share because the data pointed to can never change.
+To properly separate Pentagram tasks, there can't be any shared mutable state via references or files. Mutable reference ownership can be passed between tasks, while immutable references are okay to share because the data pointed to can never change.
 
 ## Arithmetic
 
-A constant source of security bugs is arithmetic overflow and underflow. By default all arithmetic in Tacit is checked, with the checks optimized away if provable at compile time.
+A constant source of security bugs is arithmetic overflow and underflow. By default all arithmetic in Pentagram is checked, with the checks optimized away if provable at compile time.
 
 This includes integer addition/subtraction, and maybe floating point divide by zero or other "not a number" or infinity results.
 
 ## Latency budget
 
-If a task doesn't finish fast enough, it will be preemptively terminated by the Tacit runtime. This is the only way to guarantee protection against infinite loop bugs.
+If a task doesn't finish fast enough, it will be preemptively terminated by the Pentagram runtime. This is the only way to guarantee protection against infinite loop bugs.
 
-To implement this, a signal timer is set for each OS thread. When the timer expires, the signal handler checks if the currently-running Tacit task has run out of time. If so, the task is terminated just as if it had been any other crash-causing signal (e.g. out of memory).
+To implement this, a signal timer is set for each OS thread. When the timer expires, the signal handler checks if the currently-running Pentagram task has run out of time. If so, the task is terminated just as if it had been any other crash-causing signal (e.g. out of memory).
 
 ## Platform calls
 
-When calling into platform code, Tacit threads are protected by an OS process boundary. This way platform code can crash and restart cleanly.
+When calling into platform code, Pentagram threads are protected by an OS process boundary. This way platform code can crash and restart cleanly.
 
 ## Context info
 
@@ -56,7 +56,7 @@ Also, separating error raising from stack trace generation has the benefit of ma
 
 ## Core dumps
 
-When a Tacit program crashes, if there's a core dump flag/folder continuation mark, a core dump will be generated. This can be used to recreate the entire task offline for diagnosis. Core deumps include the call stack, local variables, and heap data.
+When a Pentagram program crashes, if there's a core dump flag/folder continuation mark, a core dump will be generated. This can be used to recreate the entire task offline for diagnosis. Core deumps include the call stack, local variables, and heap data.
 
 ## Cactii
 

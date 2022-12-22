@@ -1,4 +1,4 @@
-# Tacit ideas / Syntax / Rich comments
+# Pentagram ideas / Syntax / Rich comments
 
 Normal text is captured:
 ```

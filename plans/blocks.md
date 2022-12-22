@@ -1,4 +1,4 @@
-# Tacit ideas / Plans / Blocks
+# Pentagram ideas / Plans / Blocks
 
 Non-assignment statements use the outer block's stack. Pushing & popping is allowed.
 

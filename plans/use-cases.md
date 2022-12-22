@@ -1,4 +1,4 @@
-# Tacit ideas / Plans / Use cases
+# Pentagram ideas / Plans / Use cases
 
 ## For sure
 * PC games

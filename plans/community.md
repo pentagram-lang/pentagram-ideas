@@ -1,4 +1,4 @@
-# Tacit ideas / Plans / Community
+# Pentagram ideas / Plans / Community
 
 - Design a vibrant, friendly community using **systems-thinking**
 - For beginner questions, language growth, and general community support

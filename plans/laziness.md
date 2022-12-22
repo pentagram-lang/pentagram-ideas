@@ -1,4 +1,4 @@
-# Tacit ideas / Plans / Laziness
+# Pentagram ideas / Plans / Laziness
 
 Some methods evaluate their parameters lazily, like "and" and "or" (for short-circuiting).
 

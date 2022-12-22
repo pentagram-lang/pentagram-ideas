@@ -1,4 +1,4 @@
-# Tacit ideas / Plans / Optimizations
+# Pentagram ideas / Plans / Optimizations
 
 ## Instructions (CPU/GPU)
 
