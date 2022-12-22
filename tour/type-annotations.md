@@ -15,6 +15,8 @@ hypot >> b c < f32 f32 | f32 >
   b-squared c-squared + sqrt
 
 main >>
+  | nop
+>
   [1 1 add] dbg
   [1 1 sub] dbg
   [3 4 hypot] dbg

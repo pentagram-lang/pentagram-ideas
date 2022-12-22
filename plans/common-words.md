@@ -25,9 +25,8 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `"""` | String |
 | `"` | String |
 | `%` | Remainder |
-| `&*` | Dereference operator |
-| `&-` | Negate operator |
 | `&=` | Modify assignment |
+| `&` | Special-use push/pop variable |
 | `'''` | String |
 | `'` | String |
 | `*` | Dereference suffix |
@@ -39,6 +38,8 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `-` | Negate prefix |
 | `-` | Number digit group separator |
 | `-` | Subtract |
+| `.*` | Stanalone dereference operator |
+| `.-` | Standalone negate operator |
 | `.` | Get something from inside |
 | `.` | Method retrieval point marker |
 | `.` | Radix point |
@@ -57,8 +58,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `[]` | Inline method object |
 | `[]` | Reference inside of comments |
 | `_` | Number digit group separator |
-| `_` | Unexported prefix |
-| `|<` | Uncaptured parameter type annotation |
+| `_` | Private prefix |
 | `|?` | Type condition annotation |
 | `|` | Type annotation |
 | `~` | Unspecified name parameter prefix |
@@ -143,14 +143,11 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `return` | Return from a block |
 | `say` | Tell something via the terminal |
 | `self` |  |
-| `self-pkg` |  |
-| `self-type` |  |
 | `set` | Set into a collection |
 | `smap` | Create a sorted map collection |
 | `sset` | Create a sorted set collection |
 | `skip` |  |
 | `struct` | Declare structured data |
-| `struct-ext` | Declare struct extension methods |
 | `swap` |  |
 | `take` |  |
 | `to` | Range from one number to another |

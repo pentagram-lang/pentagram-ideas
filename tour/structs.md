@@ -19,12 +19,16 @@ animal >> struct:
 
 handle >> struct:
   fd | i32
-  ctor >>
+  .ctor >>
+    self < handle
     name < str
+    | handle
   >
-    fd = name open
-  dtor >>
+    self.fd = name open
     self
+  .dtor >>
+    self < handle
+    | nop
   >
     self.fd close
 
