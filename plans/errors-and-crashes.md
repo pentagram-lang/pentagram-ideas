@@ -18,7 +18,7 @@ When a Tacit task crashes, by default it triggers a crash of all its child tasks
 
 The way to get resilience is to build your program as a distributed network of cooperating tasks. You can define your own isolation boundaries for task groups and restart rules (building a recursive tree of task groups), and use chaos engineering to verify that the system performs well regardless what bugs or systems conditions might occur. And if conditions are too bad, exit completely and let the OS or orchestration layer take over, instead of trying/failing to deal with things locally.
 
-To properly separate Tacit tasks, there can't be any shared mutable state via pointers or files. Mutable pointer ownership can be passed between tasks, while immutable pointers are okay to share because the data pointed to can never change.
+To properly separate Tacit tasks, there can't be any shared mutable state via references or files. Mutable reference ownership can be passed between tasks, while immutable references are okay to share because the data pointed to can never change.
 
 ## Arithmetic
 

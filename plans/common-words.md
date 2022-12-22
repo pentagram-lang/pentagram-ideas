@@ -128,7 +128,8 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `map` |  |
 | `match` | Apply predicates to an object |
 | `module` | Module (singleton object) definition |
-| `mptr` | Mutable pointer |
+| `mref` | Mutable reference |
+| `mut` | Change a mutable reference |
 | `nand` |  |
 | `neq` |  |
 | `nimplies` |  |
@@ -139,7 +140,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `opt` | Potential type |
 | `or` |  |
 | `pass` |  |
-| `ptr` | Read-only pointer |
+| `ref` | Read-only reference |
 | `return` | Return from a block |
 | `say` | Tell something via the terminal |
 | `self` |  |
