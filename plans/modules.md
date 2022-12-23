@@ -22,6 +22,8 @@ _(Note: member and submodule name collisions are not allowed.)_
 
 It's also possible to have a module file named the same as an existing directory, which is equivalent to having that file called `index.penta` and located inside the directory. For consistency, this will generate a warning and an automatic fix.
 
+For package creators, the use of index files, private modules, and re-exporting is encouraged, to create clean & usable package APIs.
+
 ## Prelude
 
 The standard Pentagram prelude doesn't have any of its own definitions, it re-exports from other modules. For example, the map method comes from the standard collections package (as a method linked into the root package index).

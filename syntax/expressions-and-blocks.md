@@ -30,7 +30,7 @@ Every line of code in Pentagram is a statement, and statements can either be an 
 | --- | --- |
 | Expression | `'hi' say` |
 | Variable assignment | `x = 0` |
-| Module import | `<< pkg.penta-lang.math` |
+| Module import | `< std-math` |
 | Named paramter definition | `y < 1` |
 | Method definition | `times-two >> z > z 2 *` |
 

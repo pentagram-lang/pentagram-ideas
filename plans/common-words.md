@@ -38,15 +38,13 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `-` | Negate prefix |
 | `-` | Number digit group separator |
 | `-` | Subtract |
-| `.*` | Stanalone dereference operator |
-| `.-` | Standalone negate operator |
-| `.` | Get something from inside |
-| `.` | Method retrieval point marker |
+| `.` | Object access operator |
 | `.` | Radix point |
 | `/` | Divide without loss |
+| `/` | Namespace access operator |
 | `:` | Method object operator |
 | `;` | Statement separator |
-| `<<` | Import |
+| `<` | Import |
 | `<` | Parameter type annotation |
 | `=` | Assignment |
 | `>>` | Method definition |
@@ -96,6 +94,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `dec` | Decode UTF-8 bytes to a string |
 | `default` | Define a default value for an unspecified named parameter |
 | `del` | Remove an item from a collection |
+| `deref` | Literal dereference operator |
 | `drop` | Filter and discard |
 | `dup` |  |
 | `dyn` | Dynamic object |
@@ -131,6 +130,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `mref` | Mutable reference |
 | `mut` | Change a mutable reference |
 | `nand` |  |
+| `neg` | Literal negate operator |
 | `neq` |  |
 | `nimplies` |  |
 | `nor` |  |

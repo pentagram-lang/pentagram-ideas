@@ -28,7 +28,7 @@ f >>
       7
     8 10 to each: i >
       i 2 *
-    11 15 to .*
+    11 15 to*
 
 words = ["ok" 8; "the" 400] smap
 numbers = smap:
@@ -45,5 +45,5 @@ more-numbers = smap:
 
 fib >> a b >
  next = a b +
- [next  b next fib .*] iter
+ [next  b next fib*] iter
 ```

@@ -7,7 +7,7 @@ g >> x < i32 mref | nop >
     x* 2 *
 
 main >>
-  [4 f .*] dbg
+  [4 f*] dbg
   y = 3 f
   [y*] dbg
   z = 5 mref

@@ -1,13 +1,13 @@
 ```
 delayed-sum >> struct:
-  values | virt:
+  items | virt:
     t-iterable < [< type | type]
     |& t-iterable iterable
     | i32 t-iterable*
   .sum >> self >
-    self.values* 0 [+] fold
+    self.items* 0 [+] fold
   .increment >> self >
-    self.values* &= [1 +] map
+    self.items* &= [1 +] map
     self
 
 main >>

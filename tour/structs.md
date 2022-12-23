@@ -33,7 +33,7 @@ handle >> struct:
     self.fd close
 
 main >>
-  a = animal.canis,
+  a = animal/canis,
     "dog"
     ["NA" 32 100 vec2] tup
     "woof"

@@ -15,7 +15,6 @@
 * [Errors and crashes](errors-and-crashes.md)
 * [First programs](first-programs.md)
 * [Formatting](formatting.md)
-* [Imports](imports.md)
 * [Infrastructure](infrastructure.md)
 * [Interop](interop.md)
 * [Input and output](input-and-output.md)
