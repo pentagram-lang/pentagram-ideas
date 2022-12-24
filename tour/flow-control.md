@@ -35,10 +35,10 @@ else:
   "c"
 
 -- While loop
-i = 0 mptr
+i = 0 mref
 i* 10 lt while:
   ['at' i*] dbg
-  i* &= 1 +
+  i# &= 1 +
 
 -- Infinite loop
 loop: break >
@@ -47,7 +47,7 @@ loop: break >
     break*
 
 -- Item loop
-sum = 0 mptr
+sum = 0 mref
 1 10 to each: item >
-  sum* &= item +
+  sum# &= item +
 ```

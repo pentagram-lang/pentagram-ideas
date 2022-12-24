@@ -3,8 +3,7 @@ f >> x < i32 | i32 ref >
   x 2 * ref
 
 g >> x < i32 mref | nop >
-  x mut,
-    x* 2 *
+  x# = x* 2 *
 
 main >>
   [4 f*] dbg

@@ -17,7 +17,7 @@ The formatter will help with complex nested expressions:
   1
   +,
     2  
-    3  4 5 +  + -- First + uses space, second plus uses 
+    3  4 5 +  +
 ```
 
 If your code already contains a "higher" separator, it will be left there, but "lower" separators will get upgraded by the formatter.

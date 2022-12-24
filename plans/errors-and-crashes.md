@@ -1,5 +1,29 @@
 # Pentagram ideas / Plans / Errors and crashes
 
+Errors in Pentagram aren't managed using block scopes. They're required to be managed at call-sites, which makes this special control flow visible and explicit.
+
+And crashes in Pentagram aren't managed at all. Crashes happen in response to non-local conditions (for example, system, assumptions, or API usage), so any attempt to recover or clean up locally without understanding the non-local causes will fail. A safer approach for recovery is non-local, to completely exit and restart the task, which the mechanism Pentagram provides.
+
+## Assertions
+
+Assertion failures at runtime cause crashes. They're program invariants and programmer assumptions. If they're proven false, there's no telling what whent wrong when, and no guarantee that unwinding the stack to an unsuspecting error handler might resolve the situation.
+
+Assertions will be attempted to be checked at run-time (except for when the value is a compile-time constant, which can be required using the constant compile method).
+
+When assertions fail, they produce usefully-formatted details. The details even have enough information to allow interactive browsing of equality failures.
+
+Missing default cases for conditionals are a special type of static assertion that checks the default case would never be reached.
+
+## Context data
+
+Errors, crashes, and assertions use an any (rich) comment from the preceding line as the message. And all three will also include messages and data provided by trace context from the stack.
+
+Unlike try and catch, trace context _is_ a block operator. This is because it doesn't have control flow side effects, and it's used for more than just errors and crashes.
+
+## Higher order methods
+
+It's okay to use handle errors on a method object even if in some actual uses, raising errors isn't part of that method object's signature.
+
 ## Error handler marks
 
 Performance is a key to useful and usable error modeling. Errors need to be fast to raise, fast to catch, and fast to ignore if they don't happen.

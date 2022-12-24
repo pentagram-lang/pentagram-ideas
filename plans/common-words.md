@@ -21,26 +21,29 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | (splat) | The use of unknown number of parameters |
 | (task) | Independent unit of concurrent work |
 | ` ` | Significant whitespace |
-| `!` | Not nil suffix |
 | `"""` | String |
 | `"` | String |
-| `%` | Remainder |
+| `#` | Suffix mutate reference operator |
+| `%` | Modulus operator |
 | `&=` | Modify assignment |
-| `&` | Special-use push/pop variable |
+| `&` | Rotate operator |
 | `'''` | String |
 | `'` | String |
-| `*` | Dereference suffix |
 | `*` | Multiply |
+| `*` | Postfix dereference operator |
 | `+` | Add |
-| `+` | Positive marker prefix |
+| `+` | Postfix plus operator |
 | `,` | Prefix operator |
 | `--` | Comment |
-| `-` | Negate prefix |
 | `-` | Number digit group separator |
+| `-` | Postfix negate operator |
 | `-` | Subtract |
 | `.` | Object access operator |
 | `.` | Radix point |
-| `/` | Divide without loss |
+| `/%` | Divide and modulus operator |
+| `/*` | Namespace wildcard |
+| `//` | Divide and floor operator |
+| `/` | Divide without loss operator |
 | `/` | Namespace access operator |
 | `:` | Method object operator |
 | `;` | Statement separator |
@@ -50,11 +53,14 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `>>` | Method definition |
 | `>` | Method signature end |
 | `?` | Not yet implemented |
-| `?` | Required named parameter placeholder |
+| `?` | Required named parameter value placeholder |
 | `@` | Code inside of comments |
 | `[]` | Expression inside of strings |
 | `[]` | Inline method object |
 | `[]` | Reference inside of comments |
+| `_&` | Standalone special-use pop operator |
+| `_*` | Standalone negate operator |
+| `_-` | Standalone dereference operator |
 | `_` | Number digit group separator |
 | `_` | Private prefix |
 | `|?` | Type condition annotation |
@@ -94,7 +100,6 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `dec` | Decode UTF-8 bytes to a string |
 | `default` | Define a default value for an unspecified named parameter |
 | `del` | Remove an item from a collection |
-| `deref` | Literal dereference operator |
 | `drop` | Filter and discard |
 | `dup` |  |
 | `dyn` | Dynamic object |
@@ -130,13 +135,24 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `mref` | Mutable reference |
 | `mut` | Change a mutable reference |
 | `nand` |  |
-| `neg` | Literal negate operator |
 | `neq` |  |
 | `nimplies` |  |
 | `nor` |  |
 | `nil` | Potential not filled |
 | `none?` | Is a collection all false |
 | `not` |  |
+| `op-add` | Literal plus operator |
+| `op-deref` | Literal dereference operator |
+| `op-deref-assign` | Literal dereference assignment operator |
+| `op-div` | Literal divide without loss operator |
+| `op-divmod` | Literal divide and modulus operator |
+| `op-floordiv` | Literal divide without lossoperator |
+| `op-mod` | Literal modulus operator |
+| `op-mut` | Literal mutate operator |
+| `op-mult` | Literal multiply operator |
+| `op-neg` | Literal negate operator |
+| `op-plus` | Literal plus operator |
+| `op-sub` | Literal subtract operator |
 | `opt` | Potential type |
 | `or` |  |
 | `pass` |  |

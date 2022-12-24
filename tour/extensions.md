@@ -10,8 +10,8 @@ rect >> struct:
     self.size.y self.size.y *
     +
   .scale >>
-    self < rect
     factor < f32
+    self < rect
     | rect
   >
     self.size &= factor *
@@ -26,24 +26,35 @@ rect >> struct:
 .scale-half >>
   | [self < rect]* rect
 >
-  & 0.5 &.scale
+  0.5 &.scale
 
 movable >> trait:
   t-value < type
 >
   .move >>
-    self < t-value
     distance < vec2
+    self < t-value
     | t-value
 
 rect-movalbe >> impl:
   | rect movable
 >
   .move >>
-    self < rect
     distance < vec2
+    self < rect
     | rect
   >
     self.top-left &= distance +
     self
+
+main >>
+  r = rect,
+    top-left = 0 0 vec2
+    size = 4 4 vec2
+  r &=
+    5 &.scale
+    &.move,
+      vec2,
+        8 8
+  [r] dbg
 ```

@@ -4,6 +4,6 @@ main >>
   [['hello' 'world'] arr  ' ' join] dbg
   x = 1
   [-2 -x *] dbg
-  [x 1 + neg] dbg
+  [x 1 + _-] dbg
   x y &= swap
 ```
