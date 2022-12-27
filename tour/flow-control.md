@@ -27,9 +27,9 @@ else:
 
 -- Type match
 y match
-[.is-dog?] case:
+[.is-dog] case:
   "a [y.dog-name]"
-[.is-cat?] case:
+[.is-cat] case:
   "b [y.cat-name]"
 else:
   "c"

@@ -34,5 +34,5 @@ any >>
   |? t-collection collection
   | bool
 >
-  ?
+  ...
 ```

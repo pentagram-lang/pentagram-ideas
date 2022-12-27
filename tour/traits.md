@@ -37,7 +37,7 @@ opt-can-show >> impl:
     value < t-value opt
     | str
   >
-    value.is-val? if:
+    value.is-val if:
       value* show
     else:
       "nil"

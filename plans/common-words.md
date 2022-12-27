@@ -21,6 +21,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | (splat) | The use of unknown number of parameters |
 | (task) | Independent unit of concurrent work |
 | ` ` | Significant whitespace |
+| `!` | Method suffix to try calling, crashing if there is no error |
 | `"""` | String |
 | `"` | String |
 | `#` | Suffix mutate reference operator |
@@ -38,6 +39,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `-` | Number digit group separator |
 | `-` | Postfix negate operator |
 | `-` | Subtract |
+| `...` | Unknown placeholder |
 | `.` | Object access operator |
 | `.` | Radix point |
 | `/%` | Divide and modulus operator |
@@ -52,8 +54,7 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `=` | Assignment |
 | `>>` | Method definition |
 | `>` | Method signature end |
-| `?` | Not yet implemented |
-| `?` | Required named parameter value placeholder |
+| `?` | Method suffix to try calling, continuing if there is no error |
 | `@` | Code inside of comments |
 | `[]` | Expression inside of strings |
 | `[]` | Inline method object |
@@ -65,15 +66,16 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `_` | Private prefix |
 | `|?` | Type condition annotation |
 | `|` | Type annotation |
-| `~` | Unspecified name parameter prefix |
-| `.is-nil?` | |
-| `.is-val?` | |
+| `|~` | Fallible method type annotation |
+| `~` | Method suffix to try calling, and see if there was an error |
 | `add` | Add an item to a collection |
-| `all?` | Is a collection all true |
-| `and` |  |
-| `any?` | Is true in a collection |
+| `agg` | Aggregate over a collection |
+| `all` | Is a collection all true |
+| `and` | Boolean conjunction |
+| `any` | Is true in a collection |
 | `app` | An application that can be run |
 | `arr` | A linear collection of items |
+| `arr/empty` | Empty array |
 | `ask` | Inquire something via the terminal |
 | `assert` | Make sure a value is true, or crash |
 | `atof` | Parse a float from a string |
@@ -89,11 +91,10 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `call` | Call a method object |
 | `case` | Apply equality checks to an object |
 | `cat` | Append one collection to another |
-| `catch` | Call a method and see if there was an error |
 | `chg` | Change in collection |
 | `cin` | Standard (console) input file |
-| `context` | Important info for debugging |
 | `const` | Mark an expression as compile-time constant |
+| `context` | Important info for debugging |
 | `cout` | Standard (console) output file |
 | `crash` | What happens when a program cannot continue |
 | `dbg` | Pretty print all values to standard error, includes file & line number |
@@ -106,8 +107,6 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `e` | Order of magnitude notation |
 | `each` |  |
 | `else` |  |
-| `empty-arr` | Empty array |
-| `empty?` | Is a collection empty |
 | `enc` | Encode a string to UTF-8 bytes |
 | `eq` |  |
 | `error` | What happens when a program diverts control flow to error handling |
@@ -122,8 +121,9 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `iif` | "Inline if" ternary operator |
 | `impl` | Implement a trait |
 | `implies` | Boolean operator for material implication |
-| `in?` | Is a value in a collection |
+| `in` | Is a value in a collection |
 | `ins` | Insert an item into a collection at a specific location |
+| `is-empty` | Is a collection empty |
 | `iter` | Deal with a collection lazily |
 | `keep` | Filter and retain |
 | `len` | How many items in a collection |
@@ -136,41 +136,42 @@ Common words need to be easy to use. If they're small, that's good. And they don
 | `mut` | Change a mutable reference |
 | `nand` |  |
 | `neq` |  |
-| `nimplies` |  |
-| `nor` |  |
 | `nil` | Potential not filled |
-| `none?` | Is a collection all false |
+| `nimplies` |  |
+| `none` | Is a collection all false |
+| `nop` | No operation |
+| `nor` |  |
 | `not` |  |
 | `op-add` | Literal plus operator |
-| `op-deref` | Literal dereference operator |
 | `op-deref-assign` | Literal dereference assignment operator |
+| `op-deref` | Literal dereference operator |
 | `op-div` | Literal divide without loss operator |
 | `op-divmod` | Literal divide and modulus operator |
 | `op-floordiv` | Literal divide without lossoperator |
 | `op-mod` | Literal modulus operator |
-| `op-mut` | Literal mutate operator |
 | `op-mult` | Literal multiply operator |
+| `op-mut` | Literal mutate operator |
 | `op-neg` | Literal negate operator |
 | `op-plus` | Literal plus operator |
 | `op-sub` | Literal subtract operator |
 | `opt` | Potential type |
-| `or` |  |
-| `pass` |  |
+| `opt.is-nil` | |
+| `opt.is-val` | |
+| `or` | Boolean disjunction |
 | `ref` | Read-only reference |
 | `return` | Return from a block |
 | `say` | Tell something via the terminal |
 | `self` |  |
 | `set` | Set into a collection |
+| `skip` | Skip first collection items |
 | `smap` | Create a sorted map collection |
 | `sset` | Create a sorted set collection |
-| `skip` |  |
 | `struct` | Declare structured data |
 | `swap` |  |
-| `take` |  |
+| `take` | Take first collection items |
 | `to` | Range from one number to another |
 | `trait` | Declare a group of functionality |
 | `true` |  |
-| `try` | Try to call a method, continuing if there is no error |
 | `tup` | Fixed-length group of values, can include named and unnamed members |
 | `val` | Potential fulfilled with a value |
 | `virt` | Virtual object wrapper |

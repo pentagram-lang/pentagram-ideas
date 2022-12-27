@@ -3,11 +3,14 @@
 ## Errors
 
 ```
-foo >> n >
-  n 0 eq if/try:
+foo >>
+  n < i32
+  |~ i32
+>
+  n 0 eq if?:
     -- Too small
     error
-  n 100 gt elif/try,
+  n 100 gt elif,
     -- Too big
     crash
   else:
@@ -15,23 +18,28 @@ foo >> n >
 
 -- propagate
 bar >>
-  m = 4 foo/try
-  m say
+  |~ nop
+>
+  m = 4 foo?
+  [m] dbg
 
 -- handle
 bar >>
-  result = 4 foo/catch
-  if,
-    result.is-ok?,
-      m = result*
-      m say
-    else,
-      result.error-message say
+  | nop
+>
+  result = 4 foo~
+  result.is-ok if:
+    m = result*
+    [m] dbg
+  else,
+    [result.error-message] dbg
 
 -- escalate
 bar >>
-  m = 4 foo/try-or-crash
-  m say
+  | nop
+>
+  m = 4 foo!
+  [m] dbg
 ```
 
 ## Assertions
@@ -45,27 +53,26 @@ speed.unit m-s eq const assert
 
 -- Automatic default case const assert
 animal match
-[.is-dog?] case,
+[.is-dog] case,
   animal.bark
-[.is-cat?] case,
+[.is-cat] case,
   animal.meow
 ```
 
 ## Context data
 
 ```
-  "entering file handling" data data= trace/try:
-    path open/try
+  "entering file handling" data data= trace?:
+    path open?
 ```
 
 ## Higher order methods
 
 ```
-map >> collection transform >
-  collection len 0 eq if:
-    [] arr
-  else/try:
-    [collection 0 get transform*/try] arr
-    collection 1 slice-from  transform  map/try
-    cat
+sum >>
+  get-numbers < [|? i32 arr]
+  |? i32
+>
+  numbers = get-numbers*?
+  numbers 0 [+] agg
 ```

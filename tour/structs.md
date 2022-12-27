@@ -22,20 +22,20 @@ handle >> struct:
   .ctor >>
     self < handle
     name < str
-    | handle
+    |? handle
   >
-    self.fd = name open
+    self.fd = name open?
     self
   .dtor >>
     self < handle
-    | nop
+    |? nop
   >
-    self.fd close
+    self.fd close?
 
 main >>
   a = animal/canis,
     "dog"
     ["NA" 32 100 vec2] tup
     "woof"
-  [a.is-canis? a.is-lion?] dbg
+  [a.is-canis a.is-lion] dbg
 ```

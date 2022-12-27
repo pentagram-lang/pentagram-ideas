@@ -20,9 +20,11 @@ Errors, crashes, and assertions use an any (rich) comment from the preceding lin
 
 Unlike try and catch, trace context _is_ a block operator. This is because it doesn't have control flow side effects, and it's used for more than just errors and crashes.
 
-## Higher order methods
+## Syntax
 
-It's okay to use handle errors on a method object even if in some actual uses, raising errors isn't part of that method object's signature.
+The call-site modifiers are method postfixes (binding tightly with methods before expression evalutation).
+
+Methods that raise errors need be annotated as fallible. Higher order methods that are otherwise infallible do not annotate themselves or their method objects as fallible -- but if a fallible method object is provided as a parameter and evaluated within the method, the higher order method changes to also become fallible. Infallible methods can always be substituted for fallible methods (as method objects or trait implementations).
 
 ## Error handler marks
 

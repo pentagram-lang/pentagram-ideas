@@ -33,15 +33,15 @@ f >>
 words = ["ok" 8; "the" 400] smap
 numbers = smap:
   1 tup:
-    even? = false
+    is-even = false
   2 tup:
-    even? = true
+    is-even = true
 
 more-numbers = smap:
   numbers*
   3 10 to each: i >
     i tup:
-      even? = i 2 mod 0 eq
+      is-even = i 2 mod 0 eq
 
 fib >> a b >
  next = a b +
