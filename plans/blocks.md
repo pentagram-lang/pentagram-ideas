@@ -1,8 +1,8 @@
 # Pentagram ideas / Plans / Blocks
 
-Non-assignment statements use the outer block's stack. Pushing & popping is allowed.
-
 Parameters can be popped off the stack at any point. It's not required to increase indent when doing this. This is how multiple assignment can be split onto multiple lines (push the results first, then pop each value off as separate parameters).
+
+Parameters can only be pushed onto the stack from a non-assignment statement. For assignment statements, all parameters must bind to assignment identifiers.
 
 Inside a block, any trailing assignment statements also result in pushing named parameters onto the stack. Any other assignment statements are just normal (scoped) variable creation.
 
