@@ -10,14 +10,18 @@ test-group:
   test:
     4 sqrt  2  eq assert
 
-  -- Other numbers
   arr:
-    tup:
+    -- Even
+    test-case:
       input = 16
       output = 4
-    tup:
+    
+    -- Odd
+    test-case:
       input = 9
       output = 3
+
+  -- Other numbers
   test-each: data >
     data.input sqrt  data.output  eq assert
 ```
