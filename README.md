@@ -4,8 +4,9 @@ Ideas for the Pentagram programming language.
 
 ## Contents
 
+* [Features](features/README.md)
 * [Syntax](syntax/README.md)
-* [Plans](plans/README.md)
+* [Tour](tour/README.md)
 
 ## License
 
