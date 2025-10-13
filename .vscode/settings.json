@@ -1,9 +1,17 @@
 {
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.wordWrap": "bounded",
+    "editor.wordWrapColumn": 75
+  },
   "editor.detectIndentation": false,
   "editor.formatOnPaste": false,
   "editor.formatOnSave": false,
+  "editor.formatOnSaveMode": "file",
   "editor.insertSpaces": true,
-  "editor.autoClosingBrackets": "never",
+  "editor.minimap.maxColumn": 75,
+  "editor.rulers": [75],
   "editor.tabSize": 2,
-  "files.autoSave": "onFocusChange",
+  "files.autoSave": "onFocusChange"
 }
