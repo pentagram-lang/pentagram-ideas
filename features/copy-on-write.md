@@ -1,0 +1,6 @@
+- Compiler does static analysis to discover single use modifications
+  - Use plain pointer if mutation flow goes through multiple functions
+  - Copy can be skipped
+  - Can add local assertions to ensure this condition
+- Compiler also discovers copies that are shared simply as read-only
+  - Also use plain pointer, not full COW struct
