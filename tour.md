@@ -27,6 +27,23 @@ multiple lines
 foo = 40,
 bar = 2,
 baz = foo bar +,
+
+-- Each binding creates a new scope (lexical replacement) --
+x = 1,           -- x is 1
+x = x 2 +,       -- new x is 3 (reads previous x)
+x = x 3 *,       -- new x is 9 (reads previous x)
+
+-- Variable mutation (syntactic sugar for lexical replacement) --
+x = 1,
+x _= 2 +,        -- equivalent to: x = x 2 +,
+
+y = sv 1, 2 end-sv,
+y _= 3 pushr,    -- equivalent to: y = y 3 pushr,
+
+-- Rebinding record fields creates new records --
+x = y: 1 z,
+x.y = 2,                 -- sugar for: x = x 2 z.set-y,
+x = x 3 z.set-y,         -- explicit setter function
 ```
 
 ## Primitive Values
@@ -69,12 +86,12 @@ bar = `a'"b'`,
 
 ```pentagram
 -- Boolean combinators will short-circuit --
-foo-1 = f true  g false  and,
-foo-2 = f true  g false  or,
-foo-3 = f true  g false  nand,
-foo-4 = f true  g false  nor,
-foo-5 = f true  g false  implies,
-foo-6 = f true  g false  nimplies,
+foo-1 = true f  false g  and,
+foo-2 = true f  false g  or,
+foo-3 = true f  false g  nand,
+foo-4 = true f  false g  nor,
+foo-5 = true f  false g  implies,
+foo-6 = true f  false g  nimplies,
 
 -- All conditional operators are spelled out --
 foo-1 = true not,
@@ -158,22 +175,54 @@ foo = 1 mut,
 foo = 1 laz,
 ```
 
+## Field Access
+
+### The value field
+
+```pentagram
+-- Field access desugars to get/set functions in type namespaces --
+-- The * operator is sugar for .value --
+
+x = 1 ref,
+y = x*,                    -- reads: x ref.get-value,
+x* = 2,                    -- rebinds: x = x 2 ref.set-value,
+
+x = 1 laz,
+y = x*,                    -- forces: x laz.get-value,
+x* = 3,                    -- rebinds: x = x 3 laz.set-value,
+
+-- Optional requires narrowing --
+x = 1 val,
+if x.is-val begin
+  y = x*                   -- accesses: x opt.val.get-value,
+end-if,
+
+-- Mutable boxes are the exception --
+x = 1 mut,
+y = x*,                    -- reads: x mut.get-value,
+x 2 write-mut,             -- actual mutation (no sugar)
+```
+
 ## Control Flow
 
 ### Conditionals
 
 ```pentagram
 -- Basic if-else structure --
-if condition
+if condition begin
   'true branch' say
-elif other-condition
+elif other-condition begin
   'elif branch' say
 else
   'false branch' say
 end-if,
 
 -- Tagged unions narrow through conditionals --
--- TODO: example of type narrowing --
+-- Synthetic .is-variant fields check the variant --
+if pet.is-dog begin
+  -- Inside this branch, pet is known to be a dog --
+  pet.breed say
+end-if,
 ```
 
 ### Loops
@@ -185,7 +234,7 @@ loop
 end-loop,
 
 -- Conditional loop --
-while condition
+while condition begin
   'looping' say
 end-while,
 
@@ -197,10 +246,14 @@ end-while,
 ### Basic functions
 
 ```pentagram
--- Define a function --
-fn my-func arg1 arg2
-  result = arg1 arg2 +
-  result
+-- Function with type annotations --
+def f fn
+  par x i8,
+  par y i8,
+  i8
+begin
+  z = 1 ty i8 end-ty as,
+  x y + z +
 end-fn,
 ```
 
@@ -216,11 +269,24 @@ bar = with-animal
 end-animal,
 ```
 
+### Type annotations
+
+```pentagram
+-- Types annotate values on the expression stack, not variables --
+x = 42 ty i8 end-ty as,
+
+-- Type fences can wrap any expression --
+result = 1 ty i8 end-ty as 2 ty i8 end-ty as +,
+
+-- Variables bind to typed values but have no types themselves --
+y = x,
+```
+
 ### Function signatures
 
 ```pentagram
--- TODO: type annotations --
--- TODO: return value syntax --
+-- Function parameters and return types shown in Basic functions section above --
+
 -- TODO: closures --
 ```
 
@@ -230,14 +296,14 @@ end-animal,
 
 ```pentagram
 -- Define a record type --
-rec Person
-  name: Text
-  age: Num
+def person rec
+  par name txt,
+  par age u8,
 end-rec,
 
 -- Fields become functions scoped in the type namespace --
-person = Person name: 'Alice' age: 30,
-person-name = person Person.name,
+p = person name: 'Alice' age: 30,
+p-name = p person.name,
 
 -- TODO: syntax for lexically extending the namespace with related functions --
 ```
@@ -250,13 +316,13 @@ def animal tag,
 
 -- Define variants under the tag --
 def animal.dog rec
-  breed: Text
-  age: Num
+  par breed txt,
+  par age u8,
 end-rec,
 
 def animal.cat rec
-  color: Text
-  indoor: Bool
+  par color txt,
+  par indoor bool,
 end-rec,
 ```
 
@@ -266,34 +332,283 @@ end-rec,
 
 ```pentagram
 -- Define a specification (interface/trait) --
-def foo spec,
-def foo.f fn todo end-fn,
+def foo spec
+  tpar t,
+end-spec,
+def foo.f fn
+  par self t,
+  t
+begin
+  todo
+end-fn,
 
 -- Define a type --
-def bar rec x end-rec,
+def bar rec
+  par x i32,
+end-rec,
 
 -- Implement the spec for the type --
-def bar-foo impl bar foo,
-def bar-foo.f fn x 1 + end-fn,
+def bar-foo impl bar foo end-impl,
+def bar-foo.f fn
+  par self bar,
+  bar
+begin
+  self.x 1 + bar
+end-fn,
 
 -- TODO: higher-kinded types --
--- TODO: spec conditions (bounds/constraints) --
 -- TODO: spec default implementations --
 -- TODO: existential implementations --
--- TODO: impl conditions --
+```
+
+### Spec constraints
+
+```pentagram
+-- Specs can require other specs --
+def eq spec
+  tpar t,
+end-spec,
+def eq.equals fn
+  par self t,
+  par other t,
+  bool
+begin
+  todo
+end-fn,
+
+def ord spec
+  tpar t,
+  t eq,              -- ord requires eq
+end-spec,
+def ord.compare fn
+  par self t,
+  par other t,
+  ordering
+begin
+  todo
+end-fn,
+
+-- A type implementing both specs --
+def point rec
+  par x i32,
+  par y i32,
+end-rec,
+
+-- Implement eq --
+def point-eq impl point eq end-impl,
+def point-eq.equals fn
+  par self point,
+  par other point,
+  bool
+begin
+  self.x other.x eq self.y other.y eq and
+end-fn,
+
+-- Implement ord (which requires eq automatically) --
+def point-ord impl point ord end-impl,
+def point-ord.compare fn
+  par self point,
+  par other point,
+  ordering
+begin
+  todo
+end-fn,
+```
+
+### Impl constraints
+
+```pentagram
+-- Existential implementations: implement for all types meeting constraints --
+def all-printable impl
+  tpar t,
+  t to-string,           -- constraint: t must implement to-string
+begin
+  t printable            -- implement printable for all such t
+end-impl,
+
+def all-printable.print fn
+  par self all-printable.t,    -- reference the type parameter
+  unit
+begin
+  todo
+end-fn,
+
+-- Now any type with to-string automatically gets printable --
+```
+
+### Impl specificity overrides
+
+```
+-- TODO: no constraints, some constraints, all specific types --
 ```
 
 ### Generic types
 
 ```pentagram
--- TODO: generic type parameters --
--- TODO: generic function parameters --
+-- Generic records use tpar for type parameters --
+def box rec
+  tpar t,
+  par value t,
+end-rec,
+
+-- Type parameters are named (allows omission and inference) --
+x = 1 ty value: i8 box end-ty as,     -- explicit type parameter
+y = 2 ty box end-ty as,               -- inferred type parameter
+z = 3 box,                            -- fully inferred
+
+-- Constructors can be called with explicit type parameters --
+-- Type values must be generated by ty fence --
+w = 4 value: ty i8 end-ty box,
+
+-- Generic tagged unions --
+def result tag
+  tpar ok,
+  tpar err,
+end-tag,
+
+def result.success rec
+  par value result.ok,
+end-rec,
+
+def result.failure rec
+  par error result.err,
+end-rec,
+
+-- Multiple type parameters can be partially specified --
+r = data ok: ty txt end-ty result.success,            -- err inferred
+r = data ty ok: txt result end-ty as result.success,  -- with type restriction
+r = data result.success,                              -- both inferred
+
+-- Generic functions with spec constraints --
+def max fn
+  tpar t,
+  par a t,
+  par b t,
+  t ord,                -- constraint: t must implement ord spec
+  t
+begin
+  if a b gt begin a else b end-if
+end-fn,
 ```
 
-### Type annotations
+## Error Handling
+
+### Error declaration
 
 ```pentagram
--- TODO: annotation syntax (same grammar as expressions per manifesto) --
+-- Functions that can error declare it in the prelude --
+def f fn
+  par x bool,
+  err,
+  bool
+begin
+  if x begin
+    note: 'condition was true' err?
+  else
+    false
+  end-if
+end-fn,
+
+-- Calls to erroring functions must be explicit --
+-- 1 f,           -- Invalid: must handle or propagate
+1 f?,             -- Propagate error up
+r = f.try,        -- Capture error as a result value
+```
+
+### Error values and context
+
+```pentagram
+-- Errors are a single unit type with no variants --
+-- All context comes from continuation marks --
+
+-- Define custom marks (nominal, strongly typed) --
+def file-path mark txt end-mark,
+def retry-count mark u8 end-mark,
+
+-- Marks scope to following statements in the block --
+def open-file fn
+  par path txt,
+  err,
+  file
+begin
+  > path file-path,                    -- mark applies to following statements
+  > 0 retry-count,
+  path open-internal                   -- if this errors, marks attach
+end-fn,
+
+-- The note mark is built-in for text context --
+-- Use as named parameter on err --
+note: 'file not found' err?,
+
+-- Or set explicitly as a mark --
+> 'opening file' note,
+err?,
+
+-- Read marks from captured errors --
+result = 'data.txt' open-file.try,
+if result.is-ok begin
+  result.ok* use
+else
+  -- After narrowing, access marks with get-mark --
+  note-text = result.err get-mark ty note opt end-ty as,
+  -- The * suffix unwraps/extracts values --
+  -- On error variant, * is a never function that propagates --
+  result.err*?
+end-if,
+
+-- err and err* are never functions (safe in branches) --
+
+-- Alternate pattern: inspect error then propagate --
+result = database query.try,
+if result.is-err begin
+  -- Log error details without propagating --
+  result.err log
+end-if,
+-- Propagate if error, continue if ok --
+result*? process,
+```
+
+### Crashes
+
+```pentagram
+-- crash terminates the running task (not an error) --
+if bad-state begin
+  crash
+end-if,
+
+-- must crashes if condition is false --
+x 0 gt must,
+
+-- Marks are also read during crashes for diagnostics --
+> 'validating input' note,
+> user-id user-id,
+input valid must,
+```
+
+### Error polymorphism
+
+```pentagram
+-- Higher-order functions can propagate error conditionally --
+def filter fn
+  tpar e,                    -- error-capability type parameter
+  tpar t,                    -- element type parameter
+  par d t seq,
+  par f fn
+    par x t,
+    e has-err,               -- f has error-capability e
+    bool
+  end-fn,
+  e has-err,                 -- filter has same error-capability as f
+  t seq
+begin
+  -- body can call f? to propagate
+end-fn,
+
+-- If f doesn't error, filter doesn't error --
+result = data non-error-fn filter,
+
+-- If f errors, filter errors (must handle) --
+result = data error-fn filter?,
 ```
 
 ## Syntax Overrides
@@ -308,17 +623,15 @@ end-my-fn,
 
 -- Mark conditional blocks for clarity --
 -- (Required by default lint when nesting duplicate keywords) --
-if-'marker' condition
+if-'marker' condition begin
   'marked branch' say
 end-if-'marker',
 ```
 
-## Side Effects & Errors
+## Side Effects
 
 ```pentagram
 -- TODO: how side effects are called/marked --
--- TODO: error propagation syntax --
--- TODO: error handling patterns --
 ```
 
 ## Modules & Exports
