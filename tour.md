@@ -286,8 +286,37 @@ y = x,
 
 ```pentagram
 -- Function parameters and return types shown in Basic functions section above --
+```
 
--- TODO: closures --
+### Closures
+
+```pentagram
+-- Inline lambdas capture variables from outer scope --
+x = 10,
+add-x = fn y begin y x + end-fn,
+result = 5 add-x.call,  -- result is 15
+
+-- Closures capture the lexical environment --
+multiplier = 3,
+numbers = sv 1, 2, 3 end-sv,
+scaled = numbers fn n begin n multiplier * end-fn map,
+
+-- Each closure captures what's in scope when it's created --
+base = 5,
+f1 = fn x begin x base + end-fn,
+base = 10,
+f2 = fn x begin x base + end-fn,
+-- f1.call will add 5, f2.call will add 10
+
+-- Multi-line closures for complex logic --
+threshold = 100,
+validator = fn value begin
+  if value threshold gt begin
+    'too large' err?
+  else
+    value
+  end-if
+end-fn,
 ```
 
 ## Custom Types
@@ -333,7 +362,7 @@ end-rec,
 ```pentagram
 -- Define a specification (interface/trait) --
 def foo spec
-  tpar t,
+  tpar t type,
 end-spec,
 def foo.f fn
   par self t,
@@ -356,7 +385,6 @@ begin
   self.x 1 + bar
 end-fn,
 
--- TODO: higher-kinded types --
 -- TODO: spec default implementations --
 -- TODO: existential implementations --
 ```
@@ -366,7 +394,7 @@ end-fn,
 ```pentagram
 -- Specs can require other specs --
 def eq spec
-  tpar t,
+  tpar t type,
 end-spec,
 def eq.equals fn
   par self t,
@@ -377,7 +405,7 @@ begin
 end-fn,
 
 def ord spec
-  tpar t,
+  tpar t type,
   t eq,              -- ord requires eq
 end-spec,
 def ord.compare fn
@@ -420,7 +448,7 @@ end-fn,
 ```pentagram
 -- Existential implementations: implement for all types meeting constraints --
 def all-printable impl
-  tpar t,
+  tpar t type,
   t to-string,           -- constraint: t must implement to-string
 begin
   t printable            -- implement printable for all such t
@@ -447,7 +475,7 @@ end-fn,
 ```pentagram
 -- Generic records use tpar for type parameters --
 def box rec
-  tpar t,
+  tpar t type,
   par value t,
 end-rec,
 
@@ -462,8 +490,8 @@ w = 4 value: ty i8 end-ty box,
 
 -- Generic tagged unions --
 def result tag
-  tpar ok,
-  tpar err,
+  tpar ok type,
+  tpar err type,
 end-tag,
 
 def result.success rec
@@ -481,7 +509,7 @@ r = data result.success,                              -- both inferred
 
 -- Generic functions with spec constraints --
 def max fn
-  tpar t,
+  tpar t type,
   par a t,
   par b t,
   t ord,                -- constraint: t must implement ord spec
@@ -489,6 +517,82 @@ def max fn
 begin
   if a b gt begin a else b end-if
 end-fn,
+```
+
+### Higher-kinded types
+
+```pentagram
+-- Type parameters can themselves be parameterized --
+-- This enables abstractions over type constructors --
+
+-- Define the functor spec --
+def functor spec
+  tpar f fn tpar t type, type end-fn,
+end-spec,
+
+def functor.map fn
+  tpar a type,
+  tpar b type,
+  par self a functor.f.call,
+  par transform fn par x a, b end-fn,
+  b functor.f.call
+begin
+  todo
+end-fn,
+
+-- Implement functor for box --
+def box-functor impl
+  f: fn t begin t box end-fn box functor
+end-impl,
+
+def box-functor.map fn
+  tpar a type,
+  tpar b type,
+  par self a box,
+  par transform fn par x a, b end-fn,
+  b box
+begin
+  self* transform.call box
+end-fn,
+
+-- Type-level functions are values that need .call to apply --
+-- Use type-level lambdas to capture type constructors --
+
+-- Implement functor for result (using existential impl) --
+def result-functor impl
+  tpar e type,
+begin
+  f: fn t begin t e result end-fn functor
+end-impl,
+
+def result-functor.map fn
+  tpar a type,
+  tpar b type,
+  tpar e type,
+  par self a e result,
+  par transform fn par x a, b end-fn,
+  b e result
+begin
+  if self.is-ok begin
+    self.ok* transform.call e result.success
+  else
+    self e result.failure
+  end-if
+end-fn,
+
+-- Partial application with type-level lambdas --
+-- Close over types to create specialized type functions --
+def pair rec
+  tpar left type,
+  tpar right type,
+  par fst left,
+  par snd right,
+end-rec,
+
+-- Create a type function that fixes the first parameter --
+def pair-with-string impl
+  f: fn t begin txt t pair end-fn functor
+end-impl,
 ```
 
 ## Error Handling
@@ -590,8 +694,8 @@ input valid must,
 ```pentagram
 -- Higher-order functions can propagate error conditionally --
 def filter fn
-  tpar e,                    -- error-capability type parameter
-  tpar t,                    -- element type parameter
+  tpar e type,               -- error-capability type parameter
+  tpar t type,               -- element type parameter
   par d t seq,
   par f fn
     par x t,
@@ -628,18 +732,125 @@ if-'marker' condition begin
 end-if-'marker',
 ```
 
-## Side Effects
-
-```pentagram
--- TODO: how side effects are called/marked --
-```
-
 ## Modules & Exports
 
 ```pentagram
--- TODO: import/export syntax --
--- TODO: visibility (easy opt-in per manifesto) --
--- TODO: namespacing --
+-- Modules create namespaces and control visibility --
+def utils mod
+  -- Private by default --
+  def helper fn
+    par x i8,
+    i8
+  begin
+    x 2 *
+  end-fn,
+
+  -- Public items marked with pub --
+  pub def process fn
+    par x i8,
+    i8
+  begin
+    x helper
+  end-fn
+end-mod,
+
+-- Import from modules --
+use pkg.utils.process,
+result = 5 process,
+
+-- Nested modules for hierarchy --
+def types mod
+  pub def user rec
+    pub par name txt,
+    par password-hash txt      -- private field
+  end-rec,
+
+  def internal mod
+    pub def user-id rec
+      pub par value i64
+    end-rec
+  end-mod,
+
+  -- Re-export to flatten hierarchy --
+  repub pkg.types.internal.user-id
+end-mod,
+
+-- Import with rename --
+use pkg.types.user as u,
+use pkg.types.user-id as id,
+
+-- Shortest path lint prefers repub --
+use pkg.types.user-id,         -- canonical (re-exported)
+-- use pkg.types.internal.user-id,  -- non-canonical (linter warns)
+
+-- Siblings can access each other's public items --
+def handlers mod
+  def auth mod
+    pub def login fn
+      par username txt,
+      par password txt,
+      bool
+    begin
+      -- auth logic
+      true
+    end-fn
+  end-mod,
+
+  def admin mod
+    use pkg.handlers.auth.login,
+
+    pub def admin-login fn
+      par username txt,
+      par password txt,
+      bool
+    begin
+      -- reuses sibling's login
+      username password login
+    end-fn
+  end-mod
+end-mod,
+
+-- Parent modules gate what can be accessed from outside --
+-- handlers.admin can see handlers.auth.login (sibling) --
+-- Outside handlers/ can only see what handlers/mod re-exports --
+
+-- Privacy can be bypassed with non-pub imports --
+def utils mod
+  def internal-helper fn
+    par x i8,
+    i8
+  begin
+    x 2 *
+  end-fn,
+
+  pub def process fn
+    par x i8,
+    i8
+  begin
+    x internal-helper
+  end-fn
+end-mod,
+
+-- Non-pub bypasses export boundaries --
+use pkg.utils.internal-helper non-pub,
+use pkg.utils.process,
+
+-- Works with renaming --
+use pkg.utils.internal-helper non-pub as helper,
+
+-- Common in test files to access private implementation --
+-- Test files have lints disabled for non-pub imports --
+def utils.test mod
+  use pkg.utils.internal-helper non-pub,
+
+  --
+  Test internal helper directly
+  --
+  test
+    result = 5 internal-helper,
+    result 10 eq assert
+  end-test
+end-mod,
 ```
 
 ## Concurrency
@@ -648,4 +859,72 @@ end-if-'marker',
 -- TODO: structured concurrency primitives --
 -- TODO: async operations (allowed in any function per manifesto) --
 -- TODO: green threads --
+```
+
+## Testing
+
+```pentagram
+-- Basic tests assert conditions --
+-- Check equality --
+test
+  x = 1 2 +,
+  x 3 eq assert
+end-test,
+
+-- Tests can have parameters for test cases --
+-- Parameterized test cases use rich comments --
+--
+Check addition works correctly
+
+==
+1 2 3 test-case,
+5 7 12 test-case,
+0 0 0 test-case,
+==
+--
+test
+  par a i8,
+  par b i8,
+  par expected i8
+begin
+  a b + expected eq assert
+end-test,
+
+-- Rich comments execute code between == delimiters --
+-- Code in comments has access to file scope --
+base = 100,
+
+--
+Check values above base
+
+==
+base 1 + test-case,
+base 10 + test-case,
+base 100 + test-case,
+==
+--
+test
+  par x i8
+begin
+  x base gt assert
+end-test,
+
+-- Doc helpers available in rich comments --
+-- test-case, timeout, category, etc. are regular functions --
+--
+Integration test with timeout
+
+==
+5000 timeout,
+'integration' category,
+==
+--
+test
+  result = slow-operation,
+  result expected-value eq assert
+end-test,
+
+-- Tests are discovered automatically --
+-- Organized in *.test.pg files adjacent to source --
+-- Test runner shows hierarchy and results --
 ```
