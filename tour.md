@@ -1,26 +1,33 @@
 # Pentagram Tour
 
-## Fundamentals
+## 1. Fundamentals
 
-### Hello world
+Let's start with the absolute basics. Here you'll see how to write a simple program, make notes in your code with comments, and name values using variables.
+
+### Hello World
+
+The simplest program in Pentagram prints a message. Functions, like `say`, are placed after the data they operate on.
 
 ```pentagram
--- This is the most basic program --
 'Hello world!' say,
 ```
 
 ### Comments
 
+You can write comments to leave notes for yourself or other programmers. They start and end with `--` and can span multiple lines.
+
 ```pentagram
--- All comments are delimited at start and end --
+-- This is a comment --
 --
-Comments can span
-multiple lines
+This is a comment that
+spans multiple lines.
 --
---- Add more hyphens -- if you want to use more inside ---
+--- You can add more hyphens -- to nest comments ---
 ```
 
-### Variable assignment
+### Variable Assignment
+
+Variables are used to give names to values. In Pentagram, variables are immutable; when you "change" a variable, you are actually creating a new one with the same name that shadows the old one. This makes code more predictable.
 
 ```pentagram
 -- Create two variables and use them together --
@@ -28,187 +35,163 @@ foo = 40,
 bar = 2,
 baz = foo bar +,
 
--- Each binding creates a new scope (lexical replacement) --
-x = 1,           -- x is 1
-x = x 2 +,       -- new x is 3 (reads previous x)
-x = x 3 *,       -- new x is 9 (reads previous x)
+-- Each binding creates a new variable in a nested scope --
+x = 1,           -- x is 1 --
+x = x 2 +,       -- A new x is created with the value 3 --
+x = x 3 *,       -- Another new x is created with the value 9 --
 
--- Variable mutation (syntactic sugar for lexical replacement) --
+-- The `_=` syntax is sugar for this common rebinding pattern --
 x = 1,
-x _= 2 +,        -- equivalent to: x = x 2 +,
+x _= 2 +,        -- Equivalent to: x = x 2 +, --
 
 y = sv 1, 2 end-sv,
-y _= 3 pushr,    -- equivalent to: y = y 3 pushr,
+y _= 3 pushr,    -- Equivalent to: y = y 3 pushr, --
 
--- Rebinding record fields creates new records --
+-- Rebinding a record's field creates a new record --
 x = y: 1 z,
-x.y = 2,                 -- sugar for: x = x 2 z.set-y,
-x = x 3 z.set-y,         -- explicit setter function
+x.y = 2,         -- Sugar for: x = x 2 z.set-y, --
 ```
 
-## Primitive Values
+## 2. Primitive Values
+
+Pentagram includes a standard set of primitive value types for representing simple data. All operations, including arithmetic and comparisons, are treated as regular postfix functions.
 
 ### Numbers
 
+Numbers support standard arithmetic operations.
+
 ```pentagram
--- All operators are postfix --
 foo-1 = 1 2 +,
 foo-2 = foo-1 3 -,
 foo-3 = foo-2 4 *,
 foo-4 = foo-3 5 /,
 
--- Negation is a special suffix postfix operator --
+-- Negation is a special suffix operator --
 foo-1 = 1-,
 foo-2 = foo-1-,
-foo-3 = foo-2 2 + _-,
 ```
 
 ### Text
 
-```pentagram
--- Common text operations are interpolation and concatenation --
-foo = 'e',
-bar = 'abc' 'd [foo]' cat,
+Text values support concatenation and interpolation. There are no backslash escapes; instead, special characters are handled with square-bracket syntax, and literal quotes can be included by using different outer quotes.
 
--- No string escapes but sugar for special characters --
+```pentagram
+-- Interpolation and concatenation --
+foo = 'e',
+bar = 'abc' 'd[foo]' cat,
+
+-- Sugar for special characters --
 foo = 'a[nl]b[tb]c',
 
--- Add more quotes if you want more inside --
-foo = ''a'b'',
-bar = '''c''d''',
-
--- Or use alternative quotes --
+-- Using alternative quotes to include literal quotes --
 foo = "a'b'",
 bar = `a'"b'`,
 ```
 
 ### Booleans
 
-```pentagram
--- Boolean combinators will short-circuit --
-foo-1 = true f  false g  and,
-foo-2 = true f  false g  or,
-foo-3 = true f  false g  nand,
-foo-4 = true f  false g  nor,
-foo-5 = true f  false g  implies,
-foo-6 = true f  false g  nimplies,
+Booleans support standard logic operators, which will short-circuit. All comparison operators are spelled-out functions for clarity.
 
--- All conditional operators are spelled out --
-foo-1 = true not,
-foo-2 = 1 2 eq,
-foo-3 = 3 4 ne,
-foo-4 = 5 6 gt,
-foo-5 = 7 8 gte,
-foo-6 = 9 10 lt,
-foo-7 = 11 12 lte,
+```pentagram
+-- Logic operators --
+foo-1 = true f false g and,
+foo-2 = true f false g or,
+foo-3 = true not,
+
+-- Comparison operators --
+foo-1 = 1 2 eq,      -- Equal --
+foo-2 = 3 4 ne,      -- Not equal --
+foo-3 = 5 6 gt,      -- Greater than --
+foo-4 = 7 8 gte,     -- Greater than or equal to --
+foo-5 = 9 10 lt,     -- Less than --
+foo-6 = 11 12 lte,   -- Less than or equal to --
 ```
 
-## Literal Containers
+## 3. Data Structures
 
-### Grouped values
+Pentagram provides both literal collections for simple data grouping and specialized wrapper types that add semantics like optionality, reference, or mutability.
+
+### Literal Collections
+
+Pentagram has built-in syntax for common, un-typed collections. These resolve to default types if not constrained by the context.
 
 ```pentagram
--- Store a group of values --
-foo = gv 1, 2, 3 end-gv,
+foo = gv 1, 2, 3 end-gv,    -- A group of unordered values --
+bar = sv 1, 2, 3 end-sv,    -- A sequence of ordered values --
+baz = kv 1 'a', 2 3 end-kv, -- A map of keyed values --
 ```
 
-### Sequential values
+### Value Wrappers
+
+These types provide wrappers for values to give them different semantics.
 
 ```pentagram
--- Store a bunch of values in a row --
-foo = sv 1, 2, 3 end-sv,
+foo = nil,     -- Represents an absent value --
+bar = 1 val,   -- Represents an optional value that is present --
+
+baz = 1 ref,   -- An immutable reference to a value --
+
+qux = 1 mut,   -- A mutable box for holding state --
+
+quux = 1 laz,  -- A lazily-computed value --
 ```
 
-### Keyed values
+### Field Access
+
+The `.` operator is used to access named fields on records, while the `*` operator is syntactic sugar for accessing the primary wrapped value of a wrapper type.
 
 ```pentagram
--- Store an association between values --
-foo = kv 1 'a', 2 3 end-kv,
-```
-
-### Literal type resolution
-
-```pentagram
--- Literals resolve to default types when unconstrained --
-foo-1 = 1,
-
-foo-2 = 'x',
-
-foo-3 = true,
-
-foo-4 = sv 3, 4 end-sv,
-
-foo-5 = kv 5 6, 7 8 end-kv,
-
--- TODO: configuring default types in lexical scope --
--- TODO: explicit type constraints via constructor trait --
-```
-
-## Container Wrappers
-
-### Optional values
-
-```pentagram
--- Store something that may or may not exist --
-foo = nil,
-bar = 1 val,
-```
-
-### References
-
-```pentagram
--- Store an immutable reference to something --
-foo = 1 ref,
-```
-
-### Mutable boxes
-
-```pentagram
--- Store a value in a mutable box --
-foo = 1 mut,
-```
-
-### Lazy values
-
-```pentagram
--- Store a value that can be computed later --
-foo = 1 laz,
-```
-
-## Field Access
-
-### The value field
-
-```pentagram
--- Field access desugars to get/set functions in type namespaces --
--- The * operator is sugar for .value --
-
 x = 1 ref,
-y = x*,                    -- reads: x ref.get-value,
-x* = 2,                    -- rebinds: x = x 2 ref.set-value,
+y = x*,                    -- Reads the value via ref.get-value --
+x* = 2,                    -- Rebinds x to a new ref via ref.set-value --
 
 x = 1 laz,
-y = x*,                    -- forces: x laz.get-value,
-x* = 3,                    -- rebinds: x = x 3 laz.set-value,
+y = x*,                    -- Forces computation via laz.get-value --
 
--- Optional requires narrowing --
+-- Optional values must be narrowed before accessing the value --
 x = 1 val,
 if x.is-val begin
-  y = x*                   -- accesses: x opt.val.get-value,
+  y = x*                   -- Accesses the value inside the 'val' --
 end-if,
 
--- Mutable boxes are the exception --
+-- Mutable boxes are the main exception to the rebinding rule --
 x = 1 mut,
-y = x*,                    -- reads: x mut.get-value,
-x 2 write-mut,             -- actual mutation (no sugar)
+y = x*,                    -- Reads the value via mut.get-value --
+x 2 write-mut,             -- This performs actual mutation. There is no sugar --
 ```
 
-## Control Flow
+## 4. Functions and Control Flow
+
+All programs are built from functions and control-flow structures. This section covers how Pentagram defines and calls functions, how to branch logic with conditionals, and how to loop.
+
+### Postfix and Prefix Notation
+
+Pentagram has two ways to call functions. The default is **postfix**, which is ideal for chaining operations.
+
+```pentagram
+-- Postfix style reads like a series of transformations --
+result = 5 2 + 3 *,   -- (5 + 2) * 3 --
+```
+
+For functions that take blocks of code or have complex arguments, **prefix notation** can be clearer. This is done by wrapping the function's arguments in a `with-<fn-name>...end-<fn-name>` block.
+
+```pentagram
+-- Calling the 'map' function with prefix notation --
+numbers = sv 1, 2, 3 end-sv,
+doubled = with-map
+  numbers,
+  fn n begin n 2 * end-fn,
+end-map,
+
+-- This is equivalent to the postfix version --
+doubled = numbers fn n begin n 2 * end-fn map,
+```
 
 ### Conditionals
 
+Conditional `if` blocks are used to branch execution based on a boolean value.
+
 ```pentagram
--- Basic if-else structure --
 if condition begin
   'true branch' say
 elif other-condition begin
@@ -217,8 +200,7 @@ else
   'false branch' say
 end-if,
 
--- Tagged unions narrow through conditionals --
--- Synthetic .is-variant fields check the variant --
+-- Conditionals are also used to narrow tagged union variants --
 if pet.is-dog begin
   -- Inside this branch, pet is known to be a dog --
   pet.breed say
@@ -227,26 +209,25 @@ end-if,
 
 ### Loops
 
+Pentagram provides `loop` for infinite loops and `while` for conditional loops.
+
 ```pentagram
--- Infinite loop --
+-- An infinite loop --
 loop
   'forever' say
 end-loop,
 
--- Conditional loop --
+-- A conditional loop --
 while condition begin
   'looping' say
 end-while,
-
--- TODO: break, continue, return --
 ```
 
-## Functions
+### Function Definition
 
-### Basic functions
+Use `def fn` to define a named function. Type annotations can be used for parameters and return values.
 
 ```pentagram
--- Function with type annotations --
 def f fn
   par x i8,
   par y i8,
@@ -257,238 +238,141 @@ begin
 end-fn,
 ```
 
-### Named arguments
+### Named Arguments
+
+Function arguments can be passed by name. This is often used for clarity, especially for functions with many parameters.
 
 ```pentagram
--- Inline named arguments --
-foo = name: 'dog' animal,
+-- Passing arguments by name in postfix notation --
+foo = name: 'dog' sound: 'bark' animal,
 
--- Multi-line named arguments using prefix with- syntax --
+-- Named arguments also work well with prefix notation --
 bar = with-animal
-  name: 'cat'
+  name: 'cat',
+  sound: 'meow',
 end-animal,
-```
-
-### Type annotations
-
-```pentagram
--- Types annotate values on the expression stack, not variables --
-x = 42 ty i8 end-ty as,
-
--- Type fences can wrap any expression --
-result = 1 ty i8 end-ty as 2 ty i8 end-ty as +,
-
--- Variables bind to typed values but have no types themselves --
-y = x,
-```
-
-### Function signatures
-
-```pentagram
--- Function parameters and return types shown in Basic functions section above --
 ```
 
 ### Closures
 
+Anonymous functions, or closures, can be defined inline and capture immutable variables from their outer scope.
+
 ```pentagram
--- Inline lambdas capture variables from outer scope --
+-- A closure that captures 'x' --
 x = 10,
 add-x = fn y begin y x + end-fn,
-result = 5 add-x.call,  -- result is 15
+result = 5 add-x.call,  -- result is 15 --
 
--- Closures capture the lexical environment --
-multiplier = 3,
-numbers = sv 1, 2, 3 end-sv,
-scaled = numbers fn n begin n multiplier * end-fn map,
-
--- Each closure captures what's in scope when it's created --
+-- Each closure captures the values in scope when it is created --
 base = 5,
 f1 = fn x begin x base + end-fn,
 base = 10,
 f2 = fn x begin x base + end-fn,
--- f1.call will add 5, f2.call will add 10
-
--- Multi-line closures for complex logic --
-threshold = 100,
-validator = fn value begin
-  if value threshold gt begin
-    'too large' err?
-  else
-    value
-  end-if
-end-fn,
+-- f1.call will add 5; f2.call will add 10 --
 ```
 
-## Custom Types
+## 5. The Type System
 
-### Records
+Pentagram has a strong, nominal type system designed to ensure correctness while remaining ergonomic. It supports generics, traits (called specifications), and even higher-kinded types.
+
+### Type Annotations
+
+In Pentagram, variables themselves are untyped; they simply hold values. Type annotations are applied to values on the expression stack using `ty` fences.
 
 ```pentagram
--- Define a record type --
+-- Annotating a value on the stack --
+x = 42 ty i8 end-ty as,
+
+-- Type fences can wrap complex expressions --
+result = 1 ty i8 end-ty as 2 ty i8 end-ty as +,
+
+-- Variables bind to the typed value --
+y = x,
+```
+
+### Custom Types
+
+You can define your own data structures using **Records** (for grouping data) and **Tagged Unions** (for variations).
+
+#### Records
+
+Records are product types with named fields.
+
+```pentagram
+-- Define a record --
 def person rec
   par name txt,
   par age u8,
 end-rec,
 
--- Fields become functions scoped in the type namespace --
+-- Create an instance --
 p = person name: 'Alice' age: 30,
+
+-- Access fields --
 p-name = p person.name,
-
--- TODO: syntax for lexically extending the namespace with related functions --
 ```
 
-### Tagged Unions
+#### Tagged Unions
+
+Tagged unions allow you to define a type that can be one of several variants.
 
 ```pentagram
--- Define a tag for variants --
-def animal tag,
+-- Define a tag --
+def shape tag,
 
--- Define variants under the tag --
-def animal.dog rec
-  par breed txt,
-  par age u8,
+-- Define variants --
+def shape.circle rec
+  par radius f32,
 end-rec,
 
-def animal.cat rec
-  par color txt,
-  par indoor bool,
+def shape.square rec
+  par side-length f32,
 end-rec,
 ```
 
-## Type System
+### Specifications (Traits)
 
-### Specifications
+Specifications (or "specs") define shared behavior that different types can implement. This is similar to interfaces or traits in other languages.
 
 ```pentagram
--- Define a specification (interface/trait) --
-def foo spec
+-- Define a specification --
+def serializable spec
   tpar t type,
 end-spec,
-def foo.f fn
+def serializable.to-bytes fn
   par self t,
-  t
-begin
-  todo
+  byte-seq
 end-fn,
 
--- Define a type --
-def bar rec
-  par x i32,
-end-rec,
-
--- Implement the spec for the type --
-def bar-foo impl bar foo end-impl,
-def bar-foo.f fn
-  par self bar,
-  bar
+-- Implement the spec for a type --
+def user-serializable impl user serializable end-impl,
+def user-serializable.to-bytes fn
+  par self user,
+  byte-seq
 begin
-  self.x 1 + bar
+  self.id to-bytes
 end-fn,
-
--- TODO: spec default implementations --
--- TODO: existential implementations --
 ```
 
-### Spec constraints
+### Generics
+
+Types and functions can be generic, allowing them to work with any type that satisfies certain constraints.
+
+#### Generic Types
 
 ```pentagram
--- Specs can require other specs --
-def eq spec
-  tpar t type,
-end-spec,
-def eq.equals fn
-  par self t,
-  par other t,
-  bool
-begin
-  todo
-end-fn,
-
-def ord spec
-  tpar t type,
-  t eq,              -- ord requires eq
-end-spec,
-def ord.compare fn
-  par self t,
-  par other t,
-  ordering
-begin
-  todo
-end-fn,
-
--- A type implementing both specs --
-def point rec
-  par x i32,
-  par y i32,
-end-rec,
-
--- Implement eq --
-def point-eq impl point eq end-impl,
-def point-eq.equals fn
-  par self point,
-  par other point,
-  bool
-begin
-  self.x other.x eq self.y other.y eq and
-end-fn,
-
--- Implement ord (which requires eq automatically) --
-def point-ord impl point ord end-impl,
-def point-ord.compare fn
-  par self point,
-  par other point,
-  ordering
-begin
-  todo
-end-fn,
-```
-
-### Impl constraints
-
-```pentagram
--- Existential implementations: implement for all types meeting constraints --
-def all-printable impl
-  tpar t type,
-  t to-string,           -- constraint: t must implement to-string
-begin
-  t printable            -- implement printable for all such t
-end-impl,
-
-def all-printable.print fn
-  par self all-printable.t,    -- reference the type parameter
-  unit
-begin
-  todo
-end-fn,
-
--- Now any type with to-string automatically gets printable --
-```
-
-### Impl specificity overrides
-
-```
--- TODO: no constraints, some constraints, all specific types --
-```
-
-### Generic types
-
-```pentagram
--- Generic records use tpar for type parameters --
+-- A generic record --
 def box rec
   tpar t type,
   par value t,
 end-rec,
 
--- Type parameters are named (allows omission and inference) --
-x = 1 ty value: i8 box end-ty as,     -- explicit type parameter
-y = 2 ty box end-ty as,               -- inferred type parameter
-z = 3 box,                            -- fully inferred
+-- Explicit and inferred type parameters --
+x = 1 ty value: i8 box end-ty as, -- Explicit --
+y = 2 ty box end-ty as,           -- Inferred --
+z = 3 box,                        -- Fully inferred --
 
--- Constructors can be called with explicit type parameters --
--- Type values must be generated by ty fence --
-w = 4 value: ty i8 end-ty box,
-
--- Generic tagged unions --
+-- A generic tagged union --
 def result tag
   tpar ok type,
   tpar err type,
@@ -501,31 +385,30 @@ end-rec,
 def result.failure rec
   par error result.err,
 end-rec,
+```
 
--- Multiple type parameters can be partially specified --
-r = data ok: ty txt end-ty result.success,            -- err inferred
-r = data ty ok: txt result end-ty as result.success,  -- with type restriction
-r = data result.success,                              -- both inferred
+#### Generic Functions
 
--- Generic functions with spec constraints --
+Functions can declare type parameters (`tpar`) and apply constraints (like requiring a type to implement `ord`).
+
+```pentagram
 def max fn
   tpar t type,
   par a t,
   par b t,
-  t ord,                -- constraint: t must implement ord spec
+  t ord,                -- Constraint: t must implement ord --
   t
 begin
   if a b gt begin a else b end-if
 end-fn,
 ```
 
-### Higher-kinded types
+### Higher-Kinded Types
+
+Pentagram supports higher-kinded types, meaning type parameters can themselves be generic (like a type constructor). This allows for powerful abstractions like `functor`.
 
 ```pentagram
--- Type parameters can themselves be parameterized --
--- This enables abstractions over type constructors --
-
--- Define the functor spec --
+-- The functor spec operates on a type constructor 'f' --
 def functor spec
   tpar f fn tpar t type, type end-fn,
 end-spec,
@@ -536,11 +419,9 @@ def functor.map fn
   par self a functor.f.call,
   par transform fn par x a, b end-fn,
   b functor.f.call
-begin
-  todo
 end-fn,
 
--- Implement functor for box --
+-- Implementing functor for 'box' --
 def box-functor impl
   f: fn t begin t box end-fn box functor
 end-impl,
@@ -554,190 +435,93 @@ def box-functor.map fn
 begin
   self* transform.call box
 end-fn,
-
--- Type-level functions are values that need .call to apply --
--- Use type-level lambdas to capture type constructors --
-
--- Implement functor for result (using existential impl) --
-def result-functor impl
-  tpar e type,
-begin
-  f: fn t begin t e result end-fn functor
-end-impl,
-
-def result-functor.map fn
-  tpar a type,
-  tpar b type,
-  tpar e type,
-  par self a e result,
-  par transform fn par x a, b end-fn,
-  b e result
-begin
-  if self.is-ok begin
-    self.ok* transform.call e result.success
-  else
-    self e result.failure
-  end-if
-end-fn,
-
--- Partial application with type-level lambdas --
--- Close over types to create specialized type functions --
-def pair rec
-  tpar left type,
-  tpar right type,
-  par fst left,
-  par snd right,
-end-rec,
-
--- Create a type function that fixes the first parameter --
-def pair-with-string impl
-  f: fn t begin txt t pair end-fn functor
-end-impl,
 ```
 
-## Error Handling
+## 6. Error Handling
 
-### Error declaration
+Pentagram treats error handling as a core part of the program's logic, not an afterthought. Errors are explicit, typed, and context-aware, ensuring you always know where and why things might go wrong.
+
+### Error Declaration & Handling
+
+Functions that can fail must explicitly declare `err` in their signature. Callers are then required to handle this possibility, either by propagating the error with `?` or capturing it with `try`.
 
 ```pentagram
--- Functions that can error declare it in the prelude --
+-- Functions declare 'err' if they can fail --
 def f fn
   par x bool,
   err,
   bool
 begin
   if x begin
-    note: 'condition was true' err?
+    note: 'condition was true' err? -- Propagate an error --
   else
     false
   end-if
 end-fn,
 
--- Calls to erroring functions must be explicit --
--- 1 f,           -- Invalid: must handle or propagate
-1 f?,             -- Propagate error up
-r = f.try,        -- Capture error as a result value
+-- Handling the error --
+-- 1 f,        -- Compile error: must handle the error --
+y = 1 f?,      -- Propagate the error to the caller --
+z = 1 f.try,   -- Capture the error in a 'result' type --
 ```
 
-### Error values and context
+### Error Context & Marks
+
+Unlike exceptions in other languages, Pentagram errors don't carry data themselves. Instead, context is provided by **marks**—values attached to the current scope. When an error occurs, the runtime captures all active marks.
 
 ```pentagram
--- Errors are a single unit type with no variants --
--- All context comes from continuation marks --
-
--- Define custom marks (nominal, strongly typed) --
+-- Define typed marks for context --
 def file-path mark txt end-mark,
 def retry-count mark u8 end-mark,
 
--- Marks scope to following statements in the block --
 def open-file fn
   par path txt,
   err,
   file
 begin
-  > path file-path,                    -- mark applies to following statements
+  -- Apply marks to the following block --
+  > path file-path,
   > 0 retry-count,
-  path open-internal                   -- if this errors, marks attach
+  path open-internal?    -- If this fails, marks are captured --
 end-fn,
 
--- The note mark is built-in for text context --
--- Use as named parameter on err --
-note: 'file not found' err?,
-
--- Or set explicitly as a mark --
-> 'opening file' note,
-err?,
-
--- Read marks from captured errors --
+-- Reading captured marks --
 result = 'data.txt' open-file.try,
-if result.is-ok begin
-  result.ok* use
-else
-  -- After narrowing, access marks with get-mark --
-  note-text = result.err get-mark ty note opt end-ty as,
-  -- The * suffix unwraps/extracts values --
-  -- On error variant, * is a never function that propagates --
-  result.err*?
-end-if,
-
--- err and err* are never functions (safe in branches) --
-
--- Alternate pattern: inspect error then propagate --
-result = database query.try,
 if result.is-err begin
-  -- Log error details without propagating --
-  result.err log
+  -- Retrieve context from the captured error --
+  path = result.err get-mark ty file-path opt end-ty as,
 end-if,
--- Propagate if error, continue if ok --
-result*? process,
 ```
 
 ### Crashes
 
+A **crash** is different from an error: it indicates a bug or an unrecoverable state (like a failed assertion) and terminates the current task immediately.
+
 ```pentagram
--- crash terminates the running task (not an error) --
+-- Terminate immediately --
 if bad-state begin
   crash
 end-if,
 
--- must crashes if condition is false --
+-- 'must' asserts a condition and crashes if it's false --
 x 0 gt must,
 
--- Marks are also read during crashes for diagnostics --
+-- Crashes also capture marks for diagnostics --
 > 'validating input' note,
-> user-id user-id,
 input valid must,
 ```
 
-### Error polymorphism
+## 7. Modules & Exports
+
+Modules help you organize your code into namespaces and control what is visible to the rest of the program.
+
+### Visibility & Exports
+
+By default, everything defined in a module is private. To make a function or type available to other modules, you must explicitly mark it with `pub`.
 
 ```pentagram
--- Higher-order functions can propagate error conditionally --
-def filter fn
-  tpar e type,               -- error-capability type parameter
-  tpar t type,               -- element type parameter
-  par d t seq,
-  par f fn
-    par x t,
-    e has-err,               -- f has error-capability e
-    bool
-  end-fn,
-  e has-err,                 -- filter has same error-capability as f
-  t seq
-begin
-  -- body can call f? to propagate
-end-fn,
-
--- If f doesn't error, filter doesn't error --
-result = data non-error-fn filter,
-
--- If f errors, filter errors (must handle) --
-result = data error-fn filter?,
-```
-
-## Syntax Overrides
-
-### Custom delimiters
-
-```pentagram
--- Use custom markers for nested or complex structures --
-with-my-fn
-  'custom syntax' say
-end-my-fn,
-
--- Mark conditional blocks for clarity --
--- (Required by default lint when nesting duplicate keywords) --
-if-'marker' condition begin
-  'marked branch' say
-end-if-'marker',
-```
-
-## Modules & Exports
-
-```pentagram
--- Modules create namespaces and control visibility --
 def utils mod
-  -- Private by default --
+  -- This helper is private to the module --
   def helper fn
     par x i8,
     i8
@@ -745,7 +529,7 @@ def utils mod
     x 2 *
   end-fn,
 
-  -- Public items marked with pub --
+  -- This function is public and can be imported --
   pub def process fn
     par x i8,
     i8
@@ -753,99 +537,34 @@ def utils mod
     x helper
   end-fn
 end-mod,
+```
 
--- Import from modules --
+### Imports
+
+Use the `use` keyword to bring public items from other modules into your current scope. You can rename imports with `as` to avoid conflicts or shorten names.
+
+```pentagram
+-- Import a specific item --
 use pkg.utils.process,
 result = 5 process,
 
--- Nested modules for hierarchy --
-def types mod
-  pub def user rec
-    pub par name txt,
-    par password-hash txt      -- private field
-  end-rec,
+-- Import with an alias --
+use pkg.utils.process as p,
+result = 5 p,
+```
 
-  def internal mod
-    pub def user-id rec
-      pub par value i64
-    end-rec
-  end-mod,
+### Privacy Bypassing
 
-  -- Re-export to flatten hierarchy --
-  repub pkg.types.internal.user-id
-end-mod,
+Sometimes, especially when writing tests, you need to access private implementation details. Pentagram allows you to bypass visibility rules explicitly using `non-pub`.
 
--- Import with rename --
-use pkg.types.user as u,
-use pkg.types.user-id as id,
-
--- Shortest path lint prefers repub --
-use pkg.types.user-id,         -- canonical (re-exported)
--- use pkg.types.internal.user-id,  -- non-canonical (linter warns)
-
--- Siblings can access each other's public items --
-def handlers mod
-  def auth mod
-    pub def login fn
-      par username txt,
-      par password txt,
-      bool
-    begin
-      -- auth logic
-      true
-    end-fn
-  end-mod,
-
-  def admin mod
-    use pkg.handlers.auth.login,
-
-    pub def admin-login fn
-      par username txt,
-      par password txt,
-      bool
-    begin
-      -- reuses sibling's login
-      username password login
-    end-fn
-  end-mod
-end-mod,
-
--- Parent modules gate what can be accessed from outside --
--- handlers.admin can see handlers.auth.login (sibling) --
--- Outside handlers/ can only see what handlers/mod re-exports --
-
--- Privacy can be bypassed with non-pub imports --
-def utils mod
-  def internal-helper fn
-    par x i8,
-    i8
-  begin
-    x 2 *
-  end-fn,
-
-  pub def process fn
-    par x i8,
-    i8
-  begin
-    x internal-helper
-  end-fn
-end-mod,
-
--- Non-pub bypasses export boundaries --
+```pentagram
+-- Explicitly import a private item --
 use pkg.utils.internal-helper non-pub,
-use pkg.utils.process,
 
--- Works with renaming --
-use pkg.utils.internal-helper non-pub as helper,
-
--- Common in test files to access private implementation --
--- Test files have lints disabled for non-pub imports --
+-- A common pattern for testing internal logic --
 def utils.test mod
   use pkg.utils.internal-helper non-pub,
 
-  --
-  Test internal helper directly
-  --
   test
     result = 5 internal-helper,
     result 10 eq assert
@@ -853,26 +572,26 @@ def utils.test mod
 end-mod,
 ```
 
-## Concurrency
+## 8. Testing
+
+Testing is built directly into the language. You can define tests right alongside your code, making it easy to verify correctness.
+
+### Basic Tests
+
+A `test` block isolates test logic. Inside, you can perform operations and use `assert` to verify results.
 
 ```pentagram
--- TODO: structured concurrency primitives --
--- TODO: async operations (allowed in any function per manifesto) --
--- TODO: green threads --
-```
-
-## Testing
-
-```pentagram
--- Basic tests assert conditions --
--- Check equality --
 test
   x = 1 2 +,
   x 3 eq assert
 end-test,
+```
 
--- Tests can have parameters for test cases --
--- Parameterized test cases use rich comments --
+### Parameterized Tests
+
+For testing multiple inputs against expected outputs, you can use **rich comments**. These allow you to define a table of test cases that are passed as arguments to the test block.
+
+```pentagram
 --
 Check addition works correctly
 
@@ -889,42 +608,19 @@ test
 begin
   a b + expected eq assert
 end-test,
+```
 
--- Rich comments execute code between == delimiters --
--- Code in comments has access to file scope --
-base = 100,
+## 9. Advanced Syntax
 
---
-Check values above base
+Pentagram includes a few specialized syntax features to help manage complexity in large or deeply nested codebases.
 
-==
-base 1 + test-case,
-base 10 + test-case,
-base 100 + test-case,
-==
---
-test
-  par x i8
-begin
-  x base gt assert
-end-test,
+### Custom Block Delimiters
 
--- Doc helpers available in rich comments --
--- test-case, timeout, category, etc. are regular functions --
---
-Integration test with timeout
+When you have many nested blocks, it can be hard to tell which `end-if` or `end-loop` closes which block. You can add custom markers to delimiters to make the structure explicit.
 
-==
-5000 timeout,
-'integration' category,
-==
---
-test
-  result = slow-operation,
-  result expected-value eq assert
-end-test,
-
--- Tests are discovered automatically --
--- Organized in *.test.pg files adjacent to source --
--- Test runner shows hierarchy and results --
+```pentagram
+-- A marked conditional block --
+if-'marker' condition begin
+  'marked branch' say
+end-if-'marker',
 ```
